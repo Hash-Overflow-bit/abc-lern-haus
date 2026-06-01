@@ -1,0 +1,142 @@
+[
+  {
+    "id": "1",
+    "title": "Buchstaben A–E",
+    "emoji": "🅰️",
+    "intro": "Lerne die ersten Buchstaben des Alphabets.",
+    "items": ["A","B","C","D","E"],
+    "exercise": {
+      "kind": "letter",
+      "prompt": "Welcher Buchstabe ist das?",
+      "speak": "C",
+      "options": ["A","B","C","D"],
+      "answer": "C"
+    }
+  },
+  {
+    "id": "2",
+    "title": "Buchstaben F–J",
+    "emoji": "🔤",
+    "intro": "Weiter geht's mit F bis J.",
+    "items": ["F","G","H","I","J"],
+    "exercise": {
+      "kind": "letter",
+      "prompt": "Welcher Buchstabe ist das?",
+      "speak": "H",
+      "options": ["F","G","H","J"],
+      "answer": "H"
+    }
+  },
+  {
+    "id": "3",
+    "title": "Buchstaben K–O",
+    "emoji": "🔡",
+    "intro": "Mehr Buchstaben zum Lernen.",
+    "items": ["K","L","M","N","O"],
+    "exercise": {
+      "kind": "letter",
+      "prompt": "Welcher Buchstabe ist das?",
+      "speak": "M",
+      "options": ["K","L","M","N"],
+      "answer": "M"
+    }
+  },
+  {
+    "id": "4",
+    "title": "Umlaute Ä Ö Ü ß",
+    "emoji": "🇩🇪",
+    "intro": "Die besonderen deutschen Buchstaben.",
+    "items": ["Ä","Ö","Ü","ß"],
+    "exercise": {
+      "kind": "letter",
+      "prompt": "Welcher Umlaut ist das?",
+      "speak": "Ö",
+      "options": ["Ä","Ö","Ü","ß"],
+      "answer": "Ö"
+    }
+  },
+  {
+    "id": "5",
+    "title": "Zahlen 1–5",
+    "emoji": "🔢",
+    "intro": "Zähle von eins bis fünf.",
+    "items": ["1 eins","2 zwei","3 drei","4 vier","5 fünf"],
+    "exercise": {
+      "kind": "word",
+      "prompt": "Was bedeutet diese Zahl?",
+      "speak": "drei",
+      "options": ["1","2","3","4"],
+      "answer": "3"
+    }
+  },
+  {
+    "id": "6",
+    "title": "Zahlen 6–10",
+    "emoji": "🔟",
+    "intro": "Zähle weiter bis zehn.",
+    "items": ["6 sechs","7 sieben","8 acht","9 neun","10 zehn"],
+    "exercise": {
+      "kind": "word",
+      "prompt": "Welche Zahl hörst du?",
+      "speak": "acht",
+      "options": ["6","7","8","9"],
+      "answer": "8"
+    }
+  },
+  {
+    "id": "7",
+    "title": "Tiere",
+    "emoji": "🐾",
+    "intro": "Lerne Tiere auf Deutsch.",
+    "items": ["Hund 🐶","Katze 🐱","Fisch 🐟","Vogel 🐦"],
+    "exercise": {
+      "kind": "emoji",
+      "prompt": "Welches Tier ist das?",
+      "speak": "Katze",
+      "options": ["🐶","🐱","🐟","🐦"],
+      "answer": "🐱"
+    }
+  },
+  {
+    "id": "8",
+    "title": "Essen",
+    "emoji": "🍎",
+    "intro": "Leckere Wörter zum Lernen.",
+    "items": ["Apfel 🍎","Brot 🍞","Milch 🥛"],
+    "exercise": {
+      "kind": "emoji",
+      "prompt": "Was hörst du?",
+      "speak": "Apfel",
+      "options": ["🍎","🍞","🥛","🐟"],
+      "answer": "🍎"
+    }
+  },
+  {
+    "id": "9",
+    "title": "Natur",
+    "emoji": "🌳",
+    "intro": "Die Welt um uns herum.",
+    "items": ["Baum 🌳","Sonne ☀️","Mond 🌙","Blume 🌸"],
+    "exercise": {
+      "kind": "emoji",
+      "prompt": "Welches Wort hörst du?",
+      "speak": "Sonne",
+      "options": ["🌳","☀️","🌙","🌸"],
+      "answer": "☀️"
+    }
+  },
+  {
+    "id": "10",
+    "title": "Zuhause",
+    "emoji": "🏠",
+    "intro": "Wörter rund ums Zuhause.",
+    "items": ["Haus 🏠","Auto 🚗","Buch 📕","Ball ⚽"],
+    "exercise": {
+      "kind": "emoji",
+      "prompt": "Was hörst du?",
+      "speak": "Auto",
+      "options": ["🏠","🚗","📕","⚽"],
+      "answer": "🚗"
+    }
+  }
+]
