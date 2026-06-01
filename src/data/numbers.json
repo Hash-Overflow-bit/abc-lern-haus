@@ -1,0 +1,23 @@
+[
+  {"n":0,"word":"null"},
+  {"n":1,"word":"eins"},
+  {"n":2,"word":"zwei"},
+  {"n":3,"word":"drei"},
+  {"n":4,"word":"vier"},
+  {"n":5,"word":"fünf"},
+  {"n":6,"word":"sechs"},
+  {"n":7,"word":"sieben"},
+  {"n":8,"word":"acht"},
+  {"n":9,"word":"neun"},
+  {"n":10,"word":"zehn"},
+  {"n":11,"word":"elf"},
+  {"n":12,"word":"zwölf"},
+  {"n":13,"word":"dreizehn"},
+  {"n":14,"word":"vierzehn"},
+  {"n":15,"word":"fünfzehn"},
+  {"n":16,"word":"sechzehn"},
+  {"n":17,"word":"siebzehn"},
+  {"n":18,"word":"achtzehn"},
+  {"n":19,"word":"neunzehn"},
+  {"n":20,"word":"zwanzig"}
+]

@@ -1,0 +1,11 @@
+[
+  {"label":"1:00","speak":"Es ist ein Uhr"},
+  {"label":"2:00","speak":"Es ist zwei Uhr"},
+  {"label":"3:00","speak":"Es ist drei Uhr"},
+  {"label":"4:30","speak":"Es ist halb fünf"},
+  {"label":"5:15","speak":"Es ist Viertel nach fünf"},
+  {"label":"6:45","speak":"Es ist Viertel vor sieben"},
+  {"label":"7:00","speak":"Es ist sieben Uhr"},
+  {"label":"9:00","speak":"Es ist neun Uhr"},
+  {"label":"12:00","speak":"Es ist zwölf Uhr Mittag"}
+]
