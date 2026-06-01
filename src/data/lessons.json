@@ -1,9 +1,9 @@
 [
   {
     "id": "1",
-    "title": "Buchstaben A–E",
-    "emoji": "🅰️",
-    "intro": "Lerne die ersten Buchstaben des Alphabets.",
+    "title": "Das Alphabet (ABC)",
+    "emoji": "🔤",
+    "intro": "Lerne alle Buchstaben von A bis Z und die Sonderbuchstaben.",
     "items": ["A","B","C","D","E"],
     "exercise": {
       "kind": "letter",
