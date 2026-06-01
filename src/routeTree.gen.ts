@@ -16,6 +16,7 @@ import { Route as LessonsRouteImport } from './routes/lessons'
 import { Route as ClockRouteImport } from './routes/clock'
 import { Route as AlphabetRouteImport } from './routes/alphabet'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as LessonsIndexRouteImport } from './routes/lessons.index'
 import { Route as LessonsLessonIdRouteImport } from './routes/lessons.$lessonId'
 
 const VocabularyRoute = VocabularyRouteImport.update({
@@ -53,6 +54,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LessonsIndexRoute = LessonsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => LessonsRoute,
+} as any)
 const LessonsLessonIdRoute = LessonsLessonIdRouteImport.update({
   id: '/$lessonId',
   path: '/$lessonId',
@@ -68,16 +74,17 @@ export interface FileRoutesByFullPath {
   '/numbers': typeof NumbersRoute
   '/vocabulary': typeof VocabularyRoute
   '/lessons/$lessonId': typeof LessonsLessonIdRoute
+  '/lessons/': typeof LessonsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/alphabet': typeof AlphabetRoute
   '/clock': typeof ClockRoute
-  '/lessons': typeof LessonsRouteWithChildren
   '/listening': typeof ListeningRoute
   '/numbers': typeof NumbersRoute
   '/vocabulary': typeof VocabularyRoute
   '/lessons/$lessonId': typeof LessonsLessonIdRoute
+  '/lessons': typeof LessonsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -89,6 +96,7 @@ export interface FileRoutesById {
   '/numbers': typeof NumbersRoute
   '/vocabulary': typeof VocabularyRoute
   '/lessons/$lessonId': typeof LessonsLessonIdRoute
+  '/lessons/': typeof LessonsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -101,16 +109,17 @@ export interface FileRouteTypes {
     | '/numbers'
     | '/vocabulary'
     | '/lessons/$lessonId'
+    | '/lessons/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/alphabet'
     | '/clock'
-    | '/lessons'
     | '/listening'
     | '/numbers'
     | '/vocabulary'
     | '/lessons/$lessonId'
+    | '/lessons'
   id:
     | '__root__'
     | '/'
@@ -121,6 +130,7 @@ export interface FileRouteTypes {
     | '/numbers'
     | '/vocabulary'
     | '/lessons/$lessonId'
+    | '/lessons/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -184,6 +194,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/lessons/': {
+      id: '/lessons/'
+      path: '/'
+      fullPath: '/lessons/'
+      preLoaderRoute: typeof LessonsIndexRouteImport
+      parentRoute: typeof LessonsRoute
+    }
     '/lessons/$lessonId': {
       id: '/lessons/$lessonId'
       path: '/$lessonId'
@@ -196,10 +213,12 @@ declare module '@tanstack/react-router' {
 
 interface LessonsRouteChildren {
   LessonsLessonIdRoute: typeof LessonsLessonIdRoute
+  LessonsIndexRoute: typeof LessonsIndexRoute
 }
 
 const LessonsRouteChildren: LessonsRouteChildren = {
   LessonsLessonIdRoute: LessonsLessonIdRoute,
+  LessonsIndexRoute: LessonsIndexRoute,
 }
 
 const LessonsRouteWithChildren =
