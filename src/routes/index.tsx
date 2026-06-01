@@ -23,8 +23,8 @@ const tiles = [
 
 function Index() {
   return (
-    <main className="min-h-screen bg-gradient-to-b from-amber-100 via-rose-100 to-violet-100 pl-20">
-      <header className="px-5 pt-10 pb-4 text-center">
+    <main className="min-h-screen bg-gradient-to-b from-amber-100 via-rose-100 to-violet-100 pl-20 sm:pl-24 md:pl-28 pr-4">
+      <header className="px-2 sm:px-5 pt-10 pb-4 text-center">
         <h1 className="text-5xl font-black tracking-tight text-foreground">
           Deutsch <span className="text-primary">ABC</span>
         </h1>

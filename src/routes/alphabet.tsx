@@ -1,5 +1,4 @@
 import { createFileRoute } from "@tanstack/react-router";
-import alphabet from "@/data/alphabet.json";
 import { Page } from "@/components/KidNav";
 import { speakDE } from "@/lib/speak";
 
@@ -7,6 +6,39 @@ export const Route = createFileRoute("/alphabet")({
   head: () => ({ meta: [{ title: "Alphabet – Deutsch ABC" }] }),
   component: AlphabetPage,
 });
+
+const alphabetDetails = [
+  { letter: "A", pron: "ah" },
+  { letter: "B", pron: "be" },
+  { letter: "C", pron: "ce" },
+  { letter: "D", pron: "de" },
+  { letter: "E", pron: "eh" },
+  { letter: "F", pron: "eff" },
+  { letter: "G", pron: "ge" },
+  { letter: "H", pron: "ha" },
+  { letter: "I", pron: "ih" },
+  { letter: "J", pron: "jot" },
+  { letter: "K", pron: "ka" },
+  { letter: "L", pron: "ell" },
+  { letter: "M", pron: "emm" },
+  { letter: "N", pron: "enn" },
+  { letter: "O", pron: "oh" },
+  { letter: "P", pron: "pe" },
+  { letter: "Q", pron: "ku" },
+  { letter: "R", pron: "err" },
+  { letter: "S", pron: "ess" },
+  { letter: "T", pron: "te" },
+  { letter: "U", pron: "uh" },
+  { letter: "V", pron: "vau" },
+  { letter: "W", pron: "we" },
+  { letter: "X", pron: "ix" },
+  { letter: "Y", pron: "ypsilon" },
+  { letter: "Z", pron: "zett" },
+  { letter: "Ä", pron: "äh" },
+  { letter: "Ö", pron: "öh" },
+  { letter: "Ü", pron: "üh" },
+  { letter: "ß", pron: "eszett" },
+] as const;
 
 const palette = [
   "bg-rose-300", "bg-amber-300", "bg-emerald-300",
@@ -16,17 +48,22 @@ const palette = [
 function AlphabetPage() {
   return (
     <Page title="Alphabet" emoji="🔤">
-      <div className="grid grid-cols-3 gap-3 sm:grid-cols-4">
-        {alphabet.map((l, i) => (
+      <div className="grid grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-5 pb-10">
+        {alphabetDetails.map((item, i) => (
           <button
-            key={l}
-            onClick={() => speakDE(l)}
-            className={`${palette[i % palette.length]} aspect-square rounded-3xl text-5xl font-black text-foreground shadow-md ring-4 ring-white transition active:scale-90`}
+            key={item.letter}
+            onClick={() => speakDE(item.pron)}
+            className={`${palette[i % palette.length]} flex flex-col items-center justify-center aspect-square rounded-3xl p-2 shadow-md hover:shadow-lg ring-4 ring-white transition-all hover:scale-105 active:scale-95 cursor-pointer group`}
           >
-            {l}
+            <span className="text-4xl sm:text-5xl font-black text-foreground group-hover:animate-bounce select-none">
+              {item.letter}
+            </span>
+            <span className="mt-1 text-[10px] sm:text-xs font-bold text-foreground/60 select-none">
+              {item.pron}
+            </span>
           </button>
         ))}
       </div>
     </Page>
   );
-}
+}
