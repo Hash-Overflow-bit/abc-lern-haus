@@ -1,0 +1,16 @@
+{
+  "name": "Deutsch ABC für Kinder",
+  "short_name": "Deutsch ABC",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#fff8e7",
+  "theme_color": "#ff7a3d",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
