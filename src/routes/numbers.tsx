@@ -18,10 +18,9 @@ function NumbersPage() {
           <button
             key={item.n}
             onClick={() => speakDE(`${item.n}, ${item.word}`)}
-            className={`${palette[i % palette.length]} flex aspect-square flex-col items-center justify-center rounded-3xl shadow-md ring-4 ring-white transition active:scale-90`}
+            className={`${palette[i % palette.length]} flex aspect-square items-center justify-center rounded-3xl shadow-md ring-4 ring-white transition active:scale-90`}
           >
             <span className="text-5xl font-black text-foreground">{item.n}</span>
-            <span className="mt-1 text-sm font-bold text-foreground/70">{item.word}</span>
           </button>
         ))}
       </div>

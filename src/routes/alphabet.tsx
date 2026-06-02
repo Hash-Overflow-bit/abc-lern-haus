@@ -53,13 +53,10 @@ function AlphabetPage() {
           <button
             key={item.letter}
             onClick={() => speakDE(item.pron)}
-            className={`${palette[i % palette.length]} flex flex-col items-center justify-center aspect-square rounded-3xl p-2 shadow-md hover:shadow-lg ring-4 ring-white transition-all hover:scale-105 active:scale-95 cursor-pointer group`}
+            className={`${palette[i % palette.length]} flex items-center justify-center aspect-square rounded-3xl p-2 shadow-md hover:shadow-lg ring-4 ring-white transition-all hover:scale-105 active:scale-95 cursor-pointer group`}
           >
             <span className="text-4xl sm:text-5xl font-black text-foreground group-hover:animate-bounce select-none">
               {item.letter}
-            </span>
-            <span className="mt-1 text-[10px] sm:text-xs font-bold text-foreground/60 select-none">
-              {item.pron}
             </span>
           </button>
         ))}

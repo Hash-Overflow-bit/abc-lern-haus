@@ -90,6 +90,34 @@ const lautkomColors: Record<string, { bg: string; ring: string; badge: string; t
   St:  { bg: "bg-cyan-50",    ring: "ring-cyan-200",    badge: "bg-cyan-600",    text: "text-cyan-700",    highlight: "text-cyan-600" },
 };
 
+// Lesson 6: Ähnliche Lautpaare – colour palette per pair
+const lautpaarColors: Record<string, { bg: string; ring: string; badge: string; text: string; highlight: string }> = {
+  "E/I": { bg: "bg-rose-50",   ring: "ring-rose-200",   badge: "bg-rose-500",    text: "text-rose-700",    highlight: "text-rose-600" },
+  "Ö/O": { bg: "bg-amber-50",  ring: "ring-amber-200",  badge: "bg-amber-500",   text: "text-amber-700",   highlight: "text-amber-600" },
+  "Ü/U": { bg: "bg-emerald-50",ring: "ring-emerald-200",badge: "bg-emerald-500", text: "text-emerald-700", highlight: "text-emerald-600" },
+  "P/B": { bg: "bg-sky-50",    ring: "ring-sky-200",    badge: "bg-sky-500",     text: "text-sky-700",     highlight: "text-sky-600" },
+  "T/D": { bg: "bg-violet-50", ring: "ring-violet-200", badge: "bg-violet-500",  text: "text-violet-700",  highlight: "text-violet-600" },
+  "G/K": { bg: "bg-lime-50",   ring: "ring-lime-200",   badge: "bg-lime-600",    text: "text-lime-700",    highlight: "text-lime-600" },
+};
+
+// Lesson 8: Zahlen applications category info
+const catInfo: Record<string, { emoji: string; bg: string; ring: string; badge: string; text: string }> = {
+  "Zahlen 11-20": { emoji: "🔢", bg: "bg-emerald-50", ring: "ring-emerald-200", badge: "bg-emerald-500", text: "text-emerald-700" },
+  "Telefonnummer": { emoji: "📱", bg: "bg-sky-50", ring: "ring-sky-200", badge: "bg-sky-500", text: "text-sky-700" },
+  "Preise": { emoji: "💰", bg: "bg-amber-50", ring: "ring-amber-200", badge: "bg-amber-500", text: "text-amber-700" },
+  "Datum": { emoji: "📅", bg: "bg-rose-50", ring: "ring-rose-200", badge: "bg-rose-500", text: "text-rose-700" },
+  "Reihenfolge": { emoji: "🔄", bg: "bg-violet-50", ring: "ring-violet-200", badge: "bg-violet-500", text: "text-violet-700" },
+};
+
+// Lesson 9: Zeit applications category info
+const zeitCatColors: Record<string, { emoji: string; bg: string; ring: string; badge: string; text: string }> = {
+  "1. 12-Stunden-Uhr + 24-Stunden-Uhr": { emoji: "⏰", bg: "bg-sky-50", ring: "ring-sky-200", badge: "bg-sky-500", text: "text-sky-700" },
+  "2. Digitale Uhrzeit": { emoji: "⌚", bg: "bg-violet-50", ring: "ring-violet-200", badge: "bg-violet-500", text: "text-violet-700" },
+  "3. Wie spät ist es?": { emoji: "❓", bg: "bg-emerald-50", ring: "ring-emerald-200", badge: "bg-emerald-500", text: "text-emerald-700" },
+  "4. heute / morgen": { emoji: "📅", bg: "bg-rose-50", ring: "ring-rose-200", badge: "bg-rose-500", text: "text-rose-700" },
+  "5. volle Uhr": { emoji: "🕒", bg: "bg-amber-50", ring: "ring-amber-200", badge: "bg-amber-500", text: "text-amber-700" },
+};
+
 function LessonPage() {
   const { lessonId } = Route.useParams();
 
@@ -198,6 +226,148 @@ function LessonPage() {
 
   const isLautComplete = lautkomGroups
     ? lautkomGroups.every(g => g.words.every(w => checkLautAnswer(w, userAnswers[`l_${w}`] || "")))
+    : false;
+
+  // Lesson 6: Ähnliche Lautpaare helpers
+  const lautpaarGroups = (lesson as any).lautpaare as { pair: string; label: string; words1: string[]; words2: string[] }[] | undefined;
+
+  function checkLautpaarAnswer(word: string, val: string) {
+    if (!val) return false;
+    return val.trim().toLowerCase() === word.toLowerCase();
+  }
+
+  function handleLautpaarInput(pair: string, word: string, idx: number, val: string) {
+    const key = `p_${pair}_${word}_${idx}`;
+    const wasCorrect = checkLautpaarAnswer(word, userAnswers[key] || "");
+    const isNowCorrect = checkLautpaarAnswer(word, val);
+    setUserAnswers(prev => ({ ...prev, [key]: val }));
+    if (isNowCorrect && !wasCorrect) speakDE("Super!");
+  }
+
+  const isLautpaarComplete = lautpaarGroups
+    ? lautpaarGroups.every(g => {
+        const allWords: string[] = [];
+        const maxLen = Math.max(g.words1.length, g.words2.length);
+        for (let i = 0; i < maxLen; i++) {
+          if (i < g.words1.length) allWords.push(g.words1[i]);
+          if (i < g.words2.length) allWords.push(g.words2[i]);
+        }
+        return allWords.every((w, idx) => checkLautpaarAnswer(w, userAnswers[`p_${g.pair}_${w}_${idx}`] || ""));
+      })
+    : false;
+
+  // Highlight the target pair letters inside a word (case-insensitive)
+  function highlightPair(word: string, label: string): React.ReactNode {
+    const chars = label.split("/").map(c => c.trim().toLowerCase());
+    const lower = word.toLowerCase();
+    
+    // Find index of the first matching character
+    let bestIdx = -1;
+    let matchLen = 1;
+    for (const char of chars) {
+      const idx = lower.indexOf(char);
+      if (idx !== -1 && (bestIdx === -1 || idx < bestIdx)) {
+        bestIdx = idx;
+        matchLen = char.length;
+      }
+    }
+    
+    if (bestIdx === -1) return <span>{word}</span>;
+    
+    return (
+      <span>
+        {word.slice(0, bestIdx)}
+        <span className="underline decoration-2 font-black" style={{ color: "inherit" }}>
+          {word.slice(bestIdx, bestIdx + matchLen)}
+        </span>
+        {word.slice(bestIdx + matchLen)}
+      </span>
+    );
+  }
+
+  // Lesson 7: Zahlen 0–10 helpers
+  const numberGroups = (lesson as any).numbers as { n: number; word: string }[] | undefined;
+
+  function checkNumberAnswer(word: string, val: string) {
+    if (!val) return false;
+    return val.trim().toLowerCase() === word.toLowerCase();
+  }
+
+  function handleNumberInput(word: string, val: string) {
+    const wasCorrect = checkNumberAnswer(word, userAnswers[`num_${word}`] || "");
+    const isNowCorrect = checkNumberAnswer(word, val);
+    setUserAnswers(prev => ({ ...prev, [`num_${word}`]: val }));
+    if (isNowCorrect && !wasCorrect) speakDE("Super!");
+  }
+
+  const isNumbersComplete = numberGroups
+    ? numberGroups.every(g => checkNumberAnswer(g.word, userAnswers[`num_${g.word}`] || ""))
+    : false;
+
+  // Lesson 8: Zahlen 11–20 & Anwendungen helpers
+  const numberAnwGroups = (lesson as any).numbers_anw as { label: string; word: string; category: string }[] | undefined;
+
+  function checkNumberAnwAnswer(word: string, val: string) {
+    if (!val) return false;
+    return val.trim().toLowerCase() === word.toLowerCase();
+  }
+
+  function handleNumberAnwInput(word: string, idx: number, val: string) {
+    const key = `numanw_${word}_${idx}`;
+    const wasCorrect = checkNumberAnwAnswer(word, userAnswers[key] || "");
+    const isNowCorrect = checkNumberAnwAnswer(word, val);
+    setUserAnswers(prev => ({ ...prev, [key]: val }));
+    if (isNowCorrect && !wasCorrect) speakDE("Super!");
+  }
+
+  const isNumbersAnwComplete = numberAnwGroups
+    ? numberAnwGroups.every((g, idx) => checkNumberAnwAnswer(g.word, userAnswers[`numanw_${g.word}_${idx}`] || ""))
+    : false;
+
+  // Lesson 9: Zeit helpers
+  const zeitGroups = (lesson as any).zeit as { category: string; items: { label: string; word: string }[] }[] | undefined;
+  const zeitExercises = (lesson as any).exercises as { label: string; word: string }[] | undefined;
+
+  function checkZeitAnswer(word: string, val: string) {
+    if (!val) return false;
+    return val.trim().toLowerCase().replace(/\s+/g, " ") === word.toLowerCase().replace(/\s+/g, " ");
+  }
+
+  function handleZeitInput(word: string, idx: number, val: string) {
+    const key = `zeit_${word}_${idx}`;
+    const wasCorrect = checkZeitAnswer(word, userAnswers[key] || "");
+    const isNowCorrect = checkZeitAnswer(word, val);
+    setUserAnswers(prev => ({ ...prev, [key]: val }));
+    if (isNowCorrect && !wasCorrect) speakDE(word);
+  }
+
+  const isZeitComplete = zeitExercises
+    ? zeitExercises.every((g, idx) => checkZeitAnswer(g.word, userAnswers[`zeit_${g.word}_${idx}`] || ""))
+    : false;
+
+  // Lesson 10: Wiederholung helpers
+  const reviewGroups = (lesson as any).wiederholung as { category: string; items: { prompt: string; answer: string; full: string }[] }[] | undefined;
+
+  function checkReviewAnswer(answer: string, val: string) {
+    if (!answer) return true; // No answer needed (display only)
+    if (!val) return false;
+    return val.trim().toLowerCase() === answer.toLowerCase();
+  }
+
+  function handleReviewInput(answer: string, catIdx: number, itemIdx: number, val: string) {
+    const key = `rev_${catIdx}_${itemIdx}`;
+    const wasCorrect = checkReviewAnswer(answer, userAnswers[key] || "");
+    const isNowCorrect = checkReviewAnswer(answer, val);
+    setUserAnswers(prev => ({ ...prev, [key]: val }));
+    if (isNowCorrect && !wasCorrect) speakDE(answer);
+  }
+
+  const isReviewComplete = reviewGroups
+    ? reviewGroups.every((g, catIdx) => 
+        g.items.every((it, itemIdx) => 
+          checkReviewAnswer(it.answer, userAnswers[`rev_${catIdx}_${itemIdx}`] || "")
+        )
+      )
     : false;
 
   // Highlight the combo letters inside a word
@@ -627,6 +797,843 @@ function LessonPage() {
               </section>
             )}
           </>
+        ) : lessonId === "6" && lautpaarGroups ? (
+          <>
+            {/* ======================================================== */}
+            {/* LESSON 6: ÄHNLICHE LAUTPAARE – LEARN + EXERCISE           */}
+            {/* ======================================================== */}
+
+            {/* LERNEN MODE */}
+            {mode === "learn" && (
+              <section className="rounded-3xl bg-white/80 p-5 sm:p-8 shadow-lg ring-4 ring-white animate-fade-in space-y-6">
+                <div className="flex items-center gap-3">
+                  <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-indigo-100 text-2xl">🗣️</span>
+                  <div>
+                    <h2 className="text-2xl font-black text-foreground">Ähnliche Lautpaare</h2>
+                    <p className="text-xs font-bold text-muted-foreground">Lerne ähnliche Lautpaare im Deutschen kennen</p>
+                  </div>
+                </div>
+
+                <div className="flex gap-2 flex-wrap justify-center">
+                  {lautpaarGroups.map(g => (
+                    <button
+                      key={g.pair}
+                      onClick={() => speakDE(g.label)}
+                      className={`${lautpaarColors[g.pair]?.badge || "bg-indigo-500"} text-white px-5 py-2 rounded-full text-lg font-black shadow-md hover:scale-110 active:scale-90 transition cursor-pointer select-none`}
+                    >
+                      {g.label}
+                    </button>
+                  ))}
+                </div>
+
+                <div className="rounded-2xl bg-indigo-50/60 p-4 border border-indigo-100">
+                  <p className="text-sm font-bold text-foreground/80">
+                    Tippe auf ein Wort, um es zu hören! Vergleiche die ähnlichen Laute in den beiden Spalten. 🔊
+                  </p>
+                </div>
+
+                <div className="space-y-6">
+                  {lautpaarGroups.map(g => {
+                    const c = lautpaarColors[g.pair] || { bg: "bg-indigo-50", ring: "ring-indigo-200", badge: "bg-indigo-500", text: "text-indigo-700" };
+                    return (
+                      <div key={g.pair} className={`${c.bg} rounded-2xl p-4 sm:p-5 ring-2 ${c.ring} space-y-4`}>
+                        <div className="flex items-center gap-3 border-b border-foreground/5 pb-2">
+                          <span className={`${c.badge} text-white px-3 py-1 rounded-lg text-lg font-black shadow select-none`}>
+                            {g.label}
+                          </span>
+                          <span className={`text-base font-black ${c.text}`}>Vergleiche Deutsch 1 und Deutsch 2</span>
+                        </div>
+                        
+                        <div className="grid grid-cols-2 gap-3 sm:gap-4">
+                          <div className="space-y-2">
+                            <div className="text-xs font-black opacity-60 tracking-wider uppercase pl-2">Deutsch 1</div>
+                            {g.words1.map(w => (
+                              <button
+                                key={w}
+                                onClick={() => speakDE(w)}
+                                className="w-full bg-white/80 hover:bg-white rounded-xl px-3 py-2 text-sm font-bold text-foreground shadow-sm border border-white hover:scale-[1.02] active:scale-[0.98] transition cursor-pointer text-left flex items-center justify-between gap-1"
+                              >
+                                <span>{highlightPair(w, g.label)}</span>
+                                <span className="text-xs opacity-40">🔊</span>
+                              </button>
+                            ))}
+                          </div>
+                          
+                          <div className="space-y-2">
+                            <div className="text-xs font-black opacity-60 tracking-wider uppercase pl-2">Deutsch 2</div>
+                            {g.words2.map(w => (
+                              <button
+                                key={w}
+                                onClick={() => speakDE(w)}
+                                className="w-full bg-white/80 hover:bg-white rounded-xl px-3 py-2 text-sm font-bold text-foreground shadow-sm border border-white hover:scale-[1.02] active:scale-[0.98] transition cursor-pointer text-left flex items-center justify-between gap-1"
+                              >
+                                <span>{highlightPair(w, g.label)}</span>
+                                <span className="text-xs opacity-40">🔊</span>
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+
+                <button
+                  onClick={() => setMode("exercise")}
+                  className="w-full mt-6 py-5 px-6 rounded-3xl bg-gradient-to-r from-primary to-orange-400 text-white font-black text-xl sm:text-2xl shadow-xl hover:shadow-2xl ring-4 ring-white transition-all transform hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-3 select-none cursor-pointer group"
+                >
+                  <span>✏️ Übung machen!</span>
+                  <span className="text-2xl transition-transform group-hover:translate-x-1">➔</span>
+                </button>
+              </section>
+            )}
+
+            {/* ÜBUNG MODE */}
+            {mode === "exercise" && (
+              <section className="rounded-3xl bg-white/80 p-5 sm:p-8 shadow-lg ring-4 ring-white animate-fade-in space-y-6">
+                <div className="flex items-center gap-3 justify-between">
+                  <div className="flex items-center gap-3">
+                    <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-sky-100 text-2xl">✏️</span>
+                    <div>
+                      <h2 className="text-2xl font-black text-foreground">Schreibübung</h2>
+                      <p className="text-xs font-bold text-muted-foreground">Fülle die leeren Felder aus!</p>
+                    </div>
+                  </div>
+                  <button onClick={() => setMode("learn")} className="text-xs font-black text-primary hover:underline">
+                    Lautpaare lernen
+                  </button>
+                </div>
+
+                <div className="rounded-2xl bg-sky-50/50 p-4 border border-sky-100">
+                  <p className="text-sm font-bold text-foreground/80">
+                    Lies das Wort links und schreibe es in das leere Feld rechts!
+                  </p>
+                </div>
+
+                <div className="space-y-6">
+                  {lautpaarGroups.map(g => {
+                    const c = lautpaarColors[g.pair] || { bg: "bg-indigo-50", ring: "ring-indigo-200", badge: "bg-indigo-500", text: "text-indigo-700" };
+                    
+                    // Interleave words1 and words2
+                    const allWords: string[] = [];
+                    const maxLen = Math.max(g.words1.length, g.words2.length);
+                    for (let i = 0; i < maxLen; i++) {
+                      if (i < g.words1.length) allWords.push(g.words1[i]);
+                      if (i < g.words2.length) allWords.push(g.words2[i]);
+                    }
+
+                    return (
+                      <div key={g.pair} className="overflow-hidden rounded-2xl border border-foreground/10 shadow-sm">
+                        {/* Section header */}
+                        <div className={`${c.badge} px-4 py-2.5 flex items-center gap-3`}>
+                          <span className="text-white text-xl font-black tracking-widest">{g.label}</span>
+                          <span className="text-white/80 text-sm font-bold">Ähnliche Lautpaare – {g.label}</span>
+                        </div>
+                        {/* Column labels */}
+                        <div className="grid grid-cols-2 bg-foreground/5">
+                          <div className="px-4 py-2 text-xs font-black text-foreground/60 uppercase tracking-wider border-r border-foreground/10">Deutsch</div>
+                          <div className="px-4 py-2 text-xs font-black text-foreground/60 uppercase tracking-wider">Schreibe hier</div>
+                        </div>
+                        {/* Rows */}
+                        {allWords.map((w, idx) => {
+                          const key = `p_${g.pair}_${w}_${idx}`;
+                          const val = userAnswers[key] || "";
+                          const correct = checkLautpaarAnswer(w, val);
+                          const hasVal = val.length > 0;
+                          return (
+                            <div
+                              key={`${w}-${idx}`}
+                              className={`grid grid-cols-2 border-t border-foreground/5 transition-colors ${
+                                correct ? "bg-emerald-50" : idx % 2 === 0 ? "bg-white" : "bg-white/50"
+                              }`}
+                            >
+                              {/* Col 1: word with highlighted combo */}
+                              <div className="px-4 py-2.5 border-r border-foreground/10 flex items-center gap-2">
+                                <button
+                                  onClick={() => speakDE(w)}
+                                  title={`${w} hören`}
+                                  className={`text-sm font-black text-foreground hover:${c.text} transition cursor-pointer select-none`}
+                                >
+                                  {highlightPair(w, g.label)}
+                                </button>
+                                <span className="text-xs text-foreground/30">🔊</span>
+                              </div>
+                              {/* Col 2: blank input */}
+                              <div className="px-4 py-2 flex items-center">
+                                {correct ? (
+                                  <span className="text-sm font-black text-emerald-700 flex items-center gap-1">
+                                    {w} ✅
+                                  </span>
+                                ) : (
+                                  <input
+                                    type="text"
+                                    value={val}
+                                    onChange={e => handleLautpaarInput(g.pair, w, idx, e.target.value)}
+                                    placeholder="?"
+                                    maxLength={30}
+                                    className={`w-full px-3 py-1.5 rounded-xl border-2 text-sm font-black transition-all outline-none ${
+                                      hasVal
+                                        ? "bg-rose-100 border-rose-400 text-rose-800"
+                                        : "bg-white border-dashed border-sky-300 focus:border-sky-500 focus:bg-sky-50/50"
+                                    }`}
+                                  />
+                                )}
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    );
+                  })}
+                </div>
+
+                {/* Completion */}
+                {isLautpaarComplete && (
+                  <div className="mt-8 text-center animate-bounce bg-emerald-50 border border-emerald-100 rounded-3xl p-5 shadow-inner">
+                    <div className="text-6xl">🎉😊🎉</div>
+                    <p className="mt-3 text-xl font-black text-emerald-700">
+                      Großartig! Du hast alle Wörter geschrieben!
+                    </p>
+                    <NextLessonButton currentId={lesson.id} />
+                  </div>
+                )}
+              </section>
+            )}
+          </>
+        ) : lessonId === "7" && numberGroups ? (
+          <>
+            {/* ======================================================== */}
+            {/* LESSON 7: ZAHLEN 0-10 – LEARN + EXERCISE                 */}
+            {/* ======================================================== */}
+
+            {/* LERNEN MODE */}
+            {mode === "learn" && (
+              <section className="rounded-3xl bg-white/80 p-5 sm:p-8 shadow-lg ring-4 ring-white animate-fade-in space-y-6">
+                <div className="flex items-center gap-3">
+                  <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-amber-100 text-2xl">🔢</span>
+                  <div>
+                    <h2 className="text-2xl font-black text-foreground">Zahlen 0–10</h2>
+                    <p className="text-xs font-bold text-muted-foreground">Lerne die Zahlen von null bis zehn</p>
+                  </div>
+                </div>
+
+                <div className="rounded-2xl bg-amber-50/60 p-4 border border-amber-100">
+                  <p className="text-sm font-bold text-foreground/80">
+                    Tippe auf eine Karte, um zu hören, wie die Zahl gesprochen wird! 🔊
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                  {numberGroups.map((num, idx) => (
+                    <button
+                      key={num.n}
+                      onClick={() => speakDE(num.word)}
+                      className={`${palette[idx % palette.length]} flex flex-col items-center justify-center p-5 rounded-3xl border-2 shadow-md hover:scale-105 active:scale-95 transition cursor-pointer group`}
+                    >
+                      <span className="text-5xl font-black group-hover:animate-bounce select-none">{num.n}</span>
+                      <span className="text-base font-black mt-2">{num.word}</span>
+                      <span className="text-xs opacity-50 mt-1">🔊</span>
+                    </button>
+                  ))}
+                </div>
+
+                <button
+                  onClick={() => setMode("exercise")}
+                  className="w-full mt-6 py-5 px-6 rounded-3xl bg-gradient-to-r from-primary to-orange-400 text-white font-black text-xl sm:text-2xl shadow-xl hover:shadow-2xl ring-4 ring-white transition-all transform hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-3 select-none cursor-pointer group"
+                >
+                  <span>✏️ Übung machen!</span>
+                  <span className="text-2xl transition-transform group-hover:translate-x-1">➔</span>
+                </button>
+              </section>
+            )}
+
+            {/* ÜBUNG MODE */}
+            {mode === "exercise" && (
+              <section className="rounded-3xl bg-white/80 p-5 sm:p-8 shadow-lg ring-4 ring-white animate-fade-in space-y-6">
+                <div className="flex items-center gap-3 justify-between">
+                  <div className="flex items-center gap-3">
+                    <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-sky-100 text-2xl">✏️</span>
+                    <div>
+                      <h2 className="text-2xl font-black text-foreground">Schreibübung</h2>
+                      <p className="text-xs font-bold text-muted-foreground">Fülle die leeren Felder aus!</p>
+                    </div>
+                  </div>
+                  <button onClick={() => setMode("learn")} className="text-xs font-black text-primary hover:underline">
+                    Zahlen lernen
+                  </button>
+                </div>
+
+                <div className="rounded-2xl bg-sky-50/50 p-4 border border-sky-100">
+                  <p className="text-sm font-bold text-foreground/80">
+                    Schreibe das richtige deutsche Wort für jede Zahl in das Feld.
+                  </p>
+                </div>
+
+                <div className="overflow-hidden rounded-2xl border border-foreground/10 shadow-sm">
+                  {/* Column labels */}
+                  <div className="grid grid-cols-2 bg-foreground/5">
+                    <div className="px-4 py-2 text-xs font-black text-foreground/60 uppercase tracking-wider border-r border-foreground/10">Zahl</div>
+                    <div className="px-4 py-2 text-xs font-black text-foreground/60 uppercase tracking-wider">Schreibe hier</div>
+                  </div>
+                  {/* Rows */}
+                  {numberGroups.map((num, idx) => {
+                    const val = userAnswers[`num_${num.word}`] || "";
+                    const correct = checkNumberAnswer(num.word, val);
+                    const hasVal = val.length > 0;
+                    return (
+                      <div
+                        key={num.n}
+                        className={`grid grid-cols-2 border-t border-foreground/5 transition-colors ${
+                          correct ? "bg-emerald-50" : idx % 2 === 0 ? "bg-white" : "bg-white/50"
+                        }`}
+                      >
+                        {/* Col 1: number with play button */}
+                        <div className="px-4 py-2.5 border-r border-foreground/10 flex items-center gap-2">
+                          <button
+                            onClick={() => speakDE(num.word)}
+                            title={`${num.n} (${num.word}) hören`}
+                            className="text-2xl font-black text-primary hover:scale-110 transition active:scale-90 cursor-pointer select-none"
+                          >
+                            {num.n}
+                          </button>
+                          <span className="text-xs text-foreground/30">🔊</span>
+                        </div>
+                        {/* Col 2: blank input */}
+                        <div className="px-4 py-2 flex items-center">
+                          {correct ? (
+                            <span className="text-sm font-black text-emerald-700 flex items-center gap-1">
+                              {num.word} ✅
+                            </span>
+                          ) : (
+                            <input
+                              type="text"
+                              value={val}
+                              onChange={e => handleNumberInput(num.word, e.target.value)}
+                              placeholder="?"
+                              maxLength={20}
+                              className={`w-full px-3 py-1.5 rounded-xl border-2 text-sm font-black transition-all outline-none ${
+                                hasVal
+                                  ? "bg-rose-100 border-rose-400 text-rose-800"
+                                  : "bg-white border-dashed border-sky-300 focus:border-sky-500 focus:bg-sky-50/50"
+                              }`}
+                            />
+                          )}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+
+                {/* Completion */}
+                {isNumbersComplete && (
+                  <div className="mt-8 text-center animate-bounce bg-emerald-50 border border-emerald-100 rounded-3xl p-5 shadow-inner">
+                    <div className="text-6xl">🎉😊🎉</div>
+                    <p className="mt-3 text-xl font-black text-emerald-700">
+                      Großartig! Du hast alle Zahlen richtig geschrieben!
+                    </p>
+                    <NextLessonButton currentId={lesson.id} />
+                  </div>
+                )}
+              </section>
+            )}
+          </>
+        ) : lessonId === "8" && numberAnwGroups ? (
+          <>
+            {/* ======================================================== */}
+            {/* LESSON 8: ZAHLEN 11-20 & ANWENDUNGEN – LEARN + EXERCISE   */}
+            {/* ======================================================== */}
+
+            {/* LERNEN MODE */}
+            {mode === "learn" && (
+              <section className="rounded-3xl bg-white/80 p-5 sm:p-8 shadow-lg ring-4 ring-white animate-fade-in space-y-6">
+                <div className="flex items-center gap-3">
+                  <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-amber-100 text-2xl">🔢</span>
+                  <div>
+                    <h2 className="text-2xl font-black text-foreground">Zahlen 11–20 & Anwendungen</h2>
+                    <p className="text-xs font-bold text-muted-foreground">Lerne Zahlen und ihre Verwendung im Alltag kennen</p>
+                  </div>
+                </div>
+
+                <div className="rounded-2xl bg-amber-50/60 p-4 border border-amber-100">
+                  <p className="text-sm font-bold text-foreground/80">
+                    Tippe auf eine Karte, um zu hören, wie das Wort gesprochen wird! 🔊
+                  </p>
+                </div>
+
+                <div className="space-y-6">
+                  {Array.from(new Set(numberAnwGroups.map(g => g.category))).map(cat => {
+                    const info = catInfo[cat] || { emoji: "🔢", bg: "bg-indigo-50", ring: "ring-indigo-200", badge: "bg-indigo-500", text: "text-indigo-700" };
+                    const items = numberAnwGroups.filter(g => g.category === cat);
+                    return (
+                      <div key={cat} className={`${info.bg} rounded-2xl p-4 sm:p-5 ring-2 ${info.ring} space-y-4`}>
+                        <div className="flex items-center gap-3 border-b border-foreground/5 pb-2">
+                          <span className="text-2xl">{info.emoji}</span>
+                          <span className={`text-lg font-black ${info.text}`}>{cat}</span>
+                        </div>
+                        {cat === "Zahlen 11-20" ? (
+                          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                            {items.map(it => (
+                              <button
+                                key={it.label}
+                                onClick={() => speakDE(it.word)}
+                                className="bg-white/80 hover:bg-white rounded-xl px-3 py-2 text-sm font-bold text-foreground shadow-sm border border-white hover:scale-105 active:scale-95 transition cursor-pointer flex items-center justify-between"
+                              >
+                                <span className="font-black text-base">{it.label}</span>
+                                <span className="opacity-80 font-bold">{it.word}</span>
+                                <span className="text-xs opacity-40">🔊</span>
+                              </button>
+                            ))}
+                          </div>
+                        ) : (
+                          <div className="flex flex-col gap-2">
+                            {items.map(it => (
+                              <button
+                                key={it.word}
+                                onClick={() => speakDE(it.word)}
+                                className="bg-white/80 hover:bg-white rounded-xl px-4 py-3 text-sm font-bold text-foreground shadow-sm border border-white hover:scale-[1.01] active:scale-[0.99] transition cursor-pointer flex items-center justify-between gap-3 text-left"
+                              >
+                                <div>
+                                  <span className="text-xs font-black opacity-55 mr-2">{it.label}:</span>
+                                  <span className="font-black text-base">{it.word}</span>
+                                </div>
+                                <span className="text-xs opacity-40">🔊</span>
+                              </button>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+
+                <button
+                  onClick={() => setMode("exercise")}
+                  className="w-full mt-6 py-5 px-6 rounded-3xl bg-gradient-to-r from-primary to-orange-400 text-white font-black text-xl sm:text-2xl shadow-xl hover:shadow-2xl ring-4 ring-white transition-all transform hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-3 select-none cursor-pointer group"
+                >
+                  <span>✏️ Übung machen!</span>
+                  <span className="text-2xl transition-transform group-hover:translate-x-1">➔</span>
+                </button>
+              </section>
+            )}
+
+            {/* ÜBUNG MODE */}
+            {mode === "exercise" && (
+              <section className="rounded-3xl bg-white/80 p-5 sm:p-8 shadow-lg ring-4 ring-white animate-fade-in space-y-6">
+                <div className="flex items-center gap-3 justify-between">
+                  <div className="flex items-center gap-3">
+                    <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-sky-100 text-2xl">✏️</span>
+                    <div>
+                      <h2 className="text-2xl font-black text-foreground">Schreibübung</h2>
+                      <p className="text-xs font-bold text-muted-foreground">Fülle die leeren Felder aus!</p>
+                    </div>
+                  </div>
+                  <button onClick={() => setMode("learn")} className="text-xs font-black text-primary hover:underline">
+                    Zahlen lernen
+                  </button>
+                </div>
+
+                <div className="rounded-2xl bg-sky-50/50 p-4 border border-sky-100">
+                  <p className="text-sm font-bold text-foreground/80">
+                    Schreibe das richtige deutsche Wort oder die passende Zahl in das Feld rechts!
+                  </p>
+                </div>
+
+                <div className="space-y-6">
+                  {Array.from(new Set(numberAnwGroups.map(g => g.category))).map(cat => {
+                    const info = catInfo[cat] || { emoji: "🔢", bg: "bg-indigo-50", ring: "ring-indigo-200", badge: "bg-indigo-500", text: "text-indigo-700" };
+                    const items = numberAnwGroups.filter(g => g.category === cat);
+                    return (
+                      <div key={cat} className="overflow-hidden rounded-2xl border border-foreground/10 shadow-sm">
+                        {/* Section header */}
+                        <div className={`${info.badge} px-4 py-2.5 flex items-center gap-3`}>
+                          <span className="text-white text-xl">{info.emoji}</span>
+                          <span className="text-white/80 text-sm font-bold">{cat}</span>
+                        </div>
+                        {/* Column labels */}
+                        <div className="grid grid-cols-2 bg-foreground/5">
+                          <div className="px-4 py-2 text-xs font-black text-foreground/60 uppercase tracking-wider border-r border-foreground/10">Deutsch</div>
+                          <div className="px-4 py-2 text-xs font-black text-foreground/60 uppercase tracking-wider">Schreibe hier</div>
+                        </div>
+                        {/* Rows */}
+                        {items.map(it => {
+                          const globalIdx = numberAnwGroups.indexOf(it);
+                          const key = `numanw_${it.word}_${globalIdx}`;
+                          const val = userAnswers[key] || "";
+                          const correct = checkNumberAnwAnswer(it.word, val);
+                          const hasVal = val.length > 0;
+                          return (
+                            <div
+                              key={`${it.word}-${globalIdx}`}
+                              className={`grid grid-cols-2 border-t border-foreground/5 transition-colors ${
+                                correct ? "bg-emerald-50" : globalIdx % 2 === 0 ? "bg-white" : "bg-white/50"
+                              }`}
+                            >
+                              {/* Col 1: Label / Number */}
+                              <div className="px-4 py-2.5 border-r border-foreground/10 flex items-center gap-2">
+                                <button
+                                  onClick={() => speakDE(it.word)}
+                                  title={`${it.label} hören`}
+                                  className="text-sm font-black text-foreground hover:text-primary transition cursor-pointer select-none text-left"
+                                >
+                                  {it.label}
+                                </button>
+                                <span className="text-xs text-foreground/30">🔊</span>
+                              </div>
+                              {/* Col 2: input */}
+                              <div className="px-4 py-2 flex items-center">
+                                {correct ? (
+                                  <span className="text-sm font-black text-emerald-700 flex items-center gap-1">
+                                    {it.word} ✅
+                                  </span>
+                                ) : (
+                                  <input
+                                    type="text"
+                                    value={val}
+                                    onChange={e => handleNumberAnwInput(it.word, globalIdx, e.target.value)}
+                                    placeholder="?"
+                                    maxLength={30}
+                                    className={`w-full px-3 py-1.5 rounded-xl border-2 text-sm font-black transition-all outline-none ${
+                                      hasVal
+                                        ? "bg-rose-100 border-rose-400 text-rose-800"
+                                        : "bg-white border-dashed border-sky-300 focus:border-sky-500 focus:bg-sky-50/50"
+                                    }`}
+                                  />
+                                )}
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    );
+                  })}
+                </div>
+
+                {/* Completion */}
+                {isNumbersAnwComplete && (
+                  <div className="mt-8 text-center animate-bounce bg-emerald-50 border border-emerald-100 rounded-3xl p-5 shadow-inner">
+                    <div className="text-6xl">🎉😊🎉</div>
+                    <p className="mt-3 text-xl font-black text-emerald-700">
+                      Großartig! Du hast alle Zahlen und Anwendungen richtig geschrieben!
+                    </p>
+                    <NextLessonButton currentId={lesson.id} />
+                  </div>
+                )}
+              </section>
+            )}
+          </>
+        ) : lessonId === "9" && zeitGroups && zeitExercises ? (
+          <>
+            {/* ======================================================== */}
+            {/* LESSON 9: ZEIT – LEARN + EXERCISE                        */}
+            {/* ======================================================== */}
+
+            {/* LERNEN MODE */}
+            {mode === "learn" && (
+              <section className="rounded-3xl bg-white/80 p-5 sm:p-8 shadow-lg ring-4 ring-white animate-fade-in space-y-6">
+                <div className="flex items-center gap-3">
+                  <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-amber-100 text-2xl">🕒</span>
+                  <div>
+                    <h2 className="text-2xl font-black text-foreground">Zeit</h2>
+                    <p className="text-xs font-bold text-muted-foreground">Lerne die Uhrzeit und wichtige Begriffe rund um das Thema Zeit</p>
+                  </div>
+                </div>
+
+                <div className="rounded-2xl bg-amber-50/60 p-4 border border-amber-100">
+                  <p className="text-sm font-bold text-foreground/80">
+                    Tippe auf eine Zeile, um zu hören, wie es gesprochen wird! 🔊
+                  </p>
+                </div>
+
+                <div className="space-y-6">
+                  {zeitGroups.map(g => {
+                    const info = zeitCatColors[g.category] || { emoji: "🕒", bg: "bg-indigo-50", ring: "ring-indigo-200", badge: "bg-indigo-500", text: "text-indigo-700" };
+                    return (
+                      <div key={g.category} className={`${info.bg} rounded-2xl p-4 sm:p-5 ring-2 ${info.ring} space-y-4`}>
+                        <div className="flex items-center gap-3 border-b border-foreground/5 pb-2">
+                          <span className="text-2xl">{info.emoji}</span>
+                          <span className={`text-lg font-black ${info.text}`}>{g.category}</span>
+                        </div>
+                        <div className="flex flex-col gap-2">
+                          {g.items.map(it => (
+                            <button
+                              key={it.word}
+                              onClick={() => speakDE(it.word)}
+                              className="bg-white/80 hover:bg-white rounded-xl px-4 py-3 text-sm font-bold text-foreground shadow-sm border border-white hover:scale-[1.01] active:scale-[0.99] transition cursor-pointer flex items-center justify-between gap-3 text-left"
+                            >
+                              <div>
+                                {it.label !== "Frage" && it.label !== it.word && (
+                                  <span className="text-xs font-black opacity-55 mr-2">{it.label}:</span>
+                                )}
+                                <span className="font-black text-base">{it.word}</span>
+                              </div>
+                              <span className="text-xs opacity-40">🔊</span>
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+
+                <button
+                  onClick={() => setMode("exercise")}
+                  className="w-full mt-6 py-5 px-6 rounded-3xl bg-gradient-to-r from-primary to-orange-400 text-white font-black text-xl sm:text-2xl shadow-xl hover:shadow-2xl ring-4 ring-white transition-all transform hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-3 select-none cursor-pointer group"
+                >
+                  <span>✏️ Übung machen!</span>
+                  <span className="text-2xl transition-transform group-hover:translate-x-1">➔</span>
+                </button>
+              </section>
+            )}
+
+            {/* ÜBUNG MODE */}
+            {mode === "exercise" && (
+              <section className="rounded-3xl bg-white/80 p-5 sm:p-8 shadow-lg ring-4 ring-white animate-fade-in space-y-6">
+                <div className="flex items-center gap-3 justify-between">
+                  <div className="flex items-center gap-3">
+                    <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-sky-100 text-2xl">✏️</span>
+                    <div>
+                      <h2 className="text-2xl font-black text-foreground">Schreibübung</h2>
+                      <p className="text-xs font-bold text-muted-foreground">Fülle die leeren Felder aus!</p>
+                    </div>
+                  </div>
+                  <button onClick={() => setMode("learn")} className="text-xs font-black text-primary hover:underline">
+                    Zeit lernen
+                  </button>
+                </div>
+
+                <div className="rounded-2xl bg-sky-50/50 p-4 border border-sky-100">
+                  <p className="text-sm font-bold text-foreground/80">
+                    Schreibe das richtige deutsche Wort oder die passende Uhrzeit in das Feld rechts!
+                  </p>
+                </div>
+
+                <div className="overflow-hidden rounded-2xl border border-foreground/10 shadow-sm">
+                  {/* Column labels */}
+                  <div className="grid grid-cols-2 bg-foreground/5">
+                    <div className="px-4 py-2 text-xs font-black text-foreground/60 uppercase tracking-wider border-r border-foreground/10">Deutsch</div>
+                    <div className="px-4 py-2 text-xs font-black text-foreground/60 uppercase tracking-wider">Schreibe hier</div>
+                  </div>
+                  {/* Rows */}
+                  {zeitExercises.map((it, idx) => {
+                    const key = `zeit_${it.word}_${idx}`;
+                    const val = userAnswers[key] || "";
+                    const correct = checkZeitAnswer(it.word, val);
+                    const hasVal = val.length > 0;
+                    return (
+                      <div
+                        key={`${it.word}-${idx}`}
+                        className={`grid grid-cols-2 border-t border-foreground/5 transition-colors ${
+                          correct ? "bg-emerald-50" : idx % 2 === 0 ? "bg-white" : "bg-white/50"
+                        }`}
+                      >
+                        {/* Col 1: Label / Number */}
+                        <div className="px-4 py-2.5 border-r border-foreground/10 flex items-center gap-2">
+                          <button
+                            onClick={() => speakDE(it.word)}
+                            title={`${it.label} hören`}
+                            className="text-sm font-black text-foreground hover:text-primary transition cursor-pointer select-none text-left"
+                          >
+                            {it.label}
+                          </button>
+                          <span className="text-xs text-foreground/30">🔊</span>
+                        </div>
+                        {/* Col 2: input */}
+                        <div className="px-4 py-2 flex items-center">
+                          {correct ? (
+                            <span className="text-sm font-black text-emerald-700 flex items-center gap-1">
+                              {it.word} ✅
+                            </span>
+                          ) : (
+                            <input
+                              type="text"
+                              value={val}
+                              onChange={e => handleZeitInput(it.word, idx, e.target.value)}
+                              placeholder="?"
+                              maxLength={40}
+                              className={`w-full px-3 py-1.5 rounded-xl border-2 text-sm font-black transition-all outline-none ${
+                                hasVal
+                                  ? "bg-rose-100 border-rose-400 text-rose-800"
+                                  : "bg-white border-dashed border-sky-300 focus:border-sky-500 focus:bg-sky-50/50"
+                              }`}
+                            />
+                          )}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+
+                {/* Completion */}
+                {isZeitComplete && (
+                  <div className="mt-8 text-center animate-bounce bg-emerald-50 border border-emerald-100 rounded-3xl p-5 shadow-inner">
+                    <div className="text-6xl">🎉😊🎉</div>
+                    <p className="mt-3 text-xl font-black text-emerald-700">
+                      Großartig! Du hast alle Uhrzeiten und Wörter richtig geschrieben!
+                    </p>
+                    <NextLessonButton currentId={lesson.id} />
+                  </div>
+                )}
+              </section>
+            )}
+          </>
+        ) : lessonId === "10" && reviewGroups ? (
+          <>
+            {/* ======================================================== */}
+            {/* LESSON 10: WIEDERHOLUNG – LEARN + EXERCISE               */}
+            {/* ======================================================== */}
+
+            {/* LERNEN MODE */}
+            {mode === "learn" && (
+              <section className="rounded-3xl bg-white/80 p-5 sm:p-8 shadow-lg ring-4 ring-white animate-fade-in space-y-6">
+                <div className="flex items-center gap-3">
+                  <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-amber-100 text-2xl">🔁</span>
+                  <div>
+                    <h2 className="text-2xl font-black text-foreground">Wiederholung</h2>
+                    <p className="text-xs font-bold text-muted-foreground">Wiederhole alle bisherigen Themen</p>
+                  </div>
+                </div>
+
+                <div className="rounded-2xl bg-amber-50/60 p-4 border border-amber-100">
+                  <p className="text-sm font-bold text-foreground/80">
+                    Tippe auf ein Beispiel, um es zu hören! 🔊
+                  </p>
+                </div>
+
+                <div className="space-y-6">
+                  {reviewGroups.map((g, catIdx) => (
+                    <div key={g.category} className={`${palette[catIdx % palette.length]} rounded-2xl p-4 sm:p-5 border-2 shadow-md space-y-3`}>
+                      <h3 className="text-lg font-black">{g.category}</h3>
+                      <div className="space-y-2">
+                        {g.items.map((it, itemIdx) => (
+                          <button
+                            key={itemIdx}
+                            onClick={() => speakDE(it.full)}
+                            className="w-full bg-white/80 hover:bg-white rounded-xl px-4 py-2.5 text-sm font-bold text-foreground shadow-sm border border-white hover:scale-[1.01] active:scale-[0.99] transition cursor-pointer flex items-center justify-between"
+                          >
+                            <span className="font-black text-base">{it.full}</span>
+                            <span className="text-xs opacity-40">🔊</span>
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                <button
+                  onClick={() => setMode("exercise")}
+                  className="w-full mt-6 py-5 px-6 rounded-3xl bg-gradient-to-r from-primary to-orange-400 text-white font-black text-xl sm:text-2xl shadow-xl hover:shadow-2xl ring-4 ring-white transition-all transform hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-3 select-none cursor-pointer group"
+                >
+                  <span>✏️ Übung machen!</span>
+                  <span className="text-2xl transition-transform group-hover:translate-x-1">➔</span>
+                </button>
+              </section>
+            )}
+
+            {/* ÜBUNG MODE */}
+            {mode === "exercise" && (
+              <section className="rounded-3xl bg-white/80 p-5 sm:p-8 shadow-lg ring-4 ring-white animate-fade-in space-y-6">
+                <div className="flex items-center gap-3 justify-between">
+                  <div className="flex items-center gap-3">
+                    <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-sky-100 text-2xl">✏️</span>
+                    <div>
+                      <h2 className="text-2xl font-black text-foreground">Schreibübung</h2>
+                      <p className="text-xs font-bold text-muted-foreground">Fülle die leeren Felder aus!</p>
+                    </div>
+                  </div>
+                  <button onClick={() => setMode("learn")} className="text-xs font-black text-primary hover:underline">
+                    Lernstoff ansehen
+                  </button>
+                </div>
+
+                <div className="rounded-2xl bg-sky-50/50 p-4 border border-sky-100">
+                  <p className="text-sm font-bold text-foreground/80">
+                    Schreibe die richtige Antwort für die Lücken in das Feld rechts!
+                  </p>
+                </div>
+
+                <div className="space-y-6">
+                  {reviewGroups.map((g, catIdx) => (
+                    <div key={g.category} className="overflow-hidden rounded-2xl border border-foreground/10 shadow-sm">
+                      {/* Section header */}
+                      <div className="bg-primary px-4 py-2.5 flex items-center gap-3">
+                        <span className="text-white text-base font-bold">{g.category}</span>
+                      </div>
+                      {/* Column labels */}
+                      <div className="grid grid-cols-2 bg-foreground/5">
+                        <div className="px-4 py-2 text-xs font-black text-foreground/60 uppercase tracking-wider border-r border-foreground/10">Frage</div>
+                        <div className="px-4 py-2 text-xs font-black text-foreground/60 uppercase tracking-wider">Antwort</div>
+                      </div>
+                      {/* Rows */}
+                      {g.items.map((it, itemIdx) => {
+                        const key = `rev_${catIdx}_${itemIdx}`;
+                        const val = userAnswers[key] || "";
+                        const correct = checkReviewAnswer(it.answer, val);
+                        const hasVal = val.length > 0;
+                        const isQuestion = it.answer.length > 0;
+
+                        return (
+                          <div
+                            key={itemIdx}
+                            className={`grid grid-cols-2 border-t border-foreground/5 transition-colors ${
+                              !isQuestion ? "bg-foreground/5 opacity-80" : correct ? "bg-emerald-50" : itemIdx % 2 === 0 ? "bg-white" : "bg-white/50"
+                            }`}
+                          >
+                            {/* Col 1: Prompt */}
+                            <div className="px-4 py-2.5 border-r border-foreground/10 flex items-center gap-2">
+                              <button
+                                onClick={() => speakDE(it.full)}
+                                title={`${it.prompt} hören`}
+                                className="text-sm font-black text-foreground hover:text-primary transition cursor-pointer select-none text-left"
+                              >
+                                {it.prompt}
+                              </button>
+                              <span className="text-xs text-foreground/30">🔊</span>
+                            </div>
+                            {/* Col 2: input / display */}
+                            <div className="px-4 py-2 flex items-center">
+                              {!isQuestion ? (
+                                <span className="text-sm font-bold text-foreground/40 italic">
+                                  Beispiel (fertig)
+                                </span>
+                              ) : correct ? (
+                                <span className="text-sm font-black text-emerald-700 flex items-center gap-1">
+                                  {it.answer} ✅
+                                </span>
+                              ) : (
+                                <input
+                                  type="text"
+                                  value={val}
+                                  onChange={e => handleReviewInput(it.answer, catIdx, itemIdx, e.target.value)}
+                                  placeholder="?"
+                                  maxLength={30}
+                                  className={`w-full px-3 py-1.5 rounded-xl border-2 text-sm font-black transition-all outline-none ${
+                                    hasVal
+                                      ? "bg-rose-100 border-rose-400 text-rose-800"
+                                      : "bg-white border-dashed border-sky-300 focus:border-sky-500 focus:bg-sky-50/50"
+                                  }`}
+                                />
+                              )}
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  ))}
+                </div>
+
+                {/* Completion */}
+                {isReviewComplete && (
+                  <div className="mt-8 text-center animate-bounce bg-emerald-50 border border-emerald-100 rounded-3xl p-5 shadow-inner">
+                    <div className="text-6xl">🎉😊🎉</div>
+                    <p className="mt-3 text-xl font-black text-emerald-700">
+                      Großartig! Du hast die ganze Wiederholung geschafft!
+                    </p>
+                    <NextLessonButton currentId={lesson.id} />
+                  </div>
+                )}
+              </section>
+            )}
+          </>
         ) : lessonId === "5" && lautkomGroups ? (
           <>
             {/* ======================================================== */}
@@ -846,13 +1853,10 @@ function LessonPage() {
                           <button
                             key={letter}
                             onClick={() => speakDE(letterProns[letter] || letter)}
-                            className={`${palette[(idx + letterIdx) % palette.length]} flex flex-col items-center justify-center aspect-square rounded-2xl border-2 shadow-sm transition active:scale-90 group cursor-pointer py-1`}
+                            className={`${palette[(idx + letterIdx) % palette.length]} flex items-center justify-center aspect-square rounded-2xl border-2 shadow-sm transition active:scale-90 group cursor-pointer`}
                           >
                             <span className="text-xl sm:text-3xl font-black group-hover:animate-bounce select-none">
                               {getLetterDisplay(letter)}
-                            </span>
-                            <span className="text-[8px] sm:text-[10px] font-bold opacity-60 select-none">
-                              {letterProns[letter]}
                             </span>
                           </button>
                         ))}
@@ -871,13 +1875,10 @@ function LessonPage() {
                         <button
                           key={letter}
                           onClick={() => speakDE(letterProns[letter] || letter)}
-                          className="bg-orange-100 border-orange-300 hover:bg-orange-200 text-orange-950 flex flex-col items-center justify-center aspect-square rounded-2xl border-2 shadow-sm transition active:scale-90 group cursor-pointer py-1"
+                          className="bg-orange-100 border-orange-300 hover:bg-orange-200 text-orange-950 flex items-center justify-center aspect-square rounded-2xl border-2 shadow-sm transition active:scale-90 group cursor-pointer"
                         >
                           <span className="text-xl sm:text-3xl font-black group-hover:animate-bounce select-none">
                             {getLetterDisplay(letter)}
-                          </span>
-                          <span className="text-[8px] sm:text-[10px] font-bold opacity-65 select-none">
-                            {letterProns[letter]}
                           </span>
                         </button>
                       ))}
@@ -1081,7 +2082,9 @@ function LessonPage() {
                         className="flex flex-col items-center justify-center gap-2 rounded-2xl bg-amber-100/80 hover:bg-amber-100 p-4 text-xl sm:text-2xl font-black shadow-md border-2 border-white transition-all hover:scale-105 active:scale-95 hover:shadow-lg group"
                       >
                         <span className="group-hover:animate-bounce">{it.split(" ")[0]}</span>
-                        {it.split(" ")[1] && <span className="text-xs font-bold text-foreground/60">{it.split(" ")[1]}</span>}
+                        {it.split(" ")[1] && lessonId !== "7" && lessonId !== "8" && (
+                          <span className="text-xs font-bold text-foreground/60">{it.split(" ")[1]}</span>
+                        )}
                         <span className="text-xs opacity-75">🔊</span>
                       </button>
                     ))}

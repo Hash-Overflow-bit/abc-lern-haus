@@ -15,9 +15,6 @@ export const Route = createFileRoute("/")({
 const tiles = [
   { to: "/alphabet", label: "Alphabet", emoji: "🔤", bg: "bg-rose-300" },
   { to: "/numbers", label: "Zahlen", emoji: "🔢", bg: "bg-amber-300" },
-  { to: "/vocabulary", label: "Wörter", emoji: "📚", bg: "bg-emerald-300" },
-  { to: "/listening", label: "Hören", emoji: "👂", bg: "bg-sky-300" },
-  { to: "/clock", label: "Uhrzeit", emoji: "🕐", bg: "bg-violet-300" },
   { to: "/lessons", label: "Lektionen", emoji: "🎓", bg: "bg-pink-300" },
 ] as const;
 
@@ -35,7 +32,9 @@ function Index() {
           <Link
             key={t.to}
             to={t.to}
-            className={`${t.bg} flex aspect-square flex-col items-center justify-center gap-2 rounded-3xl shadow-lg shadow-black/10 ring-4 ring-white transition active:scale-95`}
+            className={`${t.bg} ${
+              t.to === "/lessons" ? "col-span-2 aspect-[2/1] sm:aspect-[2.5/1]" : "aspect-square"
+            } flex flex-col items-center justify-center gap-2 rounded-3xl shadow-lg shadow-black/10 ring-4 ring-white transition active:scale-95`}
           >
             <span className="text-6xl">{t.emoji}</span>
             <span className="text-xl font-black text-foreground">{t.label}</span>
