@@ -97,14 +97,26 @@ export function KidNav() {
 
 export function Page({ title, emoji, children }: { title: string; emoji: string; children: React.ReactNode }) {
   return (
-    <main className="min-h-screen bg-gradient-to-b from-amber-50 via-orange-50 to-rose-50 pl-20 sm:pl-24 md:pl-28 pr-3 sm:pr-4 py-4">
-      <header className="px-2 md:px-5 pt-3 md:pt-6 pb-2">
-        <h1 className="text-2xl md:text-4xl font-black tracking-tight text-foreground flex items-center gap-2 select-none">
-          <span className="text-3xl md:text-5xl">{emoji}</span>
-          <span>{title}</span>
-        </h1>
-      </header>
-      <div className="px-2 md:px-4">{children}</div>
+    <main className="min-h-screen bg-gradient-to-b from-amber-50 via-orange-50 to-rose-50 pl-20 sm:pl-24 md:pl-28 pr-3 sm:pr-4 py-4 flex flex-col justify-between">
+      <div>
+        <header className="px-2 md:px-5 pt-3 md:pt-6 pb-2">
+          <h1 className="text-2xl md:text-4xl font-black tracking-tight text-foreground flex items-center gap-2 select-none">
+            <span className="text-3xl md:text-5xl">{emoji}</span>
+            <span>{title}</span>
+          </h1>
+        </header>
+        <div className="px-2 md:px-4">{children}</div>
+      </div>
+      <footer className="mt-auto pt-10 pb-2 text-center">
+        <a
+          href="https://www.upwork.com/freelancers/~018cb6b2be97dd2433?mp_source=share"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-xs font-semibold text-foreground/30 hover:text-primary transition-all duration-200"
+        >
+          developed by Hashir Mehboob
+        </a>
+      </footer>
       <KidNav />
     </main>
   );

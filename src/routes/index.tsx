@@ -20,27 +20,39 @@ const tiles = [
 
 function Index() {
   return (
-    <main className="min-h-screen bg-gradient-to-b from-amber-100 via-rose-100 to-violet-100 pl-20 sm:pl-24 md:pl-28 pr-4">
-      <header className="px-2 sm:px-5 pt-10 pb-4 text-center">
-        <h1 className="text-5xl font-black tracking-tight text-foreground">
-          Deutsch <span className="text-primary">ABC</span>
-        </h1>
-        <p className="mt-2 text-lg font-semibold text-foreground/70">für Kinder 🧒</p>
-      </header>
-      <div className="mx-auto grid max-w-2xl grid-cols-2 gap-4 px-4 pt-4">
-        {tiles.map((t) => (
-          <Link
-            key={t.to}
-            to={t.to}
-            className={`${t.bg} ${
-              t.to === "/lessons" ? "col-span-2 aspect-[2/1] sm:aspect-[2.5/1]" : "aspect-square"
-            } flex flex-col items-center justify-center gap-2 rounded-3xl shadow-lg shadow-black/10 ring-4 ring-white transition active:scale-95`}
-          >
-            <span className="text-6xl">{t.emoji}</span>
-            <span className="text-xl font-black text-foreground">{t.label}</span>
-          </Link>
-        ))}
+    <main className="min-h-screen bg-gradient-to-b from-amber-100 via-rose-100 to-violet-100 pl-20 sm:pl-24 md:pl-28 pr-4 flex flex-col justify-between">
+      <div>
+        <header className="px-2 sm:px-5 pt-10 pb-4 text-center">
+          <h1 className="text-5xl font-black tracking-tight text-foreground">
+            Deutsch <span className="text-primary">ABC</span>
+          </h1>
+          <p className="mt-2 text-lg font-semibold text-foreground/70">für Kinder 🧒</p>
+        </header>
+        <div className="mx-auto grid max-w-2xl grid-cols-2 gap-4 px-4 pt-4">
+          {tiles.map((t) => (
+            <Link
+              key={t.to}
+              to={t.to}
+              className={`${t.bg} ${
+                t.to === "/lessons" ? "col-span-2 aspect-[2/1] sm:aspect-[2.5/1]" : "aspect-square"
+              } flex flex-col items-center justify-center gap-2 rounded-3xl shadow-lg shadow-black/10 ring-4 ring-white transition active:scale-95`}
+            >
+              <span className="text-6xl">{t.emoji}</span>
+              <span className="text-xl font-black text-foreground">{t.label}</span>
+            </Link>
+          ))}
+        </div>
       </div>
+      <footer className="mt-auto pt-10 pb-4 text-center">
+        <a
+          href="https://www.upwork.com/freelancers/~018cb6b2be97dd2433?mp_source=share"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-xs font-semibold text-foreground/30 hover:text-primary transition-all duration-200"
+        >
+          developed by Hashir Mehboob
+        </a>
+      </footer>
       <KidNav />
     </main>
   );
