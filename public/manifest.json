@@ -1,7 +1,10 @@
 {
   "name": "Deutsch ABC für Kinder",
   "short_name": "Deutsch ABC",
+  "description": "Spielerisch Deutsch lernen: Alphabet und Zahlen.",
   "start_url": "/",
+  "scope": "/",
+  "id": "/",
   "display": "standalone",
   "background_color": "#fff8e7",
   "theme_color": "#22c55e",
@@ -13,4 +16,4 @@
       "purpose": "any maskable"
     }
   ]
-}
+}

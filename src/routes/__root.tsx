@@ -146,6 +146,28 @@ function RootComponent() {
     return () => window.removeEventListener("pointerdown", handler);
   }, []);
 
+  useEffect(() => {
+    // Register service worker for offline UI support
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker
+        .register("/sw.js")
+        .then((reg) => {
+          // Auto-update: when a new SW is found, activate it immediately
+          reg.addEventListener("updatefound", () => {
+            const newSW = reg.installing;
+            if (newSW) {
+              newSW.addEventListener("statechange", () => {
+                if (newSW.state === "activated") {
+                  console.log("[SW] New version activated");
+                }
+              });
+            }
+          });
+        })
+        .catch((err) => console.warn("[SW] Registration failed:", err));
+    }
+  }, []);
+
   return (
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
