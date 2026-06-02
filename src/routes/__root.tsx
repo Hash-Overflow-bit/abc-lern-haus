@@ -125,8 +125,17 @@ function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
   useEffect(() => {
-    // Pre-load German TTS voices as early as possible
-    warmupSpeech();
+    // Unlock/pre-load German TTS voices on first user gesture (better for autoplay policies)
+    const handler = () => {
+      try {
+        warmupSpeech();
+      } catch (e) {
+        // ignore
+      }
+      window.removeEventListener("pointerdown", handler);
+    };
+    window.addEventListener("pointerdown", handler, { passive: true });
+    return () => window.removeEventListener("pointerdown", handler);
   }, []);
 
   return (
