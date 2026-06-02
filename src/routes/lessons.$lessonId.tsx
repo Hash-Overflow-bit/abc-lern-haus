@@ -11,11 +11,37 @@ export const Route = createFileRoute("/lessons/$lessonId")({
 });
 
 const letterProns: Record<string, string> = {
-  A: "ah", B: "be", C: "ce", D: "de", E: "eh", F: "eff", G: "ge",
-  H: "ha", I: "ih", J: "jot", K: "ka", L: "ell", M: "emm", N: "enn",
-  O: "oh", P: "pe", Q: "ku", R: "err", S: "ess", T: "te", U: "uh",
-  V: "vau", W: "we", X: "ix", Y: "ypsilon", Z: "zett",
-  "\u00C4": "\u00E4h", "\u00D6": "\u00F6h", "\u00DC": "\u00FCh", "\u00DF": "eszett", ss: "ss"
+  A: "ah",
+  B: "be",
+  C: "ce",
+  D: "de",
+  E: "eh",
+  F: "eff",
+  G: "ge",
+  H: "ha",
+  I: "ih",
+  J: "jot",
+  K: "ka",
+  L: "ell",
+  M: "emm",
+  N: "enn",
+  O: "oh",
+  P: "pe",
+  Q: "ku",
+  R: "err",
+  S: "ess",
+  T: "te",
+  U: "uh",
+  V: "vau",
+  W: "we",
+  X: "ix",
+  Y: "ypsilon",
+  Z: "zett",
+  "\u00C4": "\u00E4h",
+  "\u00D6": "\u00F6h",
+  "\u00DC": "\u00FCh",
+  "\u00DF": "eszett",
+  ss: "ss",
 };
 
 const alphabetRows = [
@@ -60,55 +86,222 @@ const abcMitWieRows = [
   { letter: "\u00DC", word: "\u00DCbersetzen" },
 ];
 
-const palette = [
-  "bg-white border-foreground/15 hover:bg-foreground/5 text-foreground",
-];
+const palette = ["bg-white border-foreground/15 hover:bg-foreground/5 text-foreground"];
 
 // Lesson 4: Vokale – vowel colour palette per vowel (Neutralized)
 const vokalColors: Record<string, { bg: string; ring: string; badge: string; text: string }> = {
-  A: { bg: "bg-white", ring: "ring-foreground/10 border-2 border-foreground/15", badge: "bg-foreground", text: "text-foreground" },
-  E: { bg: "bg-white", ring: "ring-foreground/10 border-2 border-foreground/15", badge: "bg-foreground", text: "text-foreground" },
-  I: { bg: "bg-white", ring: "ring-foreground/10 border-2 border-foreground/15", badge: "bg-foreground", text: "text-foreground" },
-  O: { bg: "bg-white", ring: "ring-foreground/10 border-2 border-foreground/15", badge: "bg-foreground", text: "text-foreground" },
-  U: { bg: "bg-white", ring: "ring-foreground/10 border-2 border-foreground/15", badge: "bg-foreground", text: "text-foreground" },
+  A: {
+    bg: "bg-white",
+    ring: "ring-foreground/10 border-2 border-foreground/15",
+    badge: "bg-foreground",
+    text: "text-foreground",
+  },
+  E: {
+    bg: "bg-white",
+    ring: "ring-foreground/10 border-2 border-foreground/15",
+    badge: "bg-foreground",
+    text: "text-foreground",
+  },
+  I: {
+    bg: "bg-white",
+    ring: "ring-foreground/10 border-2 border-foreground/15",
+    badge: "bg-foreground",
+    text: "text-foreground",
+  },
+  O: {
+    bg: "bg-white",
+    ring: "ring-foreground/10 border-2 border-foreground/15",
+    badge: "bg-foreground",
+    text: "text-foreground",
+  },
+  U: {
+    bg: "bg-white",
+    ring: "ring-foreground/10 border-2 border-foreground/15",
+    badge: "bg-foreground",
+    text: "text-foreground",
+  },
 };
 
 // Lesson 5: Lautkombinationen – colour palette per combination (Neutralized)
-const lautkomColors: Record<string, { bg: string; ring: string; badge: string; text: string; highlight: string }> = {
-  Ch: { bg: "bg-white", ring: "ring-foreground/10 border-2 border-foreground/15", badge: "bg-foreground", text: "text-foreground", highlight: "text-foreground underline font-black" },
-  Sch: { bg: "bg-white", ring: "ring-foreground/10 border-2 border-foreground/15", badge: "bg-foreground", text: "text-foreground", highlight: "text-foreground underline font-black" },
-  Ei: { bg: "bg-white", ring: "ring-foreground/10 border-2 border-foreground/15", badge: "bg-foreground", text: "text-foreground", highlight: "text-foreground underline font-black" },
-  Ie: { bg: "bg-white", ring: "ring-foreground/10 border-2 border-foreground/15", badge: "bg-foreground", text: "text-foreground", highlight: "text-foreground underline font-black" },
-  Sp: { bg: "bg-white", ring: "ring-foreground/10 border-2 border-foreground/15", badge: "bg-foreground", text: "text-foreground", highlight: "text-foreground underline font-black" },
-  St: { bg: "bg-white", ring: "ring-foreground/10 border-2 border-foreground/15", badge: "bg-foreground", text: "text-foreground", highlight: "text-foreground underline font-black" },
+const lautkomColors: Record<
+  string,
+  { bg: string; ring: string; badge: string; text: string; highlight: string }
+> = {
+  Ch: {
+    bg: "bg-white",
+    ring: "ring-foreground/10 border-2 border-foreground/15",
+    badge: "bg-foreground",
+    text: "text-foreground",
+    highlight: "text-foreground underline font-black",
+  },
+  Sch: {
+    bg: "bg-white",
+    ring: "ring-foreground/10 border-2 border-foreground/15",
+    badge: "bg-foreground",
+    text: "text-foreground",
+    highlight: "text-foreground underline font-black",
+  },
+  Ei: {
+    bg: "bg-white",
+    ring: "ring-foreground/10 border-2 border-foreground/15",
+    badge: "bg-foreground",
+    text: "text-foreground",
+    highlight: "text-foreground underline font-black",
+  },
+  Ie: {
+    bg: "bg-white",
+    ring: "ring-foreground/10 border-2 border-foreground/15",
+    badge: "bg-foreground",
+    text: "text-foreground",
+    highlight: "text-foreground underline font-black",
+  },
+  Sp: {
+    bg: "bg-white",
+    ring: "ring-foreground/10 border-2 border-foreground/15",
+    badge: "bg-foreground",
+    text: "text-foreground",
+    highlight: "text-foreground underline font-black",
+  },
+  St: {
+    bg: "bg-white",
+    ring: "ring-foreground/10 border-2 border-foreground/15",
+    badge: "bg-foreground",
+    text: "text-foreground",
+    highlight: "text-foreground underline font-black",
+  },
 };
 
 // Lesson 6: Ähnliche Lautpaare – colour palette per pair (Neutralized)
-const lautpaarColors: Record<string, { bg: string; ring: string; badge: string; text: string; highlight: string }> = {
-  "E/I": { bg: "bg-white", ring: "ring-foreground/10 border-2 border-foreground/15", badge: "bg-foreground", text: "text-foreground", highlight: "text-foreground underline font-black" },
-  "Ö/O": { bg: "bg-white", ring: "ring-foreground/10 border-2 border-foreground/15", badge: "bg-foreground", text: "text-foreground", highlight: "text-foreground underline font-black" },
-  "Ü/U": { bg: "bg-white", ring: "ring-foreground/10 border-2 border-foreground/15", badge: "bg-foreground", text: "text-foreground", highlight: "text-foreground underline font-black" },
-  "P/B": { bg: "bg-white", ring: "ring-foreground/10 border-2 border-foreground/15", badge: "bg-foreground", text: "text-foreground", highlight: "text-foreground underline font-black" },
-  "T/D": { bg: "bg-white", ring: "ring-foreground/10 border-2 border-foreground/15", badge: "bg-foreground", text: "text-foreground", highlight: "text-foreground underline font-black" },
-  "G/K": { bg: "bg-white", ring: "ring-foreground/10 border-2 border-foreground/15", badge: "bg-foreground", text: "text-foreground", highlight: "text-foreground underline font-black" },
+const lautpaarColors: Record<
+  string,
+  { bg: string; ring: string; badge: string; text: string; highlight: string }
+> = {
+  "E/I": {
+    bg: "bg-white",
+    ring: "ring-foreground/10 border-2 border-foreground/15",
+    badge: "bg-foreground",
+    text: "text-foreground",
+    highlight: "text-foreground underline font-black",
+  },
+  "Ö/O": {
+    bg: "bg-white",
+    ring: "ring-foreground/10 border-2 border-foreground/15",
+    badge: "bg-foreground",
+    text: "text-foreground",
+    highlight: "text-foreground underline font-black",
+  },
+  "Ü/U": {
+    bg: "bg-white",
+    ring: "ring-foreground/10 border-2 border-foreground/15",
+    badge: "bg-foreground",
+    text: "text-foreground",
+    highlight: "text-foreground underline font-black",
+  },
+  "P/B": {
+    bg: "bg-white",
+    ring: "ring-foreground/10 border-2 border-foreground/15",
+    badge: "bg-foreground",
+    text: "text-foreground",
+    highlight: "text-foreground underline font-black",
+  },
+  "T/D": {
+    bg: "bg-white",
+    ring: "ring-foreground/10 border-2 border-foreground/15",
+    badge: "bg-foreground",
+    text: "text-foreground",
+    highlight: "text-foreground underline font-black",
+  },
+  "G/K": {
+    bg: "bg-white",
+    ring: "ring-foreground/10 border-2 border-foreground/15",
+    badge: "bg-foreground",
+    text: "text-foreground",
+    highlight: "text-foreground underline font-black",
+  },
 };
 
 // Lesson 8: Zahlen applications category info (Neutralized)
-const catInfo: Record<string, { emoji: string; bg: string; ring: string; badge: string; text: string }> = {
-  "Zahlen 11-20": { emoji: "", bg: "bg-white", ring: "ring-foreground/10 border-2 border-foreground/15", badge: "bg-foreground", text: "text-foreground" },
-  "Telefonnummer": { emoji: "", bg: "bg-white", ring: "ring-foreground/10 border-2 border-foreground/15", badge: "bg-foreground", text: "text-foreground" },
-  "Preise": { emoji: "", bg: "bg-white", ring: "ring-foreground/10 border-2 border-foreground/15", badge: "bg-foreground", text: "text-foreground" },
-  "Datum": { emoji: "", bg: "bg-white", ring: "ring-foreground/10 border-2 border-foreground/15", badge: "bg-foreground", text: "text-foreground" },
-  "Reihenfolge": { emoji: "", bg: "bg-white", ring: "ring-foreground/10 border-2 border-foreground/15", badge: "bg-foreground", text: "text-foreground" },
+const catInfo: Record<
+  string,
+  { emoji: string; bg: string; ring: string; badge: string; text: string }
+> = {
+  "Zahlen 11-20": {
+    emoji: "",
+    bg: "bg-white",
+    ring: "ring-foreground/10 border-2 border-foreground/15",
+    badge: "bg-foreground",
+    text: "text-foreground",
+  },
+  Telefonnummer: {
+    emoji: "",
+    bg: "bg-white",
+    ring: "ring-foreground/10 border-2 border-foreground/15",
+    badge: "bg-foreground",
+    text: "text-foreground",
+  },
+  Preise: {
+    emoji: "",
+    bg: "bg-white",
+    ring: "ring-foreground/10 border-2 border-foreground/15",
+    badge: "bg-foreground",
+    text: "text-foreground",
+  },
+  Datum: {
+    emoji: "",
+    bg: "bg-white",
+    ring: "ring-foreground/10 border-2 border-foreground/15",
+    badge: "bg-foreground",
+    text: "text-foreground",
+  },
+  Reihenfolge: {
+    emoji: "",
+    bg: "bg-white",
+    ring: "ring-foreground/10 border-2 border-foreground/15",
+    badge: "bg-foreground",
+    text: "text-foreground",
+  },
 };
 
 // Lesson 9: Zeit applications category info (Neutralized)
-const zeitCatColors: Record<string, { emoji: string; bg: string; ring: string; badge: string; text: string }> = {
-  "1. 12-Stunden-Uhr + 24-Stunden-Uhr": { emoji: "", bg: "bg-white", ring: "ring-foreground/10 border-2 border-foreground/15", badge: "bg-foreground", text: "text-foreground" },
-  "2. Digitale Uhrzeit": { emoji: "", bg: "bg-white", ring: "ring-foreground/10 border-2 border-foreground/15", badge: "bg-foreground", text: "text-foreground" },
-  "3. Wie spät ist es?": { emoji: "", bg: "bg-white", ring: "ring-foreground/10 border-2 border-foreground/15", badge: "bg-foreground", text: "text-foreground" },
-  "4. heute / morgen": { emoji: "", bg: "bg-white", ring: "ring-foreground/10 border-2 border-foreground/15", badge: "bg-foreground", text: "text-foreground" },
-  "5. volle Uhr": { emoji: "", bg: "bg-white", ring: "ring-foreground/10 border-2 border-foreground/15", badge: "bg-foreground", text: "text-foreground" },
+const zeitCatColors: Record<
+  string,
+  { emoji: string; bg: string; ring: string; badge: string; text: string }
+> = {
+  "1. 12-Stunden-Uhr + 24-Stunden-Uhr": {
+    emoji: "",
+    bg: "bg-white",
+    ring: "ring-foreground/10 border-2 border-foreground/15",
+    badge: "bg-foreground",
+    text: "text-foreground",
+  },
+  "2. Digitale Uhrzeit": {
+    emoji: "",
+    bg: "bg-white",
+    ring: "ring-foreground/10 border-2 border-foreground/15",
+    badge: "bg-foreground",
+    text: "text-foreground",
+  },
+  "3. Wie spät ist es?": {
+    emoji: "",
+    bg: "bg-white",
+    ring: "ring-foreground/10 border-2 border-foreground/15",
+    badge: "bg-foreground",
+    text: "text-foreground",
+  },
+  "4. heute / morgen": {
+    emoji: "",
+    bg: "bg-white",
+    ring: "ring-foreground/10 border-2 border-foreground/15",
+    badge: "bg-foreground",
+    text: "text-foreground",
+  },
+  "5. volle Uhr": {
+    emoji: "",
+    bg: "bg-white",
+    ring: "ring-foreground/10 border-2 border-foreground/15",
+    badge: "bg-foreground",
+    text: "text-foreground",
+  },
 };
 
 function LessonPage() {
@@ -130,9 +323,12 @@ function LessonPage() {
   }, [lessonId]);
 
   function speakLessonItem(text: string) {
-    if (lessonId === "1") {
-      speakDE(text);
-    }
+    if (!text) return;
+    // text might be a letter, a pair like "A a", or a pron string
+    const first = String(text).trim().split(/\s+/)[0];
+    // prefer direct mapping for single-letter keys
+    const pron = letterProns[first] || text;
+    speakDE(pron);
   }
 
   // Get previous lesson for revision
@@ -182,34 +378,34 @@ function LessonPage() {
         return cleanValLower === letter.toLowerCase();
       }
       // For umlauts: Ä→Ää, Ö→Öö, Ü→Üü
-      if (letter === "\u00C4") return cleanVal === "\u00C4\u00E4" || cleanValLower === "\u00E4\u00E4";
-      if (letter === "\u00D6") return cleanVal === "\u00D6\u00F6" || cleanValLower === "\u00F6\u00F6";
-      if (letter === "\u00DC") return cleanVal === "\u00DC\u00FC" || cleanValLower === "\u00FC\u00FC";
+      if (letter === "\u00C4")
+        return cleanVal === "\u00C4\u00E4" || cleanValLower === "\u00E4\u00E4";
+      if (letter === "\u00D6")
+        return cleanVal === "\u00D6\u00F6" || cleanValLower === "\u00F6\u00F6";
+      if (letter === "\u00DC")
+        return cleanVal === "\u00DC\u00FC" || cleanValLower === "\u00FC\u00FC";
       // Regular letters: must have uppercase + lowercase (e.g. "Aa")
       const expected = letter + letter.toLowerCase();
       return cleanVal === expected;
     }
 
     // Lesson 1: accept letter or double letter
-    return (
-      cleanValLower === letterLower ||
-      cleanValLower === letterLower + letterLower
-    );
+    return cleanValLower === letterLower || cleanValLower === letterLower + letterLower;
   }
 
   function handleInputChange(letter: string, val: string) {
     const wasCorrect = checkAnswer(letter, userAnswers[letter] || "");
     const isCorrectNow = checkAnswer(letter, val);
 
-    setUserAnswers(prev => ({ ...prev, [letter]: val }));
+    setUserAnswers((prev) => ({ ...prev, [letter]: val }));
 
     if (isCorrectNow && !wasCorrect) {
       speakDE("Super!");
     }
   }
 
-  const allLetters = [...alphabetRows.flatMap(r => r.letters), ...sonderRow];
-  const isABCComplete = allLetters.every(l => checkAnswer(l, userAnswers[l] || ""));
+  const allLetters = [...alphabetRows.flatMap((r) => r.letters), ...sonderRow];
+  const isABCComplete = allLetters.every((l) => checkAnswer(l, userAnswers[l] || ""));
 
   // Lesson 3: check fill-blank answer
   function checkWieAnswer(word: string, val: string) {
@@ -218,14 +414,16 @@ function LessonPage() {
   }
 
   function handleWieInput(letter: string, val: string) {
-    const row = abcMitWieRows.find(r => r.letter === letter);
+    const row = abcMitWieRows.find((r) => r.letter === letter);
     const wasCorrect = row ? checkWieAnswer(row.word, userAnswers[`wie_${letter}`] || "") : false;
     const isNowCorrect = row ? checkWieAnswer(row.word, val) : false;
-    setUserAnswers(prev => ({ ...prev, [`wie_${letter}`]: val }));
+    setUserAnswers((prev) => ({ ...prev, [`wie_${letter}`]: val }));
     if (isNowCorrect && !wasCorrect) speakDE("Super!");
   }
 
-  const isWieComplete = abcMitWieRows.every(r => checkWieAnswer(r.word, userAnswers[`wie_${r.letter}`] || ""));
+  const isWieComplete = abcMitWieRows.every((r) =>
+    checkWieAnswer(r.word, userAnswers[`wie_${r.letter}`] || ""),
+  );
 
   // Lesson 4: Vokale helpers
   const vokalGroups = (lesson as any).vokale as { vowel: string; words: string[] }[] | undefined;
@@ -238,16 +436,20 @@ function LessonPage() {
   function handleVokalInput(word: string, val: string) {
     const wasCorrect = checkVokalAnswer(word, userAnswers[`v_${word}`] || "");
     const isNowCorrect = checkVokalAnswer(word, val);
-    setUserAnswers(prev => ({ ...prev, [`v_${word}`]: val }));
+    setUserAnswers((prev) => ({ ...prev, [`v_${word}`]: val }));
     if (isNowCorrect && !wasCorrect) speakDE("Super!");
   }
 
   const isVokaleComplete = vokalGroups
-    ? vokalGroups.every(g => g.words.every(w => checkVokalAnswer(w, userAnswers[`v_${w}`] || "")))
+    ? vokalGroups.every((g) =>
+        g.words.every((w) => checkVokalAnswer(w, userAnswers[`v_${w}`] || "")),
+      )
     : false;
 
   // Lesson 5: Lautkombinationen helpers
-  const lautkomGroups = (lesson as any).lautkom as { combo: string; label: string; words: string[] }[] | undefined;
+  const lautkomGroups = (lesson as any).lautkom as
+    | { combo: string; label: string; words: string[] }[]
+    | undefined;
 
   function checkLautAnswer(word: string, val: string) {
     if (!val) return false;
@@ -257,16 +459,20 @@ function LessonPage() {
   function handleLautInput(word: string, val: string) {
     const wasCorrect = checkLautAnswer(word, userAnswers[`l_${word}`] || "");
     const isNowCorrect = checkLautAnswer(word, val);
-    setUserAnswers(prev => ({ ...prev, [`l_${word}`]: val }));
+    setUserAnswers((prev) => ({ ...prev, [`l_${word}`]: val }));
     if (isNowCorrect && !wasCorrect) speakDE("Super!");
   }
 
   const isLautComplete = lautkomGroups
-    ? lautkomGroups.every(g => g.words.every(w => checkLautAnswer(w, userAnswers[`l_${w}`] || "")))
+    ? lautkomGroups.every((g) =>
+        g.words.every((w) => checkLautAnswer(w, userAnswers[`l_${w}`] || "")),
+      )
     : false;
 
   // Lesson 6: Ähnliche Lautpaare helpers
-  const lautpaarGroups = (lesson as any).lautpaare as { pair: string; label: string; words1: string[]; words2: string[] }[] | undefined;
+  const lautpaarGroups = (lesson as any).lautpaare as
+    | { pair: string; label: string; words1: string[]; words2: string[] }[]
+    | undefined;
 
   function checkLautpaarAnswer(word: string, val: string) {
     if (!val) return false;
@@ -277,25 +483,27 @@ function LessonPage() {
     const key = `p_${pair}_${word}_${idx}`;
     const wasCorrect = checkLautpaarAnswer(word, userAnswers[key] || "");
     const isNowCorrect = checkLautpaarAnswer(word, val);
-    setUserAnswers(prev => ({ ...prev, [key]: val }));
+    setUserAnswers((prev) => ({ ...prev, [key]: val }));
     if (isNowCorrect && !wasCorrect) speakDE("Super!");
   }
 
   const isLautpaarComplete = lautpaarGroups
-    ? lautpaarGroups.every(g => {
-      const allWords: string[] = [];
-      const maxLen = Math.max(g.words1.length, g.words2.length);
-      for (let i = 0; i < maxLen; i++) {
-        if (i < g.words1.length) allWords.push(g.words1[i]);
-        if (i < g.words2.length) allWords.push(g.words2[i]);
-      }
-      return allWords.every((w, idx) => checkLautpaarAnswer(w, userAnswers[`p_${g.pair}_${w}_${idx}`] || ""));
-    })
+    ? lautpaarGroups.every((g) => {
+        const allWords: string[] = [];
+        const maxLen = Math.max(g.words1.length, g.words2.length);
+        for (let i = 0; i < maxLen; i++) {
+          if (i < g.words1.length) allWords.push(g.words1[i]);
+          if (i < g.words2.length) allWords.push(g.words2[i]);
+        }
+        return allWords.every((w, idx) =>
+          checkLautpaarAnswer(w, userAnswers[`p_${g.pair}_${w}_${idx}`] || ""),
+        );
+      })
     : false;
 
   // Highlight the target pair letters inside a word (case-insensitive)
   function highlightPair(word: string, label: string): React.ReactNode {
-    const chars = label.split("/").map(c => c.trim().toLowerCase());
+    const chars = label.split("/").map((c) => c.trim().toLowerCase());
     const lower = word.toLowerCase();
 
     // Find index of the first matching character
@@ -333,16 +541,18 @@ function LessonPage() {
   function handleNumberInput(word: string, val: string) {
     const wasCorrect = checkNumberAnswer(word, userAnswers[`num_${word}`] || "");
     const isNowCorrect = checkNumberAnswer(word, val);
-    setUserAnswers(prev => ({ ...prev, [`num_${word}`]: val }));
+    setUserAnswers((prev) => ({ ...prev, [`num_${word}`]: val }));
     if (isNowCorrect && !wasCorrect) speakDE("Super!");
   }
 
   const isNumbersComplete = numberGroups
-    ? numberGroups.every(g => checkNumberAnswer(g.word, userAnswers[`num_${g.word}`] || ""))
+    ? numberGroups.every((g) => checkNumberAnswer(g.word, userAnswers[`num_${g.word}`] || ""))
     : false;
 
   // Lesson 8: Zahlen 11–20 & Anwendungen helpers
-  const numberAnwGroups = (lesson as any).numbers_anw as { label: string; word: string; category: string }[] | undefined;
+  const numberAnwGroups = (lesson as any).numbers_anw as
+    | { label: string; word: string; category: string }[]
+    | undefined;
 
   function checkNumberAnwAnswer(word: string, val: string) {
     if (!val) return false;
@@ -353,37 +563,47 @@ function LessonPage() {
     const key = `numanw_${word}_${idx}`;
     const wasCorrect = checkNumberAnwAnswer(word, userAnswers[key] || "");
     const isNowCorrect = checkNumberAnwAnswer(word, val);
-    setUserAnswers(prev => ({ ...prev, [key]: val }));
+    setUserAnswers((prev) => ({ ...prev, [key]: val }));
     if (isNowCorrect && !wasCorrect) speakDE("Super!");
   }
 
   const isNumbersAnwComplete = numberAnwGroups
-    ? numberAnwGroups.every((g, idx) => checkNumberAnwAnswer(g.word, userAnswers[`numanw_${g.word}_${idx}`] || ""))
+    ? numberAnwGroups.every((g, idx) =>
+        checkNumberAnwAnswer(g.word, userAnswers[`numanw_${g.word}_${idx}`] || ""),
+      )
     : false;
 
   // Lesson 9: Zeit helpers
-  const zeitGroups = (lesson as any).zeit as { category: string; items: { label: string; word: string }[] }[] | undefined;
+  const zeitGroups = (lesson as any).zeit as
+    | { category: string; items: { label: string; word: string }[] }[]
+    | undefined;
   const zeitExercises = (lesson as any).exercises as { label: string; word: string }[] | undefined;
 
   function checkZeitAnswer(word: string, val: string) {
     if (!val) return false;
-    return val.trim().toLowerCase().replace(/\s+/g, " ") === word.toLowerCase().replace(/\s+/g, " ");
+    return (
+      val.trim().toLowerCase().replace(/\s+/g, " ") === word.toLowerCase().replace(/\s+/g, " ")
+    );
   }
 
   function handleZeitInput(word: string, idx: number, val: string) {
     const key = `zeit_${word}_${idx}`;
     const wasCorrect = checkZeitAnswer(word, userAnswers[key] || "");
     const isNowCorrect = checkZeitAnswer(word, val);
-    setUserAnswers(prev => ({ ...prev, [key]: val }));
+    setUserAnswers((prev) => ({ ...prev, [key]: val }));
     if (isNowCorrect && !wasCorrect) speakDE("Super!");
   }
 
   const isZeitComplete = zeitExercises
-    ? zeitExercises.every((g, idx) => checkZeitAnswer(g.word, userAnswers[`zeit_${g.word}_${idx}`] || ""))
+    ? zeitExercises.every((g, idx) =>
+        checkZeitAnswer(g.word, userAnswers[`zeit_${g.word}_${idx}`] || ""),
+      )
     : false;
 
   // Lesson 10: Wiederholung helpers
-  const reviewGroups = (lesson as any).wiederholung as { category: string; items: { prompt: string; answer: string; full: string }[] }[] | undefined;
+  const reviewGroups = (lesson as any).wiederholung as
+    | { category: string; items: { prompt: string; answer: string; full: string }[] }[]
+    | undefined;
 
   // Highlight the combo letters inside a word
   function checkReviewAnswer(answer: string, val: string) {
@@ -396,16 +616,16 @@ function LessonPage() {
     const key = `rev_${catIdx}_${itemIdx}`;
     const wasCorrect = checkReviewAnswer(answer, userAnswers[key] || "");
     const isNowCorrect = checkReviewAnswer(answer, val);
-    setUserAnswers(prev => ({ ...prev, [key]: val }));
+    setUserAnswers((prev) => ({ ...prev, [key]: val }));
     if (isNowCorrect && !wasCorrect) speakDE("Super!");
   }
 
   const isReviewComplete = reviewGroups
     ? reviewGroups.every((g, catIdx) =>
-      g.items.every((it, itemIdx) =>
-        checkReviewAnswer(it.answer, userAnswers[`rev_${catIdx}_${itemIdx}`] || "")
+        g.items.every((it, itemIdx) =>
+          checkReviewAnswer(it.answer, userAnswers[`rev_${catIdx}_${itemIdx}`] || ""),
+        ),
       )
-    )
     : false;
 
   // Highlight the combo letters inside a word
@@ -451,22 +671,35 @@ function LessonPage() {
           <div className="flex items-center gap-3 text-xs sm:text-sm font-black select-none">
             <button
               onClick={() => setMode("learn")}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full transition-all ${mode === "learn"
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full transition-all ${
+                mode === "learn"
                   ? "bg-amber-300 text-foreground shadow-md scale-105 ring-2 ring-white"
                   : "bg-white/40 text-foreground/50 hover:bg-white/60"
-                }`}
+              }`}
             >
               <span>1. Lernen</span>
             </button>
             <div className="h-1 w-4 sm:w-6 rounded bg-foreground/20"></div>
             <button
               onClick={() => setMode("exercise")}
-              className={`flex items-center gap-1.5 px-4 py-2 rounded-full transition-all ${mode === "exercise"
+              className={`flex items-center gap-1.5 px-4 py-2 rounded-full transition-all ${
+                mode === "exercise"
                   ? "bg-primary text-primary-foreground shadow-md scale-105 ring-2 ring-white"
                   : "bg-white/40 text-foreground/50 hover:bg-white/60"
-                }`}
+              }`}
             >
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z" /></svg>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z" />
+              </svg>
             </button>
           </div>
         </div>
@@ -486,7 +719,9 @@ function LessonPage() {
                 <div className="flex items-center gap-3">
                   <div>
                     <h2 className="text-2xl font-black text-foreground">Abc mit WIE</h2>
-                    <p className="text-xs font-bold text-muted-foreground">Ein Wort für jeden Buchstaben!</p>
+                    <p className="text-xs font-bold text-muted-foreground">
+                      Ein Wort für jeden Buchstaben!
+                    </p>
                   </div>
                 </div>
 
@@ -515,12 +750,21 @@ function LessonPage() {
 
                 {/* Word cards */}
                 <div className="space-y-2">
-                  <h3 className="text-sm font-bold text-foreground/60 uppercase tracking-wider">Wörter:</h3>
+                  <h3 className="text-sm font-bold text-foreground/60 uppercase tracking-wider">
+                    Wörter:
+                  </h3>
                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                     {abcMitWieRows.map((row) => (
                       <div
                         key={row.letter}
-                        className={`${palette[0]} flex items-center gap-2 rounded-2xl border-2 px-3 py-2 shadow-sm text-left`}
+                        role="button"
+                        tabIndex={0}
+                        onClick={() => speakDE(`${row.letter} wie ${row.word}`)}
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter" || e.key === " ")
+                            speakDE(`${row.letter} wie ${row.word}`);
+                        }}
+                        className={`${palette[0]} flex items-center gap-2 rounded-2xl border-2 px-3 py-2 shadow-sm text-left cursor-pointer`}
                       >
                         <span className="text-xl font-black w-8 shrink-0">{row.letter}</span>
                         <span className="text-xs font-bold opacity-60">wie</span>
@@ -536,7 +780,18 @@ function LessonPage() {
                     title="Übung machen"
                     className="p-4 sm:p-5 rounded-full bg-primary text-primary-foreground shadow-lg hover:shadow-xl ring-4 ring-white transition-all transform hover:scale-105 active:scale-95 flex items-center justify-center cursor-pointer group"
                   >
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 sm:h-8 sm:w-8 group-hover:animate-bounce" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z" /></svg>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-7 w-7 sm:h-8 sm:w-8 group-hover:animate-bounce"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z" />
+                    </svg>
                   </button>
                 </div>
               </section>
@@ -549,10 +804,15 @@ function LessonPage() {
                   <div className="flex items-center gap-3">
                     <div>
                       <h2 className="text-2xl font-black text-foreground">Schreibübung</h2>
-                      <p className="text-xs font-bold text-muted-foreground">Fülle die leeren Felder aus!</p>
+                      <p className="text-xs font-bold text-muted-foreground">
+                        Fülle die leeren Felder aus!
+                      </p>
                     </div>
                   </div>
-                  <button onClick={() => setMode("learn")} className="text-xs font-black text-primary hover:underline">
+                  <button
+                    onClick={() => setMode("learn")}
+                    className="text-xs font-black text-primary hover:underline"
+                  >
                     Wörter lernen
                   </button>
                 </div>
@@ -562,9 +822,15 @@ function LessonPage() {
                   <table className="w-full border-collapse">
                     <thead>
                       <tr className="bg-foreground/5">
-                        <th className="text-left px-4 py-3 text-sm font-black text-foreground/70 rounded-tl-2xl w-16">Abc</th>
-                        <th className="text-left px-4 py-3 text-sm font-black text-foreground/70 w-16">wie</th>
-                        <th className="text-left px-4 py-3 text-sm font-black text-foreground/70 rounded-tr-2xl">Deutsch</th>
+                        <th className="text-left px-4 py-3 text-sm font-black text-foreground/70 rounded-tl-2xl w-16">
+                          Abc
+                        </th>
+                        <th className="text-left px-4 py-3 text-sm font-black text-foreground/70 w-16">
+                          wie
+                        </th>
+                        <th className="text-left px-4 py-3 text-sm font-black text-foreground/70 rounded-tr-2xl">
+                          Deutsch
+                        </th>
                       </tr>
                     </thead>
                     <tbody>
@@ -576,8 +842,13 @@ function LessonPage() {
                         return (
                           <tr
                             key={row.letter}
-                            className={`border-b border-foreground/5 transition-colors ${correct ? "bg-emerald-50" : idx % 2 === 0 ? "bg-white/60" : "bg-white/30"
-                              }`}
+                            className={`border-b border-foreground/5 transition-colors ${
+                              correct
+                                ? "bg-emerald-50"
+                                : idx % 2 === 0
+                                  ? "bg-white/60"
+                                  : "bg-white/30"
+                            }`}
                           >
                             <td className="px-4 py-2">
                               <span className="text-2xl font-black text-foreground select-none">
@@ -596,13 +867,14 @@ function LessonPage() {
                                 <input
                                   type="text"
                                   value={val}
-                                  onChange={e => handleWieInput(row.letter, e.target.value)}
+                                  onChange={(e) => handleWieInput(row.letter, e.target.value)}
                                   placeholder="?"
                                   maxLength={20}
-                                  className={`w-full max-w-[200px] px-3 py-1.5 rounded-xl border-2 text-sm font-black transition-all outline-none ${hasVal
+                                  className={`w-full max-w-[200px] px-3 py-1.5 rounded-xl border-2 text-sm font-black transition-all outline-none ${
+                                    hasVal
                                       ? "bg-rose-100 border-rose-400 text-rose-800 animate-shake"
                                       : "bg-white border-dashed border-sky-300 focus:border-sky-50/50"
-                                    }`}
+                                  }`}
                                 />
                               )}
                             </td>
@@ -639,13 +911,15 @@ function LessonPage() {
                 <div className="flex items-center gap-3">
                   <div>
                     <h2 className="text-2xl font-black text-foreground">Vokale</h2>
-                    <p className="text-xs font-bold text-muted-foreground">Die Vokale im Deutschen</p>
+                    <p className="text-xs font-bold text-muted-foreground">
+                      Die Vokale im Deutschen
+                    </p>
                   </div>
                 </div>
 
                 {/* Vowel bubbles strip */}
                 <div className="flex gap-3 justify-center flex-wrap">
-                  {vokalGroups.map(g => (
+                  {vokalGroups.map((g) => (
                     <div
                       key={g.vowel}
                       className="bg-foreground/10 text-foreground w-14 h-14 rounded-full text-3xl font-black shadow-lg flex items-center justify-center select-none"
@@ -657,24 +931,35 @@ function LessonPage() {
 
                 {/* Word groups per vowel */}
                 <div className="space-y-5">
-                  {vokalGroups.map(g => {
+                  {vokalGroups.map((g) => {
                     return (
-                      <div key={g.vowel} className="bg-white/50 rounded-2xl p-4 border border-foreground/10 space-y-3">
+                      <div
+                        key={g.vowel}
+                        className="bg-white/50 rounded-2xl p-4 border border-foreground/10 space-y-3"
+                      >
                         {/* Vowel badge + header */}
                         <div className="flex items-center gap-3">
                           <span className="bg-foreground/10 text-foreground w-10 h-10 rounded-xl text-xl font-black flex items-center justify-center shadow select-none">
                             {g.vowel}
                           </span>
                           <div>
-                            <div className="text-lg font-black text-foreground">{g.vowel} – Deutsch</div>
+                            <div className="text-lg font-black text-foreground">
+                              {g.vowel} – Deutsch
+                            </div>
                           </div>
                         </div>
                         {/* Word grid */}
                         <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                          {g.words.map(w => (
+                          {g.words.map((w) => (
                             <div
                               key={w}
-                              className="bg-white rounded-xl px-3 py-2 text-sm font-black text-foreground shadow-sm border border-foreground/10 text-left"
+                              role="button"
+                              tabIndex={0}
+                              onClick={() => speakDE(w)}
+                              onKeyDown={(e) => {
+                                if (e.key === "Enter" || e.key === " ") speakDE(w);
+                              }}
+                              className="bg-white rounded-xl px-3 py-2 text-sm font-black text-foreground shadow-sm border border-foreground/10 text-left cursor-pointer"
                             >
                               <span>{w}</span>
                             </div>
@@ -689,7 +974,18 @@ function LessonPage() {
                   onClick={() => setMode("exercise")}
                   className="w-full mt-6 py-5 px-6 rounded-3xl bg-foreground text-white font-black text-xl sm:text-2xl shadow-xl hover:shadow-2xl ring-4 ring-white transition-all transform hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-3 select-none cursor-pointer group"
                 >
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z" /></svg>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-8 w-8"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z" />
+                  </svg>
                 </button>
               </section>
             )}
@@ -701,28 +997,42 @@ function LessonPage() {
                   <div className="flex items-center gap-3">
                     <div>
                       <h2 className="text-2xl font-black text-foreground">Schreibübung</h2>
-                      <p className="text-xs font-bold text-muted-foreground">Fülle die leeren Felder aus!</p>
+                      <p className="text-xs font-bold text-muted-foreground">
+                        Fülle die leeren Felder aus!
+                      </p>
                     </div>
                   </div>
-                  <button onClick={() => setMode("learn")} className="text-xs font-black text-primary hover:underline">
+                  <button
+                    onClick={() => setMode("learn")}
+                    className="text-xs font-black text-primary hover:underline"
+                  >
                     Vokale lernen
                   </button>
                 </div>
 
                 {/* 2-column table grouped by vowel */}
                 <div className="space-y-6">
-                  {vokalGroups.map(g => {
+                  {vokalGroups.map((g) => {
                     return (
-                      <div key={g.vowel} className="overflow-hidden rounded-2xl border border-foreground/10 shadow-sm">
+                      <div
+                        key={g.vowel}
+                        className="overflow-hidden rounded-2xl border border-foreground/10 shadow-sm"
+                      >
                         {/* Vowel section header */}
                         <div className="bg-foreground/5 px-4 py-2 flex items-center gap-3">
                           <span className="text-foreground text-2xl font-black">{g.vowel}</span>
-                          <span className="text-foreground/60 text-sm font-bold">Vokale – {g.vowel}</span>
+                          <span className="text-foreground/60 text-sm font-bold">
+                            Vokale – {g.vowel}
+                          </span>
                         </div>
                         {/* Column headers */}
                         <div className="grid grid-cols-2 bg-foreground/5">
-                          <div className="px-4 py-2 text-xs font-black text-foreground/60 uppercase tracking-wider border-r border-foreground/10">Deutsch</div>
-                          <div className="px-4 py-2 text-xs font-black text-foreground/60 uppercase tracking-wider">Schreibe hier</div>
+                          <div className="px-4 py-2 text-xs font-black text-foreground/60 uppercase tracking-wider border-r border-foreground/10">
+                            Deutsch
+                          </div>
+                          <div className="px-4 py-2 text-xs font-black text-foreground/60 uppercase tracking-wider">
+                            Schreibe hier
+                          </div>
                         </div>
                         {/* Rows */}
                         {g.words.map((w, idx) => {
@@ -732,12 +1042,19 @@ function LessonPage() {
                           return (
                             <div
                               key={w}
-                              className={`grid grid-cols-2 border-t border-foreground/5 transition-colors ${correct ? "bg-emerald-50" : idx % 2 === 0 ? "bg-white" : "bg-white/50"
-                                }`}
+                              className={`grid grid-cols-2 border-t border-foreground/5 transition-colors ${
+                                correct
+                                  ? "bg-emerald-50"
+                                  : idx % 2 === 0
+                                    ? "bg-white"
+                                    : "bg-white/50"
+                              }`}
                             >
                               {/* Column 1: German word */}
                               <div className="px-4 py-2.5 border-r border-foreground/10 flex items-center">
-                                <span className="text-sm font-black text-foreground select-none">{w}</span>
+                                <span className="text-sm font-black text-foreground select-none">
+                                  {w}
+                                </span>
                               </div>
                               {/* Column 2: Blank input */}
                               <div className="px-4 py-2 flex items-center">
@@ -749,13 +1066,14 @@ function LessonPage() {
                                   <input
                                     type="text"
                                     value={val}
-                                    onChange={e => handleVokalInput(w, e.target.value)}
+                                    onChange={(e) => handleVokalInput(w, e.target.value)}
                                     placeholder="?"
                                     maxLength={25}
-                                    className={`w-full px-3 py-1.5 rounded-xl border-2 text-sm font-black transition-all outline-none ${hasVal
+                                    className={`w-full px-3 py-1.5 rounded-xl border-2 text-sm font-black transition-all outline-none ${
+                                      hasVal
                                         ? "bg-rose-100 border-rose-400 text-rose-800 animate-shake"
                                         : "bg-white border-dashed border-sky-300 focus:border-sky-50/50"
-                                      }`}
+                                    }`}
                                   />
                                 )}
                               </div>
@@ -791,12 +1109,14 @@ function LessonPage() {
                 <div className="flex items-center gap-3">
                   <div>
                     <h2 className="text-2xl font-black text-foreground">Ähnliche Lautpaare</h2>
-                    <p className="text-xs font-bold text-muted-foreground">Lerne ähnliche Lautpaare im Deutschen kennen</p>
+                    <p className="text-xs font-bold text-muted-foreground">
+                      Lerne ähnliche Lautpaare im Deutschen kennen
+                    </p>
                   </div>
                 </div>
 
                 <div className="flex gap-2 flex-wrap justify-center">
-                  {lautpaarGroups.map(g => (
+                  {lautpaarGroups.map((g) => (
                     <div
                       key={g.pair}
                       className="bg-foreground text-white px-5 py-2 rounded-full text-lg font-black shadow-md select-none"
@@ -807,24 +1127,42 @@ function LessonPage() {
                 </div>
 
                 <div className="space-y-6">
-                  {lautpaarGroups.map(g => {
-                    const c = lautpaarColors[g.pair] || { bg: "bg-white", ring: "ring-foreground/10 border-2 border-foreground/15", badge: "bg-foreground", text: "text-foreground" };
+                  {lautpaarGroups.map((g) => {
+                    const c = lautpaarColors[g.pair] || {
+                      bg: "bg-white",
+                      ring: "ring-foreground/10 border-2 border-foreground/15",
+                      badge: "bg-foreground",
+                      text: "text-foreground",
+                    };
                     return (
-                      <div key={g.pair} className={`${c.bg} rounded-2xl p-4 sm:p-5 border border-foreground/10 space-y-4`}>
+                      <div
+                        key={g.pair}
+                        className={`${c.bg} rounded-2xl p-4 sm:p-5 border border-foreground/10 space-y-4`}
+                      >
                         <div className="flex items-center gap-3 border-b border-foreground/5 pb-2">
                           <span className="bg-foreground text-white px-3 py-1 rounded-lg text-lg font-black shadow select-none">
                             {g.label}
                           </span>
-                          <span className="text-base font-black text-foreground">Vergleiche Deutsch 1 und Deutsch 2</span>
+                          <span className="text-base font-black text-foreground">
+                            Vergleiche Deutsch 1 und Deutsch 2
+                          </span>
                         </div>
 
                         <div className="grid grid-cols-2 gap-3 sm:gap-4">
                           <div className="space-y-2">
-                            <div className="text-xs font-black opacity-60 tracking-wider uppercase pl-2">Deutsch 1</div>
-                            {g.words1.map(w => (
+                            <div className="text-xs font-black opacity-60 tracking-wider uppercase pl-2">
+                              Deutsch 1
+                            </div>
+                            {g.words1.map((w) => (
                               <div
                                 key={w}
-                                className="w-full bg-white rounded-xl px-3 py-2 text-sm font-bold text-foreground shadow-sm border border-foreground/10 text-left"
+                                role="button"
+                                tabIndex={0}
+                                onClick={() => speakDE(w)}
+                                onKeyDown={(e) => {
+                                  if (e.key === "Enter" || e.key === " ") speakDE(w);
+                                }}
+                                className="w-full bg-white rounded-xl px-3 py-2 text-sm font-bold text-foreground shadow-sm border border-foreground/10 text-left cursor-pointer"
                               >
                                 <span>{highlightPair(w, g.label)}</span>
                               </div>
@@ -832,11 +1170,19 @@ function LessonPage() {
                           </div>
 
                           <div className="space-y-2">
-                            <div className="text-xs font-black opacity-60 tracking-wider uppercase pl-2">Deutsch 2</div>
-                            {g.words2.map(w => (
+                            <div className="text-xs font-black opacity-60 tracking-wider uppercase pl-2">
+                              Deutsch 2
+                            </div>
+                            {g.words2.map((w) => (
                               <div
                                 key={w}
-                                className="w-full bg-white rounded-xl px-3 py-2 text-sm font-bold text-foreground shadow-sm border border-foreground/10 text-left"
+                                role="button"
+                                tabIndex={0}
+                                onClick={() => speakDE(w)}
+                                onKeyDown={(e) => {
+                                  if (e.key === "Enter" || e.key === " ") speakDE(w);
+                                }}
+                                className="w-full bg-white rounded-xl px-3 py-2 text-sm font-bold text-foreground shadow-sm border border-foreground/10 text-left cursor-pointer"
                               >
                                 <span>{highlightPair(w, g.label)}</span>
                               </div>
@@ -854,7 +1200,18 @@ function LessonPage() {
                     title="Übung machen"
                     className="p-4 sm:p-5 rounded-full bg-primary text-primary-foreground shadow-lg hover:shadow-xl ring-4 ring-white transition-all transform hover:scale-105 active:scale-95 flex items-center justify-center cursor-pointer group"
                   >
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 sm:h-8 sm:w-8 group-hover:animate-bounce" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z" /></svg>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-7 w-7 sm:h-8 sm:w-8 group-hover:animate-bounce"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z" />
+                    </svg>
                   </button>
                 </div>
               </section>
@@ -867,17 +1224,27 @@ function LessonPage() {
                   <div className="flex items-center gap-3">
                     <div>
                       <h2 className="text-2xl font-black text-foreground">Schreibübung</h2>
-                      <p className="text-xs font-bold text-muted-foreground">Fülle die leeren Felder aus!</p>
+                      <p className="text-xs font-bold text-muted-foreground">
+                        Fülle die leeren Felder aus!
+                      </p>
                     </div>
                   </div>
-                  <button onClick={() => setMode("learn")} className="text-xs font-black text-primary hover:underline">
+                  <button
+                    onClick={() => setMode("learn")}
+                    className="text-xs font-black text-primary hover:underline"
+                  >
                     Lautpaare lernen
                   </button>
                 </div>
 
                 <div className="space-y-6">
-                  {lautpaarGroups.map(g => {
-                    const c = lautpaarColors[g.pair] || { bg: "bg-white", ring: "ring-foreground/10 border-2 border-foreground/15", badge: "bg-foreground", text: "text-foreground" };
+                  {lautpaarGroups.map((g) => {
+                    const c = lautpaarColors[g.pair] || {
+                      bg: "bg-white",
+                      ring: "ring-foreground/10 border-2 border-foreground/15",
+                      badge: "bg-foreground",
+                      text: "text-foreground",
+                    };
 
                     // Interleave words1 and words2
                     const allWords: string[] = [];
@@ -888,16 +1255,27 @@ function LessonPage() {
                     }
 
                     return (
-                      <div key={g.pair} className="overflow-hidden rounded-2xl border border-foreground/10 shadow-sm">
+                      <div
+                        key={g.pair}
+                        className="overflow-hidden rounded-2xl border border-foreground/10 shadow-sm"
+                      >
                         {/* Section header */}
                         <div className="bg-foreground/5 px-4 py-2.5 flex items-center gap-3">
-                          <span className="text-foreground text-xl font-black tracking-widest">{g.label}</span>
-                          <span className="text-foreground/60 text-sm font-bold">Ähnliche Lautpaare – {g.label}</span>
+                          <span className="text-foreground text-xl font-black tracking-widest">
+                            {g.label}
+                          </span>
+                          <span className="text-foreground/60 text-sm font-bold">
+                            Ähnliche Lautpaare – {g.label}
+                          </span>
                         </div>
                         {/* Column labels */}
                         <div className="grid grid-cols-2 bg-foreground/5">
-                          <div className="px-4 py-2 text-xs font-black text-foreground/60 uppercase tracking-wider border-r border-foreground/10">Deutsch</div>
-                          <div className="px-4 py-2 text-xs font-black text-foreground/60 uppercase tracking-wider">Schreibe hier</div>
+                          <div className="px-4 py-2 text-xs font-black text-foreground/60 uppercase tracking-wider border-r border-foreground/10">
+                            Deutsch
+                          </div>
+                          <div className="px-4 py-2 text-xs font-black text-foreground/60 uppercase tracking-wider">
+                            Schreibe hier
+                          </div>
                         </div>
                         {/* Rows */}
                         {allWords.map((w, idx) => {
@@ -908,8 +1286,13 @@ function LessonPage() {
                           return (
                             <div
                               key={`${w}-${idx}`}
-                              className={`grid grid-cols-2 border-t border-foreground/5 transition-colors ${correct ? "bg-emerald-50" : idx % 2 === 0 ? "bg-white" : "bg-white/50"
-                                }`}
+                              className={`grid grid-cols-2 border-t border-foreground/5 transition-colors ${
+                                correct
+                                  ? "bg-emerald-50"
+                                  : idx % 2 === 0
+                                    ? "bg-white"
+                                    : "bg-white/50"
+                              }`}
                             >
                               {/* Col 1: word with highlighted combo */}
                               <div className="px-4 py-2.5 border-r border-foreground/10 flex items-center">
@@ -927,13 +1310,16 @@ function LessonPage() {
                                   <input
                                     type="text"
                                     value={val}
-                                    onChange={e => handleLautpaarInput(g.pair, w, idx, e.target.value)}
+                                    onChange={(e) =>
+                                      handleLautpaarInput(g.pair, w, idx, e.target.value)
+                                    }
                                     placeholder="?"
                                     maxLength={30}
-                                    className={`w-full px-3 py-1.5 rounded-xl border-2 text-sm font-black transition-all outline-none ${hasVal
+                                    className={`w-full px-3 py-1.5 rounded-xl border-2 text-sm font-black transition-all outline-none ${
+                                      hasVal
                                         ? "bg-rose-100 border-rose-400 text-rose-800 animate-shake"
                                         : "bg-white border-dashed border-sky-300 focus:border-sky-50/50"
-                                      }`}
+                                    }`}
                                   />
                                 )}
                               </div>
@@ -969,7 +1355,9 @@ function LessonPage() {
                 <div className="flex items-center gap-3">
                   <div>
                     <h2 className="text-2xl font-black text-foreground">Zahlen 0–10</h2>
-                    <p className="text-xs font-bold text-muted-foreground">Lerne die Zahlen von null bis zehn</p>
+                    <p className="text-xs font-bold text-muted-foreground">
+                      Lerne die Zahlen von null bis zehn
+                    </p>
                   </div>
                 </div>
 
@@ -977,7 +1365,13 @@ function LessonPage() {
                   {numberGroups.map((num, idx) => (
                     <div
                       key={num.n}
-                      className="flex flex-col items-center justify-center p-5 rounded-3xl border-2 border-foreground/10 bg-white shadow-sm"
+                      role="button"
+                      tabIndex={0}
+                      onClick={() => speakDE(num.word)}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter" || e.key === " ") speakDE(num.word);
+                      }}
+                      className="flex flex-col items-center justify-center p-5 rounded-3xl border-2 border-foreground/10 bg-white shadow-sm cursor-pointer"
                     >
                       <span className="text-5xl font-black select-none">{num.n}</span>
                       <span className="text-base font-black mt-2">{num.word}</span>
@@ -991,7 +1385,18 @@ function LessonPage() {
                     title="Übung machen"
                     className="p-4 sm:p-5 rounded-full bg-primary text-primary-foreground shadow-lg hover:shadow-xl ring-4 ring-white transition-all transform hover:scale-105 active:scale-95 flex items-center justify-center cursor-pointer group"
                   >
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 sm:h-8 sm:w-8 group-hover:animate-bounce" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z" /></svg>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-7 w-7 sm:h-8 sm:w-8 group-hover:animate-bounce"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z" />
+                    </svg>
                   </button>
                 </div>
               </section>
@@ -1004,10 +1409,15 @@ function LessonPage() {
                   <div className="flex items-center gap-3">
                     <div>
                       <h2 className="text-2xl font-black text-foreground">Schreibübung</h2>
-                      <p className="text-xs font-bold text-muted-foreground">Fülle die leeren Felder aus!</p>
+                      <p className="text-xs font-bold text-muted-foreground">
+                        Fülle die leeren Felder aus!
+                      </p>
                     </div>
                   </div>
-                  <button onClick={() => setMode("learn")} className="text-xs font-black text-primary hover:underline">
+                  <button
+                    onClick={() => setMode("learn")}
+                    className="text-xs font-black text-primary hover:underline"
+                  >
                     Zahlen lernen
                   </button>
                 </div>
@@ -1015,8 +1425,12 @@ function LessonPage() {
                 <div className="overflow-hidden rounded-2xl border border-foreground/10 shadow-sm">
                   {/* Column labels */}
                   <div className="grid grid-cols-2 bg-foreground/5">
-                    <div className="px-4 py-2 text-xs font-black text-foreground/60 uppercase tracking-wider border-r border-foreground/10">Zahl</div>
-                    <div className="px-4 py-2 text-xs font-black text-foreground/60 uppercase tracking-wider">Schreibe hier</div>
+                    <div className="px-4 py-2 text-xs font-black text-foreground/60 uppercase tracking-wider border-r border-foreground/10">
+                      Zahl
+                    </div>
+                    <div className="px-4 py-2 text-xs font-black text-foreground/60 uppercase tracking-wider">
+                      Schreibe hier
+                    </div>
                   </div>
                   {/* Rows */}
                   {numberGroups.map((num, idx) => {
@@ -1026,8 +1440,9 @@ function LessonPage() {
                     return (
                       <div
                         key={num.n}
-                        className={`grid grid-cols-2 border-t border-foreground/5 transition-colors ${correct ? "bg-emerald-50" : idx % 2 === 0 ? "bg-white" : "bg-white/50"
-                          }`}
+                        className={`grid grid-cols-2 border-t border-foreground/5 transition-colors ${
+                          correct ? "bg-emerald-50" : idx % 2 === 0 ? "bg-white" : "bg-white/50"
+                        }`}
                       >
                         {/* Col 1: number */}
                         <div className="px-4 py-2.5 border-r border-foreground/10 flex items-center">
@@ -1045,13 +1460,14 @@ function LessonPage() {
                             <input
                               type="text"
                               value={val}
-                              onChange={e => handleNumberInput(num.word, e.target.value)}
+                              onChange={(e) => handleNumberInput(num.word, e.target.value)}
                               placeholder="?"
                               maxLength={20}
-                              className={`w-full px-3 py-1.5 rounded-xl border-2 text-sm font-black transition-all outline-none ${hasVal
+                              className={`w-full px-3 py-1.5 rounded-xl border-2 text-sm font-black transition-all outline-none ${
+                                hasVal
                                   ? "bg-rose-100 border-rose-400 text-rose-800 animate-shake"
                                   : "bg-white border-dashed border-sky-300 focus:border-sky-50/50"
-                                }`}
+                              }`}
                             />
                           )}
                         </div>
@@ -1083,42 +1499,73 @@ function LessonPage() {
               <section className="rounded-3xl bg-white/80 p-5 sm:p-8 shadow-lg ring-4 ring-white animate-fade-in space-y-6">
                 <div className="flex items-center gap-3">
                   <div>
-                    <h2 className="text-2xl font-black text-foreground">Zahlen 11–20 & Anwendungen</h2>
-                    <p className="text-xs font-bold text-muted-foreground">Lerne Zahlen und ihre Verwendung im Alltag kennen</p>
+                    <h2 className="text-2xl font-black text-foreground">
+                      Zahlen 11–20 & Anwendungen
+                    </h2>
+                    <p className="text-xs font-bold text-muted-foreground">
+                      Lerne Zahlen und ihre Verwendung im Alltag kennen
+                    </p>
                   </div>
                 </div>
 
                 <div className="space-y-6">
-                  {Array.from(new Set(numberAnwGroups.map(g => g.category))).map(cat => {
-                    const info = catInfo[cat] || { emoji: "", bg: "bg-white", ring: "ring-foreground/10 border-2 border-foreground/15", badge: "bg-foreground", text: "text-foreground" };
-                    const items = numberAnwGroups.filter(g => g.category === cat);
+                  {Array.from(new Set(numberAnwGroups.map((g) => g.category))).map((cat) => {
+                    const info = catInfo[cat] || {
+                      emoji: "",
+                      bg: "bg-white",
+                      ring: "ring-foreground/10 border-2 border-foreground/15",
+                      badge: "bg-foreground",
+                      text: "text-foreground",
+                    };
+                    const items = numberAnwGroups.filter((g) => g.category === cat);
                     return (
-                      <div key={cat} className={`${info.bg} rounded-2xl p-4 sm:p-5 border border-foreground/10 space-y-4`}>
+                      <div
+                        key={cat}
+                        className={`${info.bg} rounded-2xl p-4 sm:p-5 border border-foreground/10 space-y-4`}
+                      >
                         <div className="flex items-center gap-3 border-b border-foreground/5 pb-2">
                           <span className="text-lg font-black text-foreground">{cat}</span>
                         </div>
                         {cat === "Zahlen 11-20" ? (
                           <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                            {items.map(it => (
+                            {items.map((it) => (
                               <div
                                 key={it.label}
-                                className="bg-white rounded-xl px-3 py-2 text-sm font-bold text-foreground shadow-sm border border-foreground/10 flex items-center justify-between"
+                                role="button"
+                                tabIndex={0}
+                                onClick={() => speakDE(it.word)}
+                                onKeyDown={(e) => {
+                                  if (e.key === "Enter" || e.key === " ") speakDE(it.word);
+                                }}
+                                className="bg-white rounded-xl px-3 py-2 text-sm font-bold text-foreground shadow-sm border border-foreground/10 flex items-center justify-between cursor-pointer"
                               >
                                 <span className="font-black text-base">{it.label}</span>
-                                <span className="opacity-80 font-bold">{it.word}</span>
+                                <span className="opacity-80 font-bold">{it.word} 🔊</span>
                               </div>
                             ))}
                           </div>
                         ) : (
                           <div className="flex flex-col gap-2">
-                            {items.map(it => (
+                            {items.map((it) => (
                               <div
                                 key={it.word}
                                 className="bg-white rounded-xl px-4 py-3 text-sm font-bold text-foreground shadow-sm border border-foreground/10 flex items-center justify-between gap-3 text-left"
                               >
                                 <div>
-                                  <span className="text-xs font-black opacity-55 mr-2">{it.label}:</span>
-                                  <span className="font-black text-base">{it.word}</span>
+                                  <span className="text-xs font-black opacity-55 mr-2">
+                                    {it.label}:
+                                  </span>
+                                  <button
+                                    onClick={() => speakDE(it.word)}
+                                    onKeyDown={(e) => {
+                                      if (e.key === "Enter" || e.key === " ") speakDE(it.word);
+                                    }}
+                                    tabIndex={0}
+                                    role="button"
+                                    className="font-black text-base cursor-pointer hover:underline"
+                                  >
+                                    {it.word} 🔊
+                                  </button>
                                 </div>
                               </div>
                             ))}
@@ -1135,7 +1582,18 @@ function LessonPage() {
                     title="Übung machen"
                     className="p-4 sm:p-5 rounded-full bg-primary text-primary-foreground shadow-lg hover:shadow-xl ring-4 ring-white transition-all transform hover:scale-105 active:scale-95 flex items-center justify-center cursor-pointer group"
                   >
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 sm:h-8 sm:w-8 group-hover:animate-bounce" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z" /></svg>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-7 w-7 sm:h-8 sm:w-8 group-hover:animate-bounce"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z" />
+                    </svg>
                   </button>
                 </div>
               </section>
@@ -1148,31 +1606,49 @@ function LessonPage() {
                   <div className="flex items-center gap-3">
                     <div>
                       <h2 className="text-2xl font-black text-foreground">Schreibübung</h2>
-                      <p className="text-xs font-bold text-muted-foreground">Fülle die leeren Felder aus!</p>
+                      <p className="text-xs font-bold text-muted-foreground">
+                        Fülle die leeren Felder aus!
+                      </p>
                     </div>
                   </div>
-                  <button onClick={() => setMode("learn")} className="text-xs font-black text-primary hover:underline">
+                  <button
+                    onClick={() => setMode("learn")}
+                    className="text-xs font-black text-primary hover:underline"
+                  >
                     Zahlen lernen
                   </button>
                 </div>
 
                 <div className="space-y-6">
-                  {Array.from(new Set(numberAnwGroups.map(g => g.category))).map(cat => {
-                    const info = catInfo[cat] || { emoji: "", bg: "bg-white", ring: "ring-foreground/10 border-2 border-foreground/15", badge: "bg-foreground", text: "text-foreground" };
-                    const items = numberAnwGroups.filter(g => g.category === cat);
+                  {Array.from(new Set(numberAnwGroups.map((g) => g.category))).map((cat) => {
+                    const info = catInfo[cat] || {
+                      emoji: "",
+                      bg: "bg-white",
+                      ring: "ring-foreground/10 border-2 border-foreground/15",
+                      badge: "bg-foreground",
+                      text: "text-foreground",
+                    };
+                    const items = numberAnwGroups.filter((g) => g.category === cat);
                     return (
-                      <div key={cat} className="overflow-hidden rounded-2xl border border-foreground/10 shadow-sm">
+                      <div
+                        key={cat}
+                        className="overflow-hidden rounded-2xl border border-foreground/10 shadow-sm"
+                      >
                         {/* Section header */}
                         <div className="bg-foreground/5 px-4 py-2.5 flex items-center gap-3">
                           <span className="text-foreground text-sm font-bold">{cat}</span>
                         </div>
                         {/* Column labels */}
                         <div className="grid grid-cols-2 bg-foreground/5">
-                          <div className="px-4 py-2 text-xs font-black text-foreground/60 uppercase tracking-wider border-r border-foreground/10">Deutsch</div>
-                          <div className="px-4 py-2 text-xs font-black text-foreground/60 uppercase tracking-wider">Schreibe hier</div>
+                          <div className="px-4 py-2 text-xs font-black text-foreground/60 uppercase tracking-wider border-r border-foreground/10">
+                            Deutsch
+                          </div>
+                          <div className="px-4 py-2 text-xs font-black text-foreground/60 uppercase tracking-wider">
+                            Schreibe hier
+                          </div>
                         </div>
                         {/* Rows */}
-                        {items.map(it => {
+                        {items.map((it) => {
                           const globalIdx = numberAnwGroups.indexOf(it);
                           const key = `numanw_${it.word}_${globalIdx}`;
                           const val = userAnswers[key] || "";
@@ -1181,8 +1657,13 @@ function LessonPage() {
                           return (
                             <div
                               key={`${it.word}-${globalIdx}`}
-                              className={`grid grid-cols-2 border-t border-foreground/5 transition-colors ${correct ? "bg-emerald-50" : globalIdx % 2 === 0 ? "bg-white" : "bg-white/50"
-                                }`}
+                              className={`grid grid-cols-2 border-t border-foreground/5 transition-colors ${
+                                correct
+                                  ? "bg-emerald-50"
+                                  : globalIdx % 2 === 0
+                                    ? "bg-white"
+                                    : "bg-white/50"
+                              }`}
                             >
                               {/* Col 1: Label / Number */}
                               <div className="px-4 py-2.5 border-r border-foreground/10 flex items-center">
@@ -1200,13 +1681,16 @@ function LessonPage() {
                                   <input
                                     type="text"
                                     value={val}
-                                    onChange={e => handleNumberAnwInput(it.word, globalIdx, e.target.value)}
+                                    onChange={(e) =>
+                                      handleNumberAnwInput(it.word, globalIdx, e.target.value)
+                                    }
                                     placeholder="?"
                                     maxLength={30}
-                                    className={`w-full px-3 py-1.5 rounded-xl border-2 text-sm font-black transition-all outline-none ${hasVal
+                                    className={`w-full px-3 py-1.5 rounded-xl border-2 text-sm font-black transition-all outline-none ${
+                                      hasVal
                                         ? "bg-rose-100 border-rose-400 text-rose-800 animate-shake"
                                         : "bg-white border-dashed border-sky-300 focus:border-sky-50/50"
-                                      }`}
+                                    }`}
                                   />
                                 )}
                               </div>
@@ -1248,23 +1732,34 @@ function LessonPage() {
                 </div>
 
                 <div className="space-y-6">
-                  {zeitGroups.map(g => {
+                  {zeitGroups.map((g) => {
                     return (
-                      <div key={g.category} className="rounded-2xl p-4 sm:p-5 border-2 border-black space-y-4">
+                      <div
+                        key={g.category}
+                        className="rounded-2xl p-4 sm:p-5 border-2 border-black space-y-4"
+                      >
                         <div className="flex items-center gap-3 border-b-2 border-black pb-2">
                           <span className="text-lg font-black text-black">{g.category}</span>
                         </div>
                         <div className="flex flex-col gap-2">
-                          {g.items.map(it => (
+                          {g.items.map((it) => (
                             <div
                               key={it.word}
-                              className="rounded-xl px-4 py-3 text-sm font-black text-black border-2 border-black flex items-center justify-between gap-3 text-left"
+                              role="button"
+                              tabIndex={0}
+                              onClick={() => speakDE(it.word)}
+                              onKeyDown={(e) => {
+                                if (e.key === "Enter" || e.key === " ") speakDE(it.word);
+                              }}
+                              className="rounded-xl px-4 py-3 text-sm font-black text-black border-2 border-black flex items-center justify-between gap-3 text-left cursor-pointer"
                             >
                               <div>
                                 {it.label !== "Frage" && it.label !== it.word && (
-                                  <span className="text-xs font-black opacity-55 mr-2">{it.label}:</span>
+                                  <span className="text-xs font-black opacity-55 mr-2">
+                                    {it.label}:
+                                  </span>
                                 )}
-                                <span className="font-black text-base">{it.word}</span>
+                                <span className="font-black text-base">{it.word} 🔊</span>
                               </div>
                             </div>
                           ))}
@@ -1290,21 +1785,26 @@ function LessonPage() {
                   <div>
                     <h2 className="text-2xl font-black text-black">Schreibübung</h2>
                   </div>
-                  <button onClick={() => setMode("learn")} className="text-xs font-black text-black border-b-2 border-black">
+                  <button
+                    onClick={() => setMode("learn")}
+                    className="text-xs font-black text-black border-b-2 border-black"
+                  >
                     Zurück
                   </button>
                 </div>
 
                 <div className="rounded-2xl border-2 border-black p-4">
-                  <p className="text-sm font-bold">
-                    Schreibe das Wort oder die Uhrzeit.
-                  </p>
+                  <p className="text-sm font-bold">Schreibe das Wort oder die Uhrzeit.</p>
                 </div>
 
                 <div className="overflow-hidden rounded-2xl border-2 border-black">
                   <div className="grid grid-cols-2 bg-black text-white">
-                    <div className="px-4 py-2 text-xs font-black uppercase tracking-wider border-r border-white">Deutsch</div>
-                    <div className="px-4 py-2 text-xs font-black uppercase tracking-wider">Antwort</div>
+                    <div className="px-4 py-2 text-xs font-black uppercase tracking-wider border-r border-white">
+                      Deutsch
+                    </div>
+                    <div className="px-4 py-2 text-xs font-black uppercase tracking-wider">
+                      Antwort
+                    </div>
                   </div>
                   {zeitExercises.map((it, idx) => {
                     const key = `zeit_${it.word}_${idx}`;
@@ -1316,7 +1816,17 @@ function LessonPage() {
                         className={`grid grid-cols-2 border-t-2 border-black ${correct ? "bg-black/5" : ""}`}
                       >
                         <div className="px-4 py-2.5 border-r-2 border-black flex items-center">
-                          <span className="text-sm font-black text-black">{it.label}</span>
+                          <button
+                            onClick={() => speakDE(it.word)}
+                            onKeyDown={(e) => {
+                              if (e.key === "Enter" || e.key === " ") speakDE(it.word);
+                            }}
+                            tabIndex={0}
+                            role="button"
+                            className="text-sm font-black text-black cursor-pointer hover:underline"
+                          >
+                            {it.label}
+                          </button>
                         </div>
                         <div className="px-4 py-2 flex items-center">
                           {correct ? (
@@ -1325,7 +1835,7 @@ function LessonPage() {
                             <input
                               type="text"
                               value={val}
-                              onChange={e => handleZeitInput(it.word, idx, e.target.value)}
+                              onChange={(e) => handleZeitInput(it.word, idx, e.target.value)}
                               className="w-full px-3 py-1.5 border-2 border-black text-sm font-black outline-none"
                             />
                           )}
@@ -1337,9 +1847,7 @@ function LessonPage() {
 
                 {isZeitComplete && (
                   <div className="mt-8 text-center border-2 border-black rounded-xl p-5">
-                    <p className="text-xl font-black text-black">
-                      Sehr gut!
-                    </p>
+                    <p className="text-xl font-black text-black">Sehr gut!</p>
                     <NextLessonButton currentId={lesson.id} />
                   </div>
                 )}
@@ -1358,7 +1866,9 @@ function LessonPage() {
                 <div className="flex items-center gap-3">
                   <div>
                     <h2 className="text-2xl font-black text-foreground">Wiederholung</h2>
-                    <p className="text-xs font-bold text-muted-foreground">Wiederhole alle bisherigen Themen</p>
+                    <p className="text-xs font-bold text-muted-foreground">
+                      Wiederhole alle bisherigen Themen
+                    </p>
                   </div>
                 </div>
 
@@ -1370,15 +1880,24 @@ function LessonPage() {
 
                 <div className="space-y-6">
                   {reviewGroups.map((g, catIdx) => (
-                    <div key={g.category} className="bg-white border border-foreground/15 rounded-2xl p-4 sm:p-5 shadow-md space-y-3">
+                    <div
+                      key={g.category}
+                      className="bg-white border border-foreground/15 rounded-2xl p-4 sm:p-5 shadow-md space-y-3"
+                    >
                       <h3 className="text-lg font-black">{g.category}</h3>
                       <div className="space-y-2">
                         {g.items.map((it, itemIdx) => (
                           <div
                             key={itemIdx}
-                            className="w-full bg-white rounded-xl px-4 py-2.5 text-sm font-black text-foreground shadow-sm border border-foreground/15 flex items-center justify-between"
+                            role="button"
+                            tabIndex={0}
+                            onClick={() => speakDE(it.full)}
+                            onKeyDown={(e) => {
+                              if (e.key === "Enter" || e.key === " ") speakDE(it.full);
+                            }}
+                            className="w-full bg-white rounded-xl px-4 py-2.5 text-sm font-black text-foreground shadow-sm border border-foreground/15 flex items-center justify-between cursor-pointer"
                           >
-                            <span className="text-base font-black">{it.full}</span>
+                            <span className="text-base font-black">{it.full} 🔊</span>
                           </div>
                         ))}
                       </div>
@@ -1392,7 +1911,18 @@ function LessonPage() {
                     title="Übung machen"
                     className="p-4 sm:p-5 rounded-full bg-primary text-primary-foreground shadow-lg hover:shadow-xl ring-4 ring-white transition-all transform hover:scale-105 active:scale-95 flex items-center justify-center cursor-pointer group"
                   >
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 sm:h-8 sm:w-8 group-hover:animate-bounce" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z" /></svg>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-7 w-7 sm:h-8 sm:w-8 group-hover:animate-bounce"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z" />
+                    </svg>
                   </button>
                 </div>
               </section>
@@ -1405,10 +1935,15 @@ function LessonPage() {
                   <div className="flex items-center gap-3">
                     <div>
                       <h2 className="text-2xl font-black text-foreground">Schreibübung</h2>
-                      <p className="text-xs font-bold text-muted-foreground">Fülle die leeren Felder aus!</p>
+                      <p className="text-xs font-bold text-muted-foreground">
+                        Fülle die leeren Felder aus!
+                      </p>
                     </div>
                   </div>
-                  <button onClick={() => setMode("learn")} className="text-xs font-black text-primary hover:underline">
+                  <button
+                    onClick={() => setMode("learn")}
+                    className="text-xs font-black text-primary hover:underline"
+                  >
                     Lernstoff ansehen
                   </button>
                 </div>
@@ -1421,15 +1956,22 @@ function LessonPage() {
 
                 <div className="space-y-6">
                   {reviewGroups.map((g, catIdx) => (
-                    <div key={g.category} className="overflow-hidden rounded-2xl border border-foreground/10 shadow-sm">
+                    <div
+                      key={g.category}
+                      className="overflow-hidden rounded-2xl border border-foreground/10 shadow-sm"
+                    >
                       {/* Section header */}
                       <div className="bg-white border-b border-foreground/15 px-4 py-2.5 flex items-center gap-3">
                         <span className="text-foreground text-base font-black">{g.category}</span>
                       </div>
                       {/* Column labels */}
                       <div className="grid grid-cols-2 bg-foreground/5">
-                        <div className="px-4 py-2 text-xs font-black text-foreground/60 uppercase tracking-wider border-r border-foreground/10">Frage</div>
-                        <div className="px-4 py-2 text-xs font-black text-foreground/60 uppercase tracking-wider">Antwort</div>
+                        <div className="px-4 py-2 text-xs font-black text-foreground/60 uppercase tracking-wider border-r border-foreground/10">
+                          Frage
+                        </div>
+                        <div className="px-4 py-2 text-xs font-black text-foreground/60 uppercase tracking-wider">
+                          Antwort
+                        </div>
                       </div>
                       {/* Rows */}
                       {g.items.map((it, itemIdx) => {
@@ -1442,8 +1984,15 @@ function LessonPage() {
                         return (
                           <div
                             key={itemIdx}
-                            className={`grid grid-cols-2 border-t border-foreground/5 transition-colors ${!isQuestion ? "bg-foreground/5 opacity-80" : correct ? "bg-emerald-50" : itemIdx % 2 === 0 ? "bg-white" : "bg-white/50"
-                              }`}
+                            className={`grid grid-cols-2 border-t border-foreground/5 transition-colors ${
+                              !isQuestion
+                                ? "bg-foreground/5 opacity-80"
+                                : correct
+                                  ? "bg-emerald-50"
+                                  : itemIdx % 2 === 0
+                                    ? "bg-white"
+                                    : "bg-white/50"
+                            }`}
                           >
                             {/* Col 1: Prompt */}
                             <div className="px-4 py-2.5 border-r border-foreground/10 flex items-center gap-2">
@@ -1470,13 +2019,16 @@ function LessonPage() {
                                 <input
                                   type="text"
                                   value={val}
-                                  onChange={e => handleReviewInput(it.answer, catIdx, itemIdx, e.target.value)}
+                                  onChange={(e) =>
+                                    handleReviewInput(it.answer, catIdx, itemIdx, e.target.value)
+                                  }
                                   placeholder="?"
                                   maxLength={30}
-                                  className={`w-full px-3 py-1.5 rounded-xl border-2 text-sm font-black transition-all outline-none ${hasVal
+                                  className={`w-full px-3 py-1.5 rounded-xl border-2 text-sm font-black transition-all outline-none ${
+                                    hasVal
                                       ? "bg-rose-100 border-rose-400 text-rose-800"
                                       : "bg-white border-dashed border-sky-300 focus:border-sky-500 focus:bg-sky-50/50"
-                                    }`}
+                                  }`}
                                 />
                               )}
                             </div>
@@ -1512,13 +2064,15 @@ function LessonPage() {
                 <div className="flex items-center gap-3">
                   <div>
                     <h2 className="text-2xl font-black text-foreground">Lautkombinationen</h2>
-                    <p className="text-xs font-bold text-muted-foreground">Lerne Lautkombinationen im Deutschen</p>
+                    <p className="text-xs font-bold text-muted-foreground">
+                      Lerne Lautkombinationen im Deutschen
+                    </p>
                   </div>
                 </div>
 
                 {/* Combo pill strip */}
                 <div className="flex gap-2 flex-wrap justify-center">
-                  {lautkomGroups.map(g => (
+                  {lautkomGroups.map((g) => (
                     <div
                       key={g.combo}
                       className="bg-foreground text-white px-5 py-2 rounded-full text-lg font-black shadow-md select-none"
@@ -1530,9 +2084,12 @@ function LessonPage() {
 
                 {/* Word groups per combination */}
                 <div className="space-y-5">
-                  {lautkomGroups.map(g => {
+                  {lautkomGroups.map((g) => {
                     return (
-                      <div key={g.combo} className="bg-white rounded-2xl p-4 border border-foreground/10 space-y-3">
+                      <div
+                        key={g.combo}
+                        className="bg-white rounded-2xl p-4 border border-foreground/10 space-y-3"
+                      >
                         <div className="flex items-center gap-3">
                           <span className="bg-foreground text-white px-3 py-1 rounded-lg text-lg font-black shadow select-none">
                             {g.label}
@@ -1540,10 +2097,16 @@ function LessonPage() {
                           <span className="text-base font-black text-foreground">Deutsch</span>
                         </div>
                         <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                          {g.words.map(w => (
+                          {g.words.map((w) => (
                             <div
                               key={w}
-                              className="bg-white rounded-xl px-3 py-2 text-sm font-bold text-foreground shadow-sm border border-foreground/10 text-left"
+                              role="button"
+                              tabIndex={0}
+                              onClick={() => speakDE(w)}
+                              onKeyDown={(e) => {
+                                if (e.key === "Enter" || e.key === " ") speakDE(w);
+                              }}
+                              className="bg-white rounded-xl px-3 py-2 text-sm font-bold text-foreground shadow-sm border border-foreground/10 text-left cursor-pointer"
                             >
                               <span>{highlightCombo(w, g.label)}</span>
                             </div>
@@ -1560,7 +2123,18 @@ function LessonPage() {
                     title="Übung machen"
                     className="p-4 sm:p-5 rounded-full bg-primary text-primary-foreground shadow-lg hover:shadow-xl ring-4 ring-white transition-all transform hover:scale-105 active:scale-95 flex items-center justify-center cursor-pointer group"
                   >
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 sm:h-8 sm:w-8 group-hover:animate-bounce" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z" /></svg>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-7 w-7 sm:h-8 sm:w-8 group-hover:animate-bounce"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z" />
+                    </svg>
                   </button>
                 </div>
               </section>
@@ -1573,28 +2147,44 @@ function LessonPage() {
                   <div className="flex items-center gap-3">
                     <div>
                       <h2 className="text-2xl font-black text-foreground">Schreibübung</h2>
-                      <p className="text-xs font-bold text-muted-foreground">Fülle die leeren Felder aus!</p>
+                      <p className="text-xs font-bold text-muted-foreground">
+                        Fülle die leeren Felder aus!
+                      </p>
                     </div>
                   </div>
-                  <button onClick={() => setMode("learn")} className="text-xs font-black text-primary hover:underline">
+                  <button
+                    onClick={() => setMode("learn")}
+                    className="text-xs font-black text-primary hover:underline"
+                  >
                     Kombinationen lernen
                   </button>
                 </div>
 
                 {/* 2-column tables grouped by combination */}
                 <div className="space-y-6">
-                  {lautkomGroups.map(g => {
+                  {lautkomGroups.map((g) => {
                     return (
-                      <div key={g.combo} className="overflow-hidden rounded-2xl border border-foreground/10 shadow-sm">
+                      <div
+                        key={g.combo}
+                        className="overflow-hidden rounded-2xl border border-foreground/10 shadow-sm"
+                      >
                         {/* Section header */}
                         <div className="bg-foreground/5 px-4 py-2.5 flex items-center gap-3">
-                          <span className="text-foreground text-xl font-black tracking-widest">{g.label}</span>
-                          <span className="text-foreground/60 text-sm font-bold">Lautkombination – {g.label}</span>
+                          <span className="text-foreground text-xl font-black tracking-widest">
+                            {g.label}
+                          </span>
+                          <span className="text-foreground/60 text-sm font-bold">
+                            Lautkombination – {g.label}
+                          </span>
                         </div>
                         {/* Column labels */}
                         <div className="grid grid-cols-2 bg-foreground/5">
-                          <div className="px-4 py-2 text-xs font-black text-foreground/60 uppercase tracking-wider border-r border-foreground/10">Deutsch</div>
-                          <div className="px-4 py-2 text-xs font-black text-foreground/60 uppercase tracking-wider">Schreibe hier</div>
+                          <div className="px-4 py-2 text-xs font-black text-foreground/60 uppercase tracking-wider border-r border-foreground/10">
+                            Deutsch
+                          </div>
+                          <div className="px-4 py-2 text-xs font-black text-foreground/60 uppercase tracking-wider">
+                            Schreibe hier
+                          </div>
                         </div>
                         {/* Rows */}
                         {g.words.map((w, idx) => {
@@ -1604,8 +2194,13 @@ function LessonPage() {
                           return (
                             <div
                               key={w}
-                              className={`grid grid-cols-2 border-t border-foreground/5 transition-colors ${correct ? "bg-emerald-50" : idx % 2 === 0 ? "bg-white" : "bg-white/50"
-                                }`}
+                              className={`grid grid-cols-2 border-t border-foreground/5 transition-colors ${
+                                correct
+                                  ? "bg-emerald-50"
+                                  : idx % 2 === 0
+                                    ? "bg-white"
+                                    : "bg-white/50"
+                              }`}
                             >
                               {/* Col 1: word with highlighted combo */}
                               <div className="px-4 py-2.5 border-r border-foreground/10 flex items-center">
@@ -1623,13 +2218,14 @@ function LessonPage() {
                                   <input
                                     type="text"
                                     value={val}
-                                    onChange={e => handleLautInput(w, e.target.value)}
+                                    onChange={(e) => handleLautInput(w, e.target.value)}
                                     placeholder="?"
                                     maxLength={30}
-                                    className={`w-full px-3 py-1.5 rounded-xl border-2 text-sm font-black transition-all outline-none ${hasVal
+                                    className={`w-full px-3 py-1.5 rounded-xl border-2 text-sm font-black transition-all outline-none ${
+                                      hasVal
                                         ? "bg-rose-100 border-rose-400 text-rose-800 animate-shake"
                                         : "bg-white border-dashed border-sky-300 focus:border-sky-500 focus:bg-sky-50/50"
-                                      }`}
+                                    }`}
                                   />
                                 )}
                               </div>
@@ -1665,7 +2261,9 @@ function LessonPage() {
                       {lessonId === "2" ? "Groß- und Kleinbuchstaben" : "Das Alphabet (ABC)"}
                     </h2>
                     <p className="text-xs font-bold text-muted-foreground">
-                      {lessonId === "2" ? "Lerne alle Groß- und Kleinbuchstaben!" : "Lerne alle Buchstaben auf Deutsch!"}
+                      {lessonId === "2"
+                        ? "Lerne alle Groß- und Kleinbuchstaben!"
+                        : "Lerne alle Buchstaben auf Deutsch!"}
                     </p>
                   </div>
                 </div>
@@ -1677,7 +2275,12 @@ function LessonPage() {
                       <div className="text-[10px] font-bold text-foreground/40 uppercase tracking-wider px-1">
                         {row.label}
                       </div>
-                      <div className={`grid gap-1.5 sm:gap-2`} style={{ gridTemplateColumns: `repeat(${row.letters.length}, minmax(0, 1fr))` }}>
+                      <div
+                        className={`grid gap-1.5 sm:gap-2`}
+                        style={{
+                          gridTemplateColumns: `repeat(${row.letters.length}, minmax(0, 1fr))`,
+                        }}
+                      >
                         {row.letters.map((letter, letterIdx) => (
                           <button
                             key={letter}
@@ -1721,7 +2324,18 @@ function LessonPage() {
                     title="Übung machen"
                     className="p-4 sm:p-5 rounded-full bg-primary text-primary-foreground shadow-lg hover:shadow-xl ring-4 ring-white transition-all transform hover:scale-105 active:scale-95 flex items-center justify-center cursor-pointer group"
                   >
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 sm:h-8 sm:w-8 group-hover:animate-bounce" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z" /></svg>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-7 w-7 sm:h-8 sm:w-8 group-hover:animate-bounce"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z" />
+                    </svg>
                   </button>
                 </div>
               </section>
@@ -1736,7 +2350,9 @@ function LessonPage() {
                       <h2 className="text-2xl font-black text-foreground">
                         {lessonId === "2" ? "Schreibübung (A a)" : "Schreibübung (ABC)"}
                       </h2>
-                      <p className="text-xs font-bold text-muted-foreground">Fülle die leeren Felder aus!</p>
+                      <p className="text-xs font-bold text-muted-foreground">
+                        Fülle die leeren Felder aus!
+                      </p>
                     </div>
                   </div>
                   <button
@@ -1750,17 +2366,28 @@ function LessonPage() {
                 {/* Rows and matching writing blocks */}
                 <div className="space-y-6">
                   {alphabetRows.map((row) => (
-                    <div key={row.id} className="space-y-2 p-3 bg-white/40 rounded-2xl border border-foreground/5 shadow-inner">
+                    <div
+                      key={row.id}
+                      className="space-y-2 p-3 bg-white/40 rounded-2xl border border-foreground/5 shadow-inner"
+                    >
                       {/* Row Letters Header */}
-                      <div className="grid gap-1.5 sm:gap-2" style={{ gridTemplateColumns: `repeat(${row.letters.length}, minmax(0, 1fr))` }}>
+                      <div
+                        className="grid gap-1.5 sm:gap-2"
+                        style={{
+                          gridTemplateColumns: `repeat(${row.letters.length}, minmax(0, 1fr))`,
+                        }}
+                      >
                         {row.letters.map((letter) => {
                           const correct = checkAnswer(letter, userAnswers[letter] || "");
                           return (
                             <div
                               key={`ref-${letter}`}
                               onClick={() => speakLessonItem(letterProns[letter] || letter)}
-                              className={`flex items-center justify-center aspect-square rounded-xl text-lg sm:text-2xl font-black border-2 shadow-sm select-none cursor-pointer transition active:scale-95 ${correct ? "bg-emerald-500 border-emerald-600 text-white animate-pulse" : "bg-white border-foreground/15 text-foreground"
-                                }`}
+                              className={`flex items-center justify-center aspect-square rounded-xl text-lg sm:text-2xl font-black border-2 shadow-sm select-none cursor-pointer transition active:scale-95 ${
+                                correct
+                                  ? "bg-emerald-500 border-emerald-600 text-white animate-pulse"
+                                  : "bg-white border-foreground/15 text-foreground"
+                              }`}
                             >
                               {getLetterDisplay(letter)}
                             </div>
@@ -1769,7 +2396,12 @@ function LessonPage() {
                       </div>
 
                       {/* Matching Input Row */}
-                      <div className="grid gap-1.5 sm:gap-2" style={{ gridTemplateColumns: `repeat(${row.letters.length}, minmax(0, 1fr))` }}>
+                      <div
+                        className="grid gap-1.5 sm:gap-2"
+                        style={{
+                          gridTemplateColumns: `repeat(${row.letters.length}, minmax(0, 1fr))`,
+                        }}
+                      >
                         {row.letters.map((letter) => {
                           const val = userAnswers[letter] || "";
                           const correct = checkAnswer(letter, val);
@@ -1783,12 +2415,13 @@ function LessonPage() {
                               disabled={correct}
                               onChange={(e) => handleInputChange(letter, e.target.value)}
                               placeholder="?"
-                              className={`w-full aspect-square text-center text-sm sm:text-base font-black rounded-xl border-2 transition-all outline-none ${correct
+                              className={`w-full aspect-square text-center text-sm sm:text-base font-black rounded-xl border-2 transition-all outline-none ${
+                                correct
                                   ? "bg-emerald-100 border-emerald-500 text-emerald-800 shadow-inner"
                                   : hasVal
                                     ? "bg-rose-100 border-rose-400 text-rose-800 animate-shake"
                                     : "bg-white border-dashed border-sky-300 focus:border-sky-50/50"
-                                }`}
+                              }`}
                             />
                           );
                         })}
@@ -1809,8 +2442,11 @@ function LessonPage() {
                           <div
                             key={`ref-${letter}`}
                             onClick={() => speakLessonItem(letterProns[letter] || letter)}
-                            className={`flex items-center justify-center aspect-square rounded-xl text-lg sm:text-2xl font-black border-2 shadow-sm select-none cursor-pointer transition active:scale-95 ${correct ? "bg-emerald-500 border-emerald-600 text-white animate-pulse" : "bg-white border-foreground/15 text-foreground"
-                              }`}
+                            className={`flex items-center justify-center aspect-square rounded-xl text-lg sm:text-2xl font-black border-2 shadow-sm select-none cursor-pointer transition active:scale-95 ${
+                              correct
+                                ? "bg-emerald-500 border-emerald-600 text-white animate-pulse"
+                                : "bg-white border-foreground/15 text-foreground"
+                            }`}
                           >
                             {getLetterDisplay(letter)}
                           </div>
@@ -1833,12 +2469,13 @@ function LessonPage() {
                             disabled={correct}
                             onChange={(e) => handleInputChange(letter, e.target.value)}
                             placeholder="?"
-                            className={`w-full aspect-square text-center text-sm sm:text-base font-black rounded-xl border-2 transition-all outline-none ${correct
+                            className={`w-full aspect-square text-center text-sm sm:text-base font-black rounded-xl border-2 transition-all outline-none ${
+                              correct
                                 ? "bg-emerald-100 border-emerald-500 text-emerald-800 shadow-inner"
                                 : hasVal
                                   ? "bg-rose-100 border-rose-400 text-rose-800 animate-shake"
                                   : "bg-white border-dashed border-sky-300 focus:border-sky-50/50"
-                              }`}
+                            }`}
                           />
                         );
                       })}
@@ -1851,7 +2488,9 @@ function LessonPage() {
                   <div className="mt-8 text-center animate-bounce bg-emerald-50 border border-emerald-100 rounded-3xl p-5 shadow-inner">
                     <div className="text-6xl">🎉😊🎉</div>
                     <p className="mt-3 text-xl font-black text-emerald-700">
-                      {lessonId === "2" ? "Großartig! Du hast alle Groß- und Kleinbuchstaben geschrieben!" : "Großartig! Du hast das ganze ABC geschrieben!"}
+                      {lessonId === "2"
+                        ? "Großartig! Du hast alle Groß- und Kleinbuchstaben geschrieben!"
+                        : "Großartig! Du hast das ganze ABC geschrieben!"}
                     </p>
                     <NextLessonButton currentId={lesson.id} />
                   </div>
@@ -1873,7 +2512,9 @@ function LessonPage() {
                   </span>
                   <div>
                     <h2 className="text-2xl font-black text-foreground">Lernzeit mit dem Lehrer</h2>
-                    <p className="text-xs font-bold text-muted-foreground">Der Lehrer zeigt dir das Thema</p>
+                    <p className="text-xs font-bold text-muted-foreground">
+                      Der Lehrer zeigt dir das Thema
+                    </p>
                   </div>
                 </div>
 
@@ -1882,7 +2523,9 @@ function LessonPage() {
                 </div>
 
                 <div className="mt-6">
-                  <h3 className="text-sm font-bold text-foreground/60 uppercase tracking-wider mb-3">Tippe auf die Karten zum Hören:</h3>
+                  <h3 className="text-sm font-bold text-foreground/60 uppercase tracking-wider mb-3">
+                    Tippe auf die Karten zum Hören:
+                  </h3>
                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                     {lesson.items.map((it) => (
                       <button
@@ -1892,7 +2535,9 @@ function LessonPage() {
                       >
                         <span className="group-hover:animate-bounce">{it.split(" ")[0]}</span>
                         {it.split(" ")[1] && lessonId !== "7" && lessonId !== "8" && (
-                          <span className="text-xs font-bold text-foreground/60">{it.split(" ")[1]}</span>
+                          <span className="text-xs font-bold text-foreground/60">
+                            {it.split(" ")[1]}
+                          </span>
                         )}
                         <span className="text-xs opacity-75">🔊</span>
                       </button>
@@ -1907,7 +2552,18 @@ function LessonPage() {
                     title="Übung machen"
                     className="p-4 sm:p-5 rounded-full bg-primary text-primary-foreground shadow-lg hover:shadow-xl ring-4 ring-white transition-all transform hover:scale-105 active:scale-95 flex items-center justify-center cursor-pointer group"
                   >
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 sm:h-8 sm:w-8 group-hover:animate-bounce" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z" /></svg>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-7 w-7 sm:h-8 sm:w-8 group-hover:animate-bounce"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z" />
+                    </svg>
                   </button>
                 </div>
               </section>
@@ -1923,7 +2579,9 @@ function LessonPage() {
                     </span>
                     <div>
                       <h2 className="text-2xl font-black text-foreground">Übung machen</h2>
-                      <p className="text-xs font-bold text-muted-foreground">Finde die richtige Antwort!</p>
+                      <p className="text-xs font-bold text-muted-foreground">
+                        Finde die richtige Antwort!
+                      </p>
                     </div>
                   </div>
                   <button
@@ -1948,7 +2606,9 @@ function LessonPage() {
                     >
                       🔊
                     </button>
-                    <span className="text-xs font-bold text-foreground/50 animate-bounce">Tippe auf den Lautsprecher!</span>
+                    <span className="text-xs font-bold text-foreground/50 animate-bounce">
+                      Tippe auf den Lautsprecher!
+                    </span>
                   </div>
                 </div>
 
@@ -1982,13 +2642,17 @@ function LessonPage() {
                     {isCorrect ? (
                       <div className="bg-emerald-50 border border-emerald-100 rounded-3xl p-5 shadow-inner">
                         <div className="text-6xl">🎉😊🎉</div>
-                        <p className="mt-3 text-xl font-black text-emerald-700">Super gemacht! Perfekt!</p>
+                        <p className="mt-3 text-xl font-black text-emerald-700">
+                          Super gemacht! Perfekt!
+                        </p>
                         <NextLessonButton currentId={lesson.id} />
                       </div>
                     ) : (
                       <div className="bg-rose-50 border border-rose-100 rounded-3xl p-5 shadow-inner">
                         <div className="text-6xl">😢</div>
-                        <p className="mt-3 text-lg font-black text-rose-700">Och, schade! Versuchs noch einmal!</p>
+                        <p className="mt-3 text-lg font-black text-rose-700">
+                          Och, schade! Versuchs noch einmal!
+                        </p>
                         <button
                           onClick={() => setPicked(null)}
                           className="mt-4 rounded-full bg-primary px-6 py-2.5 text-base font-black text-primary-foreground shadow active:scale-95 transition-all hover:scale-105 cursor-pointer"
@@ -2031,4 +2695,3 @@ function NextLessonButton({ currentId }: { currentId: string }) {
     </Link>
   );
 }
-
