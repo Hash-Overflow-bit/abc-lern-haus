@@ -15,59 +15,109 @@
   },
   {
     "id": "2",
-    "title": "Buchstaben F–J",
-    "emoji": "🔤",
-    "intro": "Weiter geht's mit F bis J.",
-    "items": ["F","G","H","I","J"],
+    "title": "Groß- und Kleinbuchstaben",
+    "emoji": "🔡",
+    "intro": "Lerne alle Groß- und Kleinbuchstaben von A a bis Z z und die Sonderbuchstaben.",
+    "items": ["A a","B b","C c","D d","E e"],
     "exercise": {
       "kind": "letter",
-      "prompt": "Welcher Buchstabe ist das?",
-      "speak": "H",
-      "options": ["F","G","H","J"],
-      "answer": "H"
+      "prompt": "Schreibe die passenden Buchstaben!",
+      "speak": "A a",
+      "options": ["A a","B b","C c","D d"],
+      "answer": "A a"
     }
   },
   {
     "id": "3",
-    "title": "Buchstaben K–O",
-    "emoji": "🔡",
-    "intro": "Mehr Buchstaben zum Lernen.",
-    "items": ["K","L","M","N","O"],
+    "title": "Abc mit WIE",
+    "emoji": "🗣️",
+    "intro": "Lerne deutsche Wörter – ein Wort für jeden Buchstaben!",
+    "items": [
+      "A wie Apfel","B wie Buch","C wie Computer","D wie Deutsch",
+      "E wie England","F wie Fisch","G wie Gold","H wie Hotel",
+      "I wie Italien","J wie Japan","K wie Kanada","L wie London",
+      "M wie Mama","N wie November","O wie Orange","P wie Papa",
+      "Q wie Quiz","R wie Rot","S wie Schweiz","T wie Telefon",
+      "U wie Uhr","V wie Vater","W wie Wohnung","X wie Xylofon",
+      "Y wie Yoga","Z wie Zimmer","Ä wie Äpfel","Ö wie Öl","Ü wie Übersetzen"
+    ],
     "exercise": {
-      "kind": "letter",
-      "prompt": "Welcher Buchstabe ist das?",
-      "speak": "M",
-      "options": ["K","L","M","N"],
-      "answer": "M"
+      "kind": "fill-blank",
+      "prompt": "Schreibe das deutsche Wort für jeden Buchstaben!",
+      "speak": "Apfel",
+      "options": ["Apfel","Buch","Computer","Deutsch"],
+      "answer": "Apfel"
     }
   },
   {
     "id": "4",
-    "title": "Umlaute Ä Ö Ü ß",
-    "emoji": "🇩🇪",
-    "intro": "Die besonderen deutschen Buchstaben.",
-    "items": ["Ä","Ö","Ü","ß"],
-    "exercise": {
-      "kind": "letter",
-      "prompt": "Welcher Umlaut ist das?",
-      "speak": "Ö",
-      "options": ["Ä","Ö","Ü","ß"],
-      "answer": "Ö"
-    }
+    "title": "Vokale",
+    "emoji": "🔵",
+    "intro": "Die Vokale im Deutschen: a, e, i, o, u",
+    "items": [],
+    "exercise": { "kind": "vokale", "prompt": "", "speak": "", "options": [], "answer": "" },
+    "vokale": [
+      {
+        "vowel": "A",
+        "words": ["Apfel","Auto","Abend","Arzt","Angeln","Auge","Alt","Alle","Arbeit","Ananas"]
+      },
+      {
+        "vowel": "E",
+        "words": ["Essen","Eltern","Ente","Erdbeere","Engel","Ecke","E-Mail","Ende","Eis","Erde"]
+      },
+      {
+        "vowel": "I",
+        "words": ["Igel","Idee","immer","Insel","Internet","innen","Info","interessant","im","ich"]
+      },
+      {
+        "vowel": "O",
+        "words": ["Ofen","Oma","Opa","Obst","oben","offen","oder","Ort","Ohrring","Olive"]
+      },
+      {
+        "vowel": "U",
+        "words": ["Uhr","unten","U-Bahn","Umzug","Ungarn","unser","unter","unterschiedlich","und","Urlaub"]
+      }
+    ]
   },
   {
     "id": "5",
-    "title": "Zahlen 1–5",
-    "emoji": "🔢",
-    "intro": "Zähle von eins bis fünf.",
-    "items": ["1 eins","2 zwei","3 drei","4 vier","5 fünf"],
-    "exercise": {
-      "kind": "word",
-      "prompt": "Was bedeutet diese Zahl?",
-      "speak": "drei",
-      "options": ["1","2","3","4"],
-      "answer": "3"
-    }
+    "title": "Lautkombinationen",
+    "emoji": "🔤",
+    "intro": "Lerne Lautkombinationen im Deutschen: ch, sch, ei, ie, sp, st",
+    "items": [],
+    "exercise": { "kind": "lautkom", "prompt": "", "speak": "", "options": [], "answer": "" },
+    "lautkom": [
+      {
+        "combo": "Ch",
+        "label": "ch",
+        "words": ["Buch","China","Chemie","Chirurg","Chor"]
+      },
+      {
+        "combo": "Sch",
+        "label": "sch",
+        "words": ["Schule","Schnee","Schrank","Schuh","Schlüssel","Schiff","Schinken","Schwester","Schwein","schwarz"]
+      },
+      {
+        "combo": "Ei",
+        "label": "ei",
+        "words": ["Eis","Eimer","Eichel","Eile","Eigelb","Eisen","Eidechse","Eisberg"]
+      },
+      {
+        "combo": "Ie",
+        "label": "ie",
+        "words": ["Liebe","Lied","Liege","Liebhaber","Lieblich","Liederbuch","Liebesfilm","Lieblingsort","Lieblingsfarbe"]
+      },
+      {
+        "combo": "Sp",
+        "label": "sp",
+        "words": ["Sport","Spiegel","Spitze","Spinne","Spinat","Spur","Spass","Spital","Spenden"]
+      },
+      {
+        "combo": "St",
+        "label": "st",
+        "words": ["Strasse","Stadt","Stein","Stuhl","Stock","Stift","Stimme","Stunde","Strom","Student"]
+      }
+    ]
   },
   {
     "id": "6",

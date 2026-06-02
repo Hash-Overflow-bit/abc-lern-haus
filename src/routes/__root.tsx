@@ -11,6 +11,7 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { warmupSpeech } from "../lib/speak";
 
 function NotFoundComponent() {
   return (
@@ -122,6 +123,11 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+
+  useEffect(() => {
+    // Pre-load German TTS voices as early as possible
+    warmupSpeech();
+  }, []);
 
   return (
     <QueryClientProvider client={queryClient}>
