@@ -1,6 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
 import numbers from "@/data/numbers.json";
-import { Page } from "@/components/KidNav";
 import { speakDE } from "@/lib/speak";
 
 export const Route = createFileRoute("/numbers")({
@@ -8,11 +7,12 @@ export const Route = createFileRoute("/numbers")({
   component: NumbersPage,
 });
 
-const palette = ["bg-amber-300","bg-emerald-300","bg-sky-300","bg-rose-300","bg-violet-300"];
+const palette = ["bg-amber-300", "bg-emerald-300", "bg-sky-300", "bg-rose-300", "bg-violet-300"];
 
 function NumbersPage() {
   return (
-    <Page title="Zahlen 0–20" emoji="🔢">
+    <div className="mx-auto max-w-2xl space-y-6 pb-10 mt-14">
+      <h1 className="text-2xl font-black mb-6">Zahlen 0–20</h1>
       <div className="grid grid-cols-3 gap-3 sm:grid-cols-4">
         {numbers.map((item, i) => (
           <button
@@ -24,6 +24,6 @@ function NumbersPage() {
           </button>
         ))}
       </div>
-    </Page>
+    </div>
   );
 }

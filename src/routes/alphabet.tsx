@@ -1,5 +1,4 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Page } from "@/components/KidNav";
 import { speakDE } from "@/lib/speak";
 
 export const Route = createFileRoute("/alphabet")({
@@ -47,7 +46,8 @@ const palette = [
 
 function AlphabetPage() {
   return (
-    <Page title="Alphabet" emoji="🔤">
+    <div className="mx-auto max-w-2xl space-y-6 pb-10 mt-14">
+      <h1 className="text-2xl font-black mb-6">Alphabet</h1>
       <div className="grid grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-5 pb-10">
         {alphabetDetails.map((item, i) => (
           <button
@@ -61,6 +61,6 @@ function AlphabetPage() {
           </button>
         ))}
       </div>
-    </Page>
+    </div>
   );
-}
+}

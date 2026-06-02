@@ -1,6 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
 import clock from "@/data/clock.json";
-import { Page } from "@/components/KidNav";
 import { speakDE } from "@/lib/speak";
 
 export const Route = createFileRoute("/clock")({
@@ -12,7 +11,8 @@ const palette = ["bg-violet-300","bg-sky-300","bg-emerald-300","bg-amber-300","b
 
 function ClockPage() {
   return (
-    <Page title="Uhrzeit" emoji="🕐">
+    <div className="mx-auto max-w-2xl space-y-6 pb-10 mt-14">
+      <h1 className="text-2xl font-black mb-6">Uhrzeit</h1>
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
         {clock.map((c, i) => (
           <button
@@ -28,6 +28,6 @@ function ClockPage() {
           </button>
         ))}
       </div>
-    </Page>
+    </div>
   );
 }

@@ -1,7 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import alphabet from "@/data/alphabet.json";
-import { Page } from "@/components/KidNav";
 import { speakDE } from "@/lib/speak";
 
 export const Route = createFileRoute("/listening")({
@@ -39,7 +38,8 @@ function ListeningPage() {
   }
 
   return (
-    <Page title="Hör-Übung" emoji="👂">
+    <div className="mx-auto max-w-2xl space-y-6 pb-10 mt-14">
+      <h1 className="text-2xl font-black mb-6">Hör-Übung</h1>
       <div className="flex items-center justify-between rounded-2xl bg-white/70 px-4 py-2 text-lg font-bold">
         <span>✅ {score.ok}</span>
         <span>❌ {score.no}</span>
@@ -75,6 +75,6 @@ function ListeningPage() {
           </div>
         </div>
       )}
-    </Page>
+    </div>
   );
 }

@@ -9,7 +9,6 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as VocabularyRouteImport } from './routes/vocabulary'
 import { Route as NumbersRouteImport } from './routes/numbers'
 import { Route as ListeningRouteImport } from './routes/listening'
 import { Route as LessonsRouteImport } from './routes/lessons'
@@ -19,11 +18,6 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as LessonsIndexRouteImport } from './routes/lessons.index'
 import { Route as LessonsLessonIdRouteImport } from './routes/lessons.$lessonId'
 
-const VocabularyRoute = VocabularyRouteImport.update({
-  id: '/vocabulary',
-  path: '/vocabulary',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const NumbersRoute = NumbersRouteImport.update({
   id: '/numbers',
   path: '/numbers',
@@ -72,7 +66,6 @@ export interface FileRoutesByFullPath {
   '/lessons': typeof LessonsRouteWithChildren
   '/listening': typeof ListeningRoute
   '/numbers': typeof NumbersRoute
-  '/vocabulary': typeof VocabularyRoute
   '/lessons/$lessonId': typeof LessonsLessonIdRoute
   '/lessons/': typeof LessonsIndexRoute
 }
@@ -82,7 +75,6 @@ export interface FileRoutesByTo {
   '/clock': typeof ClockRoute
   '/listening': typeof ListeningRoute
   '/numbers': typeof NumbersRoute
-  '/vocabulary': typeof VocabularyRoute
   '/lessons/$lessonId': typeof LessonsLessonIdRoute
   '/lessons': typeof LessonsIndexRoute
 }
@@ -94,7 +86,6 @@ export interface FileRoutesById {
   '/lessons': typeof LessonsRouteWithChildren
   '/listening': typeof ListeningRoute
   '/numbers': typeof NumbersRoute
-  '/vocabulary': typeof VocabularyRoute
   '/lessons/$lessonId': typeof LessonsLessonIdRoute
   '/lessons/': typeof LessonsIndexRoute
 }
@@ -107,7 +98,6 @@ export interface FileRouteTypes {
     | '/lessons'
     | '/listening'
     | '/numbers'
-    | '/vocabulary'
     | '/lessons/$lessonId'
     | '/lessons/'
   fileRoutesByTo: FileRoutesByTo
@@ -117,7 +107,6 @@ export interface FileRouteTypes {
     | '/clock'
     | '/listening'
     | '/numbers'
-    | '/vocabulary'
     | '/lessons/$lessonId'
     | '/lessons'
   id:
@@ -128,7 +117,6 @@ export interface FileRouteTypes {
     | '/lessons'
     | '/listening'
     | '/numbers'
-    | '/vocabulary'
     | '/lessons/$lessonId'
     | '/lessons/'
   fileRoutesById: FileRoutesById
@@ -140,18 +128,10 @@ export interface RootRouteChildren {
   LessonsRoute: typeof LessonsRouteWithChildren
   ListeningRoute: typeof ListeningRoute
   NumbersRoute: typeof NumbersRoute
-  VocabularyRoute: typeof VocabularyRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/vocabulary': {
-      id: '/vocabulary'
-      path: '/vocabulary'
-      fullPath: '/vocabulary'
-      preLoaderRoute: typeof VocabularyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/numbers': {
       id: '/numbers'
       path: '/numbers'
@@ -231,7 +211,6 @@ const rootRouteChildren: RootRouteChildren = {
   LessonsRoute: LessonsRouteWithChildren,
   ListeningRoute: ListeningRoute,
   NumbersRoute: NumbersRoute,
-  VocabularyRoute: VocabularyRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
