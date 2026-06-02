@@ -20,7 +20,6 @@ function LessonsLayout() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-
       {/* ────────────── Fixed Top Bar ────────────── */}
       <header className="fixed inset-x-0 top-0 h-14 bg-white border-b border-gray-200 z-50 flex items-center px-4 gap-3 shadow-sm">
         {/* Hamburger – mobile only */}
@@ -31,11 +30,25 @@ function LessonsLayout() {
           className="lg:hidden p-2 -ml-1 rounded-lg text-gray-500 hover:bg-gray-100 transition active:scale-90"
         >
           {sidebarOpen ? (
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
               <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
             </svg>
           ) : (
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
               <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
             </svg>
           )}
@@ -111,8 +124,10 @@ function LessonsLayout() {
                   </span>
 
                   {/* Title */}
-                  <span className={`text-sm leading-tight ${isActive ? "font-black" : "font-semibold"}`}>
-                    {lesson.title}
+                  <span
+                    className={`text-sm leading-tight ${isActive ? "font-black" : "font-semibold"}`}
+                  >
+                    {`Lektion ${lesson.id}`}
                   </span>
                 </Link>
               );
