@@ -1,7 +1,7 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import React, { useState, useEffect } from "react";
 import lessons from "@/data/lessons.json";
-import { speakDE } from "@/lib/speak";
+import { speakDE, warmupSpeech } from "@/lib/speak";
 
 export const Route = createFileRoute("/lessons/$lessonId")({
   head: ({ params }) => ({
@@ -321,6 +321,21 @@ function LessonPage() {
     setUserAnswers({});
     setExercisePhase("revision");
   }, [lessonId]);
+
+  // Warm up SpeechSynthesis once on first user interaction so browsers allow playback
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const handler = () => {
+      try {
+        warmupSpeech();
+      } catch (e) {
+        // ignore
+      }
+      window.removeEventListener("pointerdown", handler);
+    };
+    window.addEventListener("pointerdown", handler, { passive: true });
+    return () => window.removeEventListener("pointerdown", handler);
+  }, []);
 
   function speakLessonItem(text: string) {
     if (!text) return;
