@@ -69,96 +69,21 @@ if (typeof window !== "undefined" && "speechSynthesis" in window) {
 export function speakDE(text: string) {
   if (typeof window === "undefined") return;
 
-  const tryPlayAudio = (src: string): Promise<boolean> => {
-    return new Promise((resolve) => {
-      const audio = new Audio(src);
-      let resolved = false;
-      const cleanup = () => {
-        audio.onended = null;
-        audio.onerror = null;
-        audio.oncanplaythrough = null;
-      };
-      audio.oncanplaythrough = () => {
-        audio
-          .play()
-          .then(() => {
-            if (!resolved) {
-              resolved = true;
-              cleanup();
-              resolve(true);
-            }
-          })
-          .catch(() => {
-            if (!resolved) {
-              resolved = true;
-              cleanup();
-              resolve(false);
-            }
-          });
-      };
-      audio.onerror = () => {
-        if (!resolved) {
-          resolved = true;
-          cleanup();
-          resolve(false);
-        }
-      };
-      // If the src 404s, onerror will fire
-      audio.src = src;
-      // Start loading
-      audio.load();
-      // Fallback timeout
-      setTimeout(() => {
-        if (!resolved) {
-          resolved = true;
-          cleanup();
-          resolve(false);
-        }
-      }, 1500);
-    });
-  };
+  // Speak immediately in the current user gesture. This is the most reliable
+  // production path across browsers and mobile devices.
+  if (!("speechSynthesis" in window)) return;
+  window.speechSynthesis.cancel();
 
-  const slugify = (s: string) =>
-    s
-      .toString()
-      .normalize("NFD")
-      .replace(/\p{Diacritic}/gu, "")
-      .replace(/[^\p{L}\p{N} ]+/gu, "")
-      .trim()
-      .toLowerCase()
-      .replace(/\s+/g, "_");
+  const utterance = new SpeechSynthesisUtterance(text);
+  utterance.lang = "de-DE";
+  utterance.rate = 0.82;
+  utterance.pitch = 1.0;
+  utterance.volume = 1.0;
 
-  const candidates = [] as string[];
-  const base = slugify(text);
-  // try specific buckets
-  candidates.push(`/audio/${base}.mp3`);
-  candidates.push(`/audio/words/${base}.mp3`);
-  candidates.push(`/audio/letters/${base}.mp3`);
+  const voice = ensureVoice();
+  if (voice) utterance.voice = voice;
 
-  // For letter pairs like "A a" prefer single-letter file
-  const first = String(text).trim().split(/\s+/)[0];
-  const firstSlug = slugify(first);
-  candidates.push(`/audio/letters/${firstSlug}.mp3`);
-
-  // Try each candidate in order, play first that exists/plays
-  (async () => {
-    for (const c of candidates) {
-      const ok = await tryPlayAudio(c);
-      if (ok) return;
-    }
-
-    // Fallback to SpeechSynthesis if audio files not available
-    if (!("speechSynthesis" in window)) return;
-    window.speechSynthesis.cancel();
-    const u = new SpeechSynthesisUtterance(text);
-    u.lang = "de-DE";
-    u.rate = 0.82;
-    u.pitch = 1.0;
-    u.volume = 1.0;
-    const voice = ensureVoice();
-    if (voice) u.voice = voice;
-    window.speechSynthesis.speak(u);
-  })();
+  window.speechSynthesis.speak(utterance);
 }
 
 /** Call once on app boot to trigger async voice loading early */
