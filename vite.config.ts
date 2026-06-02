@@ -16,28 +16,4 @@ export default defineConfig({
   nitro: {
     preset: "vercel",
   },
-  vite: {
-    plugins: (function () {
-      const p = [] as any[];
-      try {
-        // Load the PWA plugin only if it's installed to avoid type errors during tsc
-        // @ts-ignore
-        const { VitePWA } = require("vite-plugin-pwa");
-        p.push(
-          VitePWA({
-            registerType: "autoUpdate",
-            includeAssets: ["icon.svg", "abc_mit_wie_chart.png", "umlaute_wie_cards.png"],
-            workbox: {
-              globPatterns: ["**/*.{js,css,html,svg,png,mp3}"],
-            },
-            // Let public/manifest.json be used; plugin will still generate SW
-            injectRegister: "auto",
-          }),
-        );
-      } catch (e) {
-        // plugin not installed — continue without PWA support
-      }
-      return p;
-    })(),
-  },
 });
