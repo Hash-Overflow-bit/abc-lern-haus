@@ -10,40 +10,6 @@ export const Route = createFileRoute("/lessons/$lessonId")({
   component: LessonPage,
 });
 
-const letterProns: Record<string, string> = {
-  A: "ah",
-  B: "be",
-  C: "ce",
-  D: "de",
-  E: "eh",
-  F: "eff",
-  G: "ge",
-  H: "ha",
-  I: "ih",
-  J: "jot",
-  K: "ka",
-  L: "ell",
-  M: "emm",
-  N: "enn",
-  O: "oh",
-  P: "pe",
-  Q: "ku",
-  R: "err",
-  S: "ess",
-  T: "te",
-  U: "uh",
-  V: "vau",
-  W: "we",
-  X: "ix",
-  Y: "ypsilon",
-  Z: "zett",
-  "\u00C4": "\u00E4h",
-  "\u00D6": "\u00F6h",
-  "\u00DC": "\u00FCh",
-  "\u00DF": "eszett",
-  ss: "ss",
-};
-
 const alphabetRows = [
   { id: "row1", label: "A bis G", letters: ["A", "B", "C", "D", "E", "F", "G"] },
   { id: "row2", label: "H bis P", letters: ["H", "I", "J", "K", "L", "M", "N", "O", "P"] },
@@ -338,12 +304,7 @@ function LessonPage() {
   }, []);
 
   function speakLessonItem(text: string) {
-    if (!text) return;
-    // text might be a letter, a pair like "A a", or a pron string
-    const first = String(text).trim().split(/\s+/)[0];
-    // prefer direct mapping for single-letter keys
-    const pron = letterProns[first] || text;
-    speakDE(pron);
+    speakDE(text);
   }
 
   // Get previous lesson for revision
@@ -384,7 +345,7 @@ function LessonPage() {
     const cleanVal = val.replace(/\s+/g, "").trim();
     const cleanValLower = cleanVal.toLowerCase();
     const letterLower = letter.toLowerCase();
-    const pronLower = letterProns[letter]?.toLowerCase() || "";
+
 
     if (lessonId === "2") {
       // Lesson 2: require BOTH capital and small letter (e.g. "A a", "Aa")
@@ -2299,7 +2260,7 @@ function LessonPage() {
                         {row.letters.map((letter, letterIdx) => (
                           <button
                             key={letter}
-                            onClick={() => speakLessonItem(letterProns[letter] || letter)}
+                            onClick={() => speakLessonItem(letter)}
                             className={`${palette[(idx + letterIdx) % palette.length]} flex items-center justify-center aspect-square rounded-2xl border-2 shadow-sm transition active:scale-90 group cursor-pointer`}
                           >
                             <span className="text-xl sm:text-3xl font-black group-hover:animate-bounce select-none">
@@ -2320,7 +2281,7 @@ function LessonPage() {
                       {sonderRow.map((letter, letterIdx) => (
                         <button
                           key={letter}
-                          onClick={() => speakLessonItem(letterProns[letter] || letter)}
+                          onClick={() => speakLessonItem(letter)}
                           className="bg-white border-foreground/15 hover:bg-foreground/5 text-foreground flex items-center justify-center aspect-square rounded-2xl border-2 shadow-sm transition active:scale-90 group cursor-pointer"
                         >
                           <span className="text-xl sm:text-3xl font-black group-hover:animate-bounce select-none">
@@ -2397,7 +2358,7 @@ function LessonPage() {
                           return (
                             <div
                               key={`ref-${letter}`}
-                              onClick={() => speakLessonItem(letterProns[letter] || letter)}
+                              onClick={() => speakLessonItem(letter)}
                               className={`flex items-center justify-center aspect-square rounded-xl text-lg sm:text-2xl font-black border-2 shadow-sm select-none cursor-pointer transition active:scale-95 ${
                                 correct
                                   ? "bg-emerald-500 border-emerald-600 text-white animate-pulse"
@@ -2456,7 +2417,7 @@ function LessonPage() {
                         return (
                           <div
                             key={`ref-${letter}`}
-                            onClick={() => speakLessonItem(letterProns[letter] || letter)}
+                            onClick={() => speakLessonItem(letter)}
                             className={`flex items-center justify-center aspect-square rounded-xl text-lg sm:text-2xl font-black border-2 shadow-sm select-none cursor-pointer transition active:scale-95 ${
                               correct
                                 ? "bg-emerald-500 border-emerald-600 text-white animate-pulse"
