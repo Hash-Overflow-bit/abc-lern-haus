@@ -695,9 +695,7 @@ function LessonPage() {
                 <div className="flex items-center gap-3">
                   <div>
                     <h2 className="text-2xl font-black text-foreground">Abc mit WIE</h2>
-                    <p className="text-xs font-bold text-muted-foreground">
-                      Ein Wort für jeden Buchstaben!
-                    </p>
+                    
                   </div>
                 </div>
 
@@ -780,9 +778,7 @@ function LessonPage() {
                   <div className="flex items-center gap-3">
                     <div>
                       <h2 className="text-2xl font-black text-foreground">Schreibübung</h2>
-                      <p className="text-xs font-bold text-muted-foreground">
-                        Fülle die leeren Felder aus!
-                      </p>
+                      
                     </div>
                   </div>
                   <button
@@ -887,9 +883,7 @@ function LessonPage() {
                 <div className="flex items-center gap-3">
                   <div>
                     <h2 className="text-2xl font-black text-foreground">Vokale</h2>
-                    <p className="text-xs font-bold text-muted-foreground">
-                      Die Vokale im Deutschen
-                    </p>
+                    
                   </div>
                 </div>
 
@@ -973,9 +967,7 @@ function LessonPage() {
                   <div className="flex items-center gap-3">
                     <div>
                       <h2 className="text-2xl font-black text-foreground">Schreibübung</h2>
-                      <p className="text-xs font-bold text-muted-foreground">
-                        Fülle die leeren Felder aus!
-                      </p>
+                      
                     </div>
                   </div>
                   <button
@@ -1085,9 +1077,7 @@ function LessonPage() {
                 <div className="flex items-center gap-3">
                   <div>
                     <h2 className="text-2xl font-black text-foreground">Ähnliche Lautpaare</h2>
-                    <p className="text-xs font-bold text-muted-foreground">
-                      Lerne ähnliche Lautpaare im Deutschen kennen
-                    </p>
+                    
                   </div>
                 </div>
 
@@ -1200,9 +1190,7 @@ function LessonPage() {
                   <div className="flex items-center gap-3">
                     <div>
                       <h2 className="text-2xl font-black text-foreground">Schreibübung</h2>
-                      <p className="text-xs font-bold text-muted-foreground">
-                        Fülle die leeren Felder aus!
-                      </p>
+                      
                     </div>
                   </div>
                   <button
@@ -1331,9 +1319,7 @@ function LessonPage() {
                 <div className="flex items-center gap-3">
                   <div>
                     <h2 className="text-2xl font-black text-foreground">Zahlen 0–10</h2>
-                    <p className="text-xs font-bold text-muted-foreground">
-                      Lerne die Zahlen von null bis zehn
-                    </p>
+                    
                   </div>
                 </div>
 
@@ -1385,9 +1371,7 @@ function LessonPage() {
                   <div className="flex items-center gap-3">
                     <div>
                       <h2 className="text-2xl font-black text-foreground">Schreibübung</h2>
-                      <p className="text-xs font-bold text-muted-foreground">
-                        Fülle die leeren Felder aus!
-                      </p>
+                      
                     </div>
                   </div>
                   <button
@@ -1478,9 +1462,7 @@ function LessonPage() {
                     <h2 className="text-2xl font-black text-foreground">
                       Zahlen 11–20 & Anwendungen
                     </h2>
-                    <p className="text-xs font-bold text-muted-foreground">
-                      Lerne Zahlen und ihre Verwendung im Alltag kennen
-                    </p>
+                    
                   </div>
                 </div>
 
@@ -1582,9 +1564,7 @@ function LessonPage() {
                   <div className="flex items-center gap-3">
                     <div>
                       <h2 className="text-2xl font-black text-foreground">Schreibübung</h2>
-                      <p className="text-xs font-bold text-muted-foreground">
-                        Fülle die leeren Felder aus!
-                      </p>
+                      
                     </div>
                   </div>
                   <button
@@ -1842,9 +1822,7 @@ function LessonPage() {
                 <div className="flex items-center gap-3">
                   <div>
                     <h2 className="text-2xl font-black text-foreground">Wiederholung</h2>
-                    <p className="text-xs font-bold text-muted-foreground">
-                      Wiederhole alle bisherigen Themen
-                    </p>
+                    
                   </div>
                 </div>
 
@@ -1911,9 +1889,7 @@ function LessonPage() {
                   <div className="flex items-center gap-3">
                     <div>
                       <h2 className="text-2xl font-black text-foreground">Schreibübung</h2>
-                      <p className="text-xs font-bold text-muted-foreground">
-                        Fülle die leeren Felder aus!
-                      </p>
+                      
                     </div>
                   </div>
                   <button
@@ -2040,9 +2016,7 @@ function LessonPage() {
                 <div className="flex items-center gap-3">
                   <div>
                     <h2 className="text-2xl font-black text-foreground">Lautkombinationen</h2>
-                    <p className="text-xs font-bold text-muted-foreground">
-                      Lerne Lautkombinationen im Deutschen
-                    </p>
+                    
                   </div>
                 </div>
 
@@ -2123,9 +2097,7 @@ function LessonPage() {
                   <div className="flex items-center gap-3">
                     <div>
                       <h2 className="text-2xl font-black text-foreground">Schreibübung</h2>
-                      <p className="text-xs font-bold text-muted-foreground">
-                        Fülle die leeren Felder aus!
-                      </p>
+                      
                     </div>
                   </div>
                   <button
@@ -2236,11 +2208,7 @@ function LessonPage() {
                     <h2 className="text-2xl font-black text-foreground">
                       {lessonId === "2" ? "Groß- und Kleinbuchstaben" : "Das Alphabet (ABC)"}
                     </h2>
-                    <p className="text-xs font-bold text-muted-foreground">
-                      {lessonId === "2"
-                        ? "Lerne alle Groß- und Kleinbuchstaben!"
-                        : "Lerne alle Buchstaben auf Deutsch!"}
-                    </p>
+                    
                   </div>
                 </div>
 
@@ -2248,9 +2216,7 @@ function LessonPage() {
                 <div className="space-y-4">
                   {alphabetRows.map((row, idx) => (
                     <div key={row.id} className="space-y-1">
-                      <div className="text-[10px] font-bold text-foreground/40 uppercase tracking-wider px-1">
-                        {row.label}
-                      </div>
+                      
                       <div
                         className={`grid gap-1.5 sm:gap-2`}
                         style={{
@@ -2274,9 +2240,7 @@ function LessonPage() {
 
                   {/* Sonderbuchstaben */}
                   <div className="space-y-1 pt-2 border-t border-foreground/5">
-                    <div className="text-[10px] font-black text-primary uppercase tracking-wider px-1 flex items-center gap-1">
-                      <span>Sonderbuchstaben</span>
-                    </div>
+                    
                     <div className="grid grid-cols-5 gap-2 max-w-sm">
                       {sonderRow.map((letter, letterIdx) => (
                         <button
@@ -2326,9 +2290,7 @@ function LessonPage() {
                       <h2 className="text-2xl font-black text-foreground">
                         {lessonId === "2" ? "Schreibübung (A a)" : "Schreibübung (ABC)"}
                       </h2>
-                      <p className="text-xs font-bold text-muted-foreground">
-                        Fülle die leeren Felder aus!
-                      </p>
+                      
                     </div>
                   </div>
                   <button
@@ -2488,14 +2450,12 @@ function LessonPage() {
                   </span>
                   <div>
                     <h2 className="text-2xl font-black text-foreground">Lernzeit mit dem Lehrer</h2>
-                    <p className="text-xs font-bold text-muted-foreground">
-                      Der Lehrer zeigt dir das Thema
-                    </p>
+                    
                   </div>
                 </div>
 
                 <div className="mt-6 rounded-2xl bg-amber-50/50 p-4 border border-amber-100">
-                  <p className="text-base sm:text-lg font-black text-foreground">{lesson.intro}</p>
+                  
                 </div>
 
                 <div className="mt-6">
@@ -2555,9 +2515,7 @@ function LessonPage() {
                     </span>
                     <div>
                       <h2 className="text-2xl font-black text-foreground">Übung machen</h2>
-                      <p className="text-xs font-bold text-muted-foreground">
-                        Finde die richtige Antwort!
-                      </p>
+                      
                     </div>
                   </div>
                   <button
