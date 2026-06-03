@@ -30,7 +30,7 @@ const GERMAN_LETTER_SOUNDS: Record<string, string> = {
   E: "Eh",
   F: "Eff",
   G: "Geh",
-  H: "Hah",
+  H: "Ha",
   I: "i",
   J: "Jott",
   K: "Kah",
@@ -256,7 +256,7 @@ export function speakDE(text: string) {
 
   // ✅ FORCE German language — this is critical even without a German voice
   utterance.lang = "de-DE";
-  utterance.rate = 0.85;
+  utterance.rate = 0.6;
   utterance.pitch = 1.0;
   utterance.volume = 1.0;
 
