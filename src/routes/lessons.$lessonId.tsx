@@ -1336,7 +1336,6 @@ function LessonPage() {
                       className="flex flex-col items-center justify-center p-5 rounded-3xl border-2 border-foreground/10 bg-white shadow-sm cursor-pointer"
                     >
                       <span className="text-5xl font-black select-none">{num.n}</span>
-                      <span className="text-base font-black mt-2">{num.word}</span>
                     </div>
                   ))}
                 </div>
