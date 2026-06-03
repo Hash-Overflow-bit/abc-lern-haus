@@ -2664,7 +2664,10 @@ function RevisionExercise({
 
   // Check completion for fill-blank types
   function isComplete(): boolean {
-    if (prevId === "1" || prevId === "2") return isRevCorrect;
+    if (prevId === "1" || prevId === "2") {
+      const allL = [...alphabetRows.flatMap((r) => r.letters), ...sonderRow];
+      return allL.every((l) => checkRevAbcAnswer(prevId, l, revAnswers[l] || ""));
+    }
     if (prevId === "3") {
       return abcMitWieRows.every((r) => checkRevAnswer(r.word, revAnswers[`rev_wie_${r.letter}`] || ""));
     }
@@ -2699,9 +2702,48 @@ function RevisionExercise({
 
   const completed = isComplete();
 
+  // ABC check logic for revision
+  function checkRevAbcAnswer(lId: string, letter: string, val: string) {
+    if (!val) return false;
+    const cleanVal = val.replace(/\s+/g, "").trim();
+    const cleanValLower = cleanVal.toLowerCase();
+    const letterLower = letter.toLowerCase();
+
+    if (lId === "2") {
+      if (letter === "\u00DF" || letter === "ss") {
+        return cleanValLower === letter.toLowerCase();
+      }
+      if (letter === "\u00C4") return cleanVal === "\u00C4\u00E4" || cleanValLower === "\u00E4\u00E4";
+      if (letter === "\u00D6") return cleanVal === "\u00D6\u00F6" || cleanValLower === "\u00F6\u00F6";
+      if (letter === "\u00DC") return cleanVal === "\u00DC\u00FC" || cleanValLower === "\u00FC\u00FC";
+      const expected = letter + letter.toLowerCase();
+      return cleanVal === expected;
+    }
+    return cleanValLower === letterLower || cleanValLower === letterLower + letterLower;
+  }
+
+  function handleRevAbcInput(lId: string, letter: string, val: string) {
+    const wasCorrect = checkRevAbcAnswer(lId, letter, revAnswers[letter] || "");
+    const isNowCorrect = checkRevAbcAnswer(lId, letter, val);
+    setRevAnswers((prev) => ({ ...prev, [letter]: val }));
+    if (isNowCorrect && !wasCorrect) speakDE("Super!");
+  }
+
+  function getLetterDisplayRev(lId: string, l: string) {
+    if (lId === "2") {
+      if (l === "\u00DF" || l === "ss") return l;
+      if (l === "\u00C4") return "\u00C4 \u00E4";
+      if (l === "\u00D6") return "\u00D6 \u00F6";
+      if (l === "\u00DC") return "\u00DC \u00FC";
+      return l + " " + l.toLowerCase();
+    }
+    return l;
+  }
+
+
   // Auto-advance on completion for fill-blank types
   React.useEffect(() => {
-    if (completed && prevId !== "1" && prevId !== "2") {
+    if (completed) {
       const timer = setTimeout(() => onComplete(), 1500);
       return () => clearTimeout(timer);
     }
@@ -2803,52 +2845,126 @@ function RevisionExercise({
         </button>
       </div>
 
-      {/* Lesson 1 or 2: MCQ exercise */}
-      {(prevId === "1" || prevId === "2") && prevEx.options.length > 0 && (
-        <div className="text-center">
-          <p className="text-lg font-black text-foreground/80">{prevEx.prompt}</p>
-          <div className="mt-4 flex flex-col items-center gap-3">
-            <button
-              onClick={() => speakDE(prevEx.speak)}
-              className="flex h-20 w-20 items-center justify-center rounded-full bg-amber-400 text-4xl shadow-xl ring-4 ring-white transition-all hover:scale-110 active:scale-90 cursor-pointer"
+      
+      {/* Lesson 1 or 2: ABC Grid exercise */}
+      {(prevId === "1" || prevId === "2") && (
+        <div className="space-y-6">
+          {alphabetRows.map((row) => (
+            <div
+              key={row.id}
+              className="space-y-2 p-3 bg-amber-50/40 rounded-2xl border border-amber-900/5 shadow-inner"
             >
-              🔊
-            </button>
-          </div>
-          <div className="mt-6 grid grid-cols-2 gap-3 max-w-md mx-auto">
-            {prevEx.options.map((opt) => {
-              const chosen = revPicked === opt;
-              const correct = opt === prevEx.answer;
-              const showState = revPicked !== null && (chosen || correct);
-              const cls = showState
-                ? correct
-                  ? "bg-emerald-300 border-emerald-500 text-emerald-950 scale-105"
-                  : chosen
-                    ? "bg-rose-300 border-rose-500 text-rose-950"
-                    : "bg-amber-100 border-white text-foreground"
-                : "bg-amber-200 border-white text-foreground hover:bg-amber-100";
-              return (
-                <button
-                  key={opt}
-                  onClick={() => chooseRev(opt)}
-                  disabled={revPicked !== null && isRevCorrect}
-                  className={`${cls} aspect-square rounded-3xl text-3xl sm:text-4xl font-black border-4 shadow-md transition-all duration-200 active:scale-95 cursor-pointer flex items-center justify-center`}
-                >
-                  {opt}
-                </button>
-              );
-            })}
-          </div>
-          {revPicked !== null && !isRevCorrect && (
-            <div className="mt-4">
-              <button
-                onClick={() => setRevPicked(null)}
-                className="rounded-full bg-amber-500 px-5 py-2 text-sm font-black text-white shadow active:scale-95 cursor-pointer"
+              {/* Row Letters Header */}
+              <div
+                className="grid gap-1.5 sm:gap-2"
+                style={{
+                  gridTemplateColumns: "repeat(" + row.letters.length + ", minmax(0, 1fr))",
+                }}
               >
-                Nochmal versuchen
-              </button>
+                {row.letters.map((letter) => {
+                  const correct = checkRevAbcAnswer(prevId, letter, revAnswers[letter] || "");
+                  return (
+                    <div
+                      key={"ref-" + letter}
+                      onClick={() => speakDE(letter)}
+                      className={"flex items-center justify-center aspect-square rounded-xl text-lg sm:text-2xl font-black border-2 shadow-sm select-none cursor-pointer transition active:scale-95 " + (
+                        correct
+                          ? "bg-emerald-500 border-emerald-600 text-white animate-pulse"
+                          : "bg-white border-amber-900/15 text-foreground"
+                      )}
+                    >
+                      {getLetterDisplayRev(prevId, letter)}
+                    </div>
+                  );
+                })}
+              </div>
+
+              {/* Matching Input Row */}
+              <div
+                className="grid gap-1.5 sm:gap-2"
+                style={{
+                  gridTemplateColumns: "repeat(" + row.letters.length + ", minmax(0, 1fr))",
+                }}
+              >
+                {row.letters.map((letter) => {
+                  const val = revAnswers[letter] || "";
+                  const correct = checkRevAbcAnswer(prevId, letter, val);
+                  const hasVal = val.length > 0;
+                  return (
+                    <input
+                      key={"input-" + letter}
+                      type="text"
+                      maxLength={8}
+                      value={val}
+                      disabled={correct}
+                      onChange={(e) => handleRevAbcInput(prevId, letter, e.target.value)}
+                      placeholder="?"
+                      className={"w-full aspect-square text-center text-sm sm:text-base font-black rounded-xl border-2 transition-all outline-none " + (
+                        correct
+                          ? "bg-emerald-100 border-emerald-500 text-emerald-800 shadow-inner"
+                          : hasVal
+                            ? "bg-rose-100 border-rose-400 text-rose-800 animate-shake"
+                            : "bg-white border-dashed border-sky-300 focus:border-sky-50/50"
+                      )}
+                    />
+                  );
+                })}
+              </div>
             </div>
-          )}
+          ))}
+
+          {/* Sonderbuchstaben reference & inputs */}
+          <div className="space-y-2 p-3 bg-white rounded-2xl border border-amber-900/10 shadow-inner">
+            <div className="text-[10px] font-black text-foreground/40 uppercase tracking-wider px-1">
+              Sonderbuchstaben
+            </div>
+            {/* Sonder Reference Row */}
+            <div className="grid grid-cols-5 gap-2 max-w-sm">
+              {sonderRow.map((letter) => {
+                const correct = checkRevAbcAnswer(prevId, letter, revAnswers[letter] || "");
+                return (
+                  <div
+                    key={"ref-" + letter}
+                    onClick={() => speakDE(letter)}
+                    className={"flex items-center justify-center aspect-square rounded-xl text-lg sm:text-2xl font-black border-2 shadow-sm select-none cursor-pointer transition active:scale-95 " + (
+                      correct
+                        ? "bg-emerald-500 border-emerald-600 text-white animate-pulse"
+                        : "bg-white border-amber-900/15 text-foreground"
+                    )}
+                  >
+                    {getLetterDisplayRev(prevId, letter)}
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Sonder Input Row */}
+            <div className="grid grid-cols-5 gap-2 max-w-sm">
+              {sonderRow.map((letter) => {
+                const val = revAnswers[letter] || "";
+                const correct = checkRevAbcAnswer(prevId, letter, val);
+                const hasVal = val.length > 0;
+                return (
+                  <input
+                    key={"input-" + letter}
+                    type="text"
+                    maxLength={8}
+                    value={val}
+                    disabled={correct}
+                    onChange={(e) => handleRevAbcInput(prevId, letter, e.target.value)}
+                    placeholder="?"
+                    className={"w-full aspect-square text-center text-sm sm:text-base font-black rounded-xl border-2 transition-all outline-none " + (
+                      correct
+                        ? "bg-emerald-100 border-emerald-500 text-emerald-800 shadow-inner"
+                        : hasVal
+                          ? "bg-rose-100 border-rose-400 text-rose-800 animate-shake"
+                          : "bg-white border-dashed border-sky-300 focus:border-sky-50/50"
+                    )}
+                  />
+                );
+              })}
+            </div>
+          </div>
         </div>
       )}
 
