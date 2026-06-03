@@ -2833,7 +2833,7 @@ function RevisionExercise({
         <div className="flex items-center gap-3">
           <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-amber-200 text-xl">🔄</span>
           <div>
-            <h2 className="text-xl font-black text-foreground">Übung (Vorherige Lektion)</h2>
+            <h2 className="text-xl font-black text-foreground">Übung (Lektion {prevLesson.id})</h2>
             <p className="text-xs font-bold text-foreground/60">{prevLesson.title}</p>
           </div>
         </div>
