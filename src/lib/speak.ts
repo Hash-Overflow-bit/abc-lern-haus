@@ -23,39 +23,51 @@
  */
 const GERMAN_LETTER_SOUNDS: Record<string, string> = {
   // Standard alphabet — German letter names as pronounceable words
-  A: "ah",
-  B: "beh",
-  C: "zeh",        // German pronunciation of C = "tsee" → "zeh" is a real German word
-  D: "deh",
-  E: "eh",
-  F: "eff",
-  G: "geh",
-  H: "hah",
-  I: "ih",
-  J: "jott",
-  K: "kah",
-  L: "ell",
-  M: "emm",
-  N: "enn",
-  O: "oh",
-  P: "peh",
-  Q: "kuh",
-  R: "err",
-  S: "ess",
-  T: "teh",
-  U: "uh",
-  V: "fau",
-  W: "weh",
-  X: "iks",
-  Y: "üpsilon",
-  Z: "zett",
+  A: "Ah",
+  B: "Beh",
+  C: "Zeh",        // German pronunciation of C = "tsee" → "zeh" is a real German word
+  D: "Deh",
+  E: "Eh",
+  F: "Eff",
+  G: "Geh",
+  H: "Hah",
+  I: "Ehh",
+  J: "Jott",
+  K: "Kah",
+  L: "Ell",
+  M: "M",
+  N: "Enn",
+  O: "Oh",
+  P: "Peh",
+  Q: "Kuh",
+  R: "Err",
+  S: "Ess",
+  T: "Teh",
+  U: "U",
+  V: "Fau",
+  W: "Weh",
+  X: "Iks",
+  Y: "Ypsilon",
+  Z: "Zett",
 
   // Umlaute & Sonderbuchstaben
-  "Ä": "äh",
-  "Ö": "öh",
-  "Ü": "üh",
-  "ß": "eszett",
-  "ss": "doppel ess",
+  "Ä": "Äh",
+  "Ö": "Öh",
+  "Ü": "Üh",
+  "ß": "Eszett",
+  "ss": "Doppel-S",
+
+  // Numbers
+  "0": "Null",
+  "1": "Eins",
+  "2": "Zwei",
+  "3": "Drei",
+  "4": "Vier",
+  "5": "Fünf",
+  "6": "Sechs",
+  "7": "Sieben",
+  "8": "Acht",
+  "9": "Neun",
 };
 
 // ============================================================================
@@ -183,8 +195,12 @@ export function cleanSpokenText(text: string): string {
     }
   }
 
-  // 3. Single letter → map to German phonetic name
-  if (/^\p{L}$/u.test(t)) {
+  // 3. Single letter or number → map to German phonetic name
+  if (/^[\p{L}\d]$/u.test(t)) {
+    // Check exact match first to handle special cases like "ß" and numbers
+    if (GERMAN_LETTER_SOUNDS[t]) {
+      return GERMAN_LETTER_SOUNDS[t];
+    }
     const key = t.toUpperCase();
     if (GERMAN_LETTER_SOUNDS[key]) {
       return GERMAN_LETTER_SOUNDS[key];
