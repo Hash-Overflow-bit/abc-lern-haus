@@ -1494,10 +1494,9 @@ function LessonPage() {
                                 onKeyDown={(e) => {
                                   if (e.key === "Enter" || e.key === " ") speakDE(it.word);
                                 }}
-                                className="bg-white rounded-xl px-3 py-2 text-sm font-bold text-foreground shadow-sm border border-foreground/10 flex items-center justify-between cursor-pointer"
+                                className="bg-white rounded-xl px-3 py-2 text-sm font-bold text-foreground shadow-sm border border-foreground/10 flex items-center justify-center cursor-pointer"
                               >
                                 <span className="font-black text-base">{it.label}</span>
-                                <span className="opacity-80 font-bold">{it.word} 🔊</span>
                               </div>
                             ))}
                           </div>
