@@ -60,7 +60,7 @@ const GERMAN_LETTER_SOUNDS: Record<string, string> = {
   "Ö": "ö",
   "Ü": "ü",
   "ß": "Eszett",
-  "ss": "Ess-Ess",
+  "ss": "ess, ess",
 
   // Numbers
   "0": "Null",
@@ -183,8 +183,14 @@ if (typeof window !== "undefined" && "speechSynthesis" in window) {
 export function cleanSpokenText(text: string): string {
   if (!text) return "";
   let t = text.trim();
+  const lowerT = t.toLowerCase();
 
-  // 1. Strip number prefixes like "0 null" → "null" ONLY if the rest is the spelling of the number
+  // 1. Known multi-char special cases (ss, ß) checked FIRST to prevent collapsing
+  if (lowerT === "ss" && GERMAN_LETTER_SOUNDS["ss"]) {
+    return GERMAN_LETTER_SOUNDS["ss"];
+  }
+
+  // 2. Strip number prefixes like "0 null" → "null" ONLY if the rest is the spelling of the number
   const numWordMatch = t.match(/^(\d+)\s+(.+)$/);
   if (numWordMatch) {
     const word = numWordMatch[2].toLowerCase();
@@ -197,7 +203,7 @@ export function cleanSpokenText(text: string): string {
     }
   }
 
-  // 2. Detect and collapse double-letter patterns: "A a", "Aa", "A, a", "Ä ä"
+  // 3. Detect and collapse double-letter patterns: "A a", "Aa", "A, a", "Ä ä"
   const doubleLetterMatch = t.match(/^(\p{L})\s*[,|\s]?\s*(\p{L})$/u);
   if (doubleLetterMatch) {
     const first = doubleLetterMatch[1];
@@ -207,7 +213,7 @@ export function cleanSpokenText(text: string): string {
     }
   }
 
-  // 3. Single letter or number → map to German phonetic name
+  // 4. Single letter or number → map to German phonetic name
   if (/^[\p{L}\d]$/u.test(t)) {
     // Check exact match first to handle special cases like "ß" and numbers
     if (GERMAN_LETTER_SOUNDS[t]) {
@@ -217,12 +223,6 @@ export function cleanSpokenText(text: string): string {
     if (GERMAN_LETTER_SOUNDS[key]) {
       return GERMAN_LETTER_SOUNDS[key];
     }
-  }
-
-  // 4. Known multi-char special cases (ss, ß)
-  const lowerT = t.toLowerCase();
-  if (lowerT === "ss" && GERMAN_LETTER_SOUNDS["ss"]) {
-    return GERMAN_LETTER_SOUNDS["ss"];
   }
 
   return t;
