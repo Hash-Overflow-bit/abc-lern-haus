@@ -56,10 +56,10 @@ const GERMAN_LETTER_SOUNDS: Record<string, string> = {
   //   Ö → similar to "i" in "bird"
   //   Ü → similar to French "u"
   //   ß → pronounced like "ss"
-  "Ä": "Ä",
-  "Ö": "Ö",
-  "Ü": "Ü",
-  "ß": "ß",
+  "Ä": "eh",
+  "Ö": "ö",
+  "Ü": "ü",
+  "ß": "SS",
   "ss": "Doppel-S",
 
   // Numbers
@@ -184,10 +184,17 @@ export function cleanSpokenText(text: string): string {
   if (!text) return "";
   let t = text.trim();
 
-  // 1. Strip number prefixes like "0 null" → "null"
-  const numWordMatch = t.match(/^\d+\s+(.+)$/);
+  // 1. Strip number prefixes like "0 null" → "null" ONLY if the rest is the spelling of the number
+  const numWordMatch = t.match(/^(\d+)\s+(.+)$/);
   if (numWordMatch) {
-    t = numWordMatch[1];
+    const word = numWordMatch[2].toLowerCase();
+    const numberWords = [
+      "null", "eins", "zwei", "drei", "vier", "fünf", "sechs", "sieben", "acht", "neun", "zehn",
+      "elf", "zwölf", "dreizehn", "vierzehn", "fünfzehn", "sechzehn", "siebzehn", "achtzehn", "neunzehn", "zwanzig"
+    ];
+    if (numberWords.includes(word)) {
+      t = numWordMatch[2];
+    }
   }
 
   // 2. Detect and collapse double-letter patterns: "A a", "Aa", "A, a", "Ä ä"
