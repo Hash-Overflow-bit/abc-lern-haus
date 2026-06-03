@@ -35,7 +35,7 @@ const GERMAN_LETTER_SOUNDS: Record<string, string> = {
   J: "Jott",
   K: "Kah",
   L: "Ell",
-  M: "em ",
+  M: "ɛm",
   N: "Enn",
   O: "Oh",
   P: "Peh",
