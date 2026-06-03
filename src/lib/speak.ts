@@ -50,11 +50,16 @@ const GERMAN_LETTER_SOUNDS: Record<string, string> = {
   Y: "Ypsilon",
   Z: "Zett",
 
-  // Umlaute & Sonderbuchstaben
-  "Ä": "Äh",
-  "Ö": "Öh",
-  "Ü": "Üh",
-  "ß": "Eszett",
+  // Umlaute & Sonderbuchstaben — pass the actual character so de-DE TTS
+  // produces the correct native sound:
+  //   Ä → "eh" sound
+  //   Ö → similar to "i" in "bird"
+  //   Ü → similar to French "u"
+  //   ß → pronounced like "ss"
+  "Ä": "Ä",
+  "Ö": "Ö",
+  "Ü": "Ü",
+  "ß": "ß",
   "ss": "Doppel-S",
 
   // Numbers
