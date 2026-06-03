@@ -700,13 +700,6 @@ function LessonPage() {
             {/* LERNEN MODE */}
             {mode === "learn" && (
               <section className="rounded-3xl bg-white/80 p-5 sm:p-8 shadow-lg ring-4 ring-white animate-fade-in space-y-6">
-                <div className="flex items-center gap-3">
-                  <div>
-                    <h2 className="text-2xl font-black text-foreground">Abc mit WIE</h2>
-                    
-                  </div>
-                </div>
-
                 {/* Main ABC mit WIE chart image */}
                 <div className="rounded-2xl overflow-hidden border-2 border-foreground/15 shadow-md">
                   <img
@@ -732,9 +725,6 @@ function LessonPage() {
 
                 {/* Word cards */}
                 <div className="space-y-2">
-                  <h3 className="text-sm font-bold text-foreground/60 uppercase tracking-wider">
-                    Wörter:
-                  </h3>
                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                     {abcMitWieRows.map((row) => (
                       <div
@@ -783,12 +773,6 @@ function LessonPage() {
             {mode === "exercise" && (!previousLesson || exercisePhase === "current") && (
               <section className="rounded-3xl bg-white/80 p-5 sm:p-8 shadow-lg ring-4 ring-white animate-fade-in space-y-6">
                 <div className="flex items-center gap-3 justify-between">
-                  <div className="flex items-center gap-3">
-                    <div>
-                      <h2 className="text-2xl font-black text-foreground">Schreibübung</h2>
-                      
-                    </div>
-                  </div>
                   <button
                     onClick={() => setMode("learn")}
                     className="text-xs font-black text-primary hover:underline"
@@ -841,7 +825,7 @@ function LessonPage() {
                             <td className="px-4 py-2">
                               {correct ? (
                                 <span className="inline-flex items-center gap-2 text-base font-black text-emerald-700">
-                                  {row.word} ✅
+                                  {row.word} 
                                 </span>
                               ) : (
                                 <input
@@ -868,7 +852,6 @@ function LessonPage() {
                 {/* Completion celebration */}
                 {isWieComplete && (
                   <div className="mt-8 text-center animate-bounce bg-emerald-50 border border-emerald-100 rounded-3xl p-5 shadow-inner">
-                    <div className="text-6xl">🎉😊🎉</div>
                     <p className="mt-3 text-xl font-black text-emerald-700">
                       Großartig! Du hast alle Wörter geschrieben!
                     </p>
@@ -888,13 +871,6 @@ function LessonPage() {
             {mode === "learn" && (
               <section className="rounded-3xl bg-white/80 p-5 sm:p-8 shadow-lg ring-4 ring-white animate-fade-in space-y-6">
                 {/* Header */}
-                <div className="flex items-center gap-3">
-                  <div>
-                    <h2 className="text-2xl font-black text-foreground">Vokale</h2>
-                    
-                  </div>
-                </div>
-
                 {/* Vowel bubbles strip */}
                 <div className="flex gap-3 justify-center flex-wrap">
                   {vokalGroups.map((g) => (
@@ -972,12 +948,6 @@ function LessonPage() {
             {mode === "exercise" && (!previousLesson || exercisePhase === "current") && (
               <section className="rounded-3xl bg-white/80 p-5 sm:p-8 shadow-lg ring-4 ring-white animate-fade-in space-y-6">
                 <div className="flex items-center gap-3 justify-between">
-                  <div className="flex items-center gap-3">
-                    <div>
-                      <h2 className="text-2xl font-black text-foreground">Schreibübung</h2>
-                      
-                    </div>
-                  </div>
                   <button
                     onClick={() => setMode("learn")}
                     className="text-xs font-black text-primary hover:underline"
@@ -1082,13 +1052,6 @@ function LessonPage() {
             {/* LERNEN MODE */}
             {mode === "learn" && (
               <section className="rounded-3xl bg-white/80 p-5 sm:p-8 shadow-lg ring-4 ring-white animate-fade-in space-y-6">
-                <div className="flex items-center gap-3">
-                  <div>
-                    <h2 className="text-2xl font-black text-foreground">Ähnliche Lautpaare</h2>
-                    
-                  </div>
-                </div>
-
                 <div className="flex gap-2 flex-wrap justify-center">
                   {lautpaarGroups.map((g) => (
                     <div
@@ -1195,12 +1158,6 @@ function LessonPage() {
             {mode === "exercise" && (!previousLesson || exercisePhase === "current") && (
               <section className="rounded-3xl bg-white/80 p-5 sm:p-8 shadow-lg ring-4 ring-white animate-fade-in space-y-6">
                 <div className="flex items-center gap-3 justify-between">
-                  <div className="flex items-center gap-3">
-                    <div>
-                      <h2 className="text-2xl font-black text-foreground">Schreibübung</h2>
-                      
-                    </div>
-                  </div>
                   <button
                     onClick={() => setMode("learn")}
                     className="text-xs font-black text-primary hover:underline"
@@ -1276,7 +1233,7 @@ function LessonPage() {
                               <div className="px-4 py-2 flex items-center">
                                 {correct ? (
                                   <span className="text-sm font-black text-emerald-700 flex items-center gap-1">
-                                    {w} ✅
+                                    {w} 
                                   </span>
                                 ) : (
                                   <input
@@ -1324,13 +1281,6 @@ function LessonPage() {
             {/* LERNEN MODE */}
             {mode === "learn" && (
               <section className="rounded-3xl bg-white/80 p-5 sm:p-8 shadow-lg ring-4 ring-white animate-fade-in space-y-6">
-                <div className="flex items-center gap-3">
-                  <div>
-                    <h2 className="text-2xl font-black text-foreground">Zahlen 0–10</h2>
-                    
-                  </div>
-                </div>
-
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                   {numberGroups.map((num, idx) => (
                     <div
@@ -1375,12 +1325,6 @@ function LessonPage() {
             {mode === "exercise" && (!previousLesson || exercisePhase === "current") && (
               <section className="rounded-3xl bg-white/80 p-5 sm:p-8 shadow-lg ring-4 ring-white animate-fade-in space-y-6">
                 <div className="flex items-center gap-3 justify-between">
-                  <div className="flex items-center gap-3">
-                    <div>
-                      <h2 className="text-2xl font-black text-foreground">Schreibübung</h2>
-                      
-                    </div>
-                  </div>
                   <button
                     onClick={() => setMode("learn")}
                     className="text-xs font-black text-primary hover:underline"
@@ -1421,7 +1365,7 @@ function LessonPage() {
                         <div className="px-4 py-2 flex items-center">
                           {correct ? (
                             <span className="text-sm font-black text-emerald-700 flex items-center gap-1">
-                              {num.word} ✅
+                              {num.word} 
                             </span>
                           ) : (
                             <input
@@ -1464,15 +1408,6 @@ function LessonPage() {
             {/* LERNEN MODE */}
             {mode === "learn" && (
               <section className="rounded-3xl bg-white/80 p-5 sm:p-8 shadow-lg ring-4 ring-white animate-fade-in space-y-6">
-                <div className="flex items-center gap-3">
-                  <div>
-                    <h2 className="text-2xl font-black text-foreground">
-                      Zahlen 11–20 & Anwendungen
-                    </h2>
-                    
-                  </div>
-                </div>
-
                 <div className="space-y-6">
                   {Array.from(new Set(numberAnwGroups.map((g) => g.category))).map((cat) => {
                     const info = catInfo[cat] || {
@@ -1528,7 +1463,7 @@ function LessonPage() {
                                     role="button"
                                     className="font-black text-base cursor-pointer hover:underline"
                                   >
-                                    {it.word} 🔊
+                                    {it.word} 
                                   </button>
                                 </div>
                               </div>
@@ -1567,12 +1502,6 @@ function LessonPage() {
             {mode === "exercise" && (!previousLesson || exercisePhase === "current") && (
               <section className="rounded-3xl bg-white/80 p-5 sm:p-8 shadow-lg ring-4 ring-white animate-fade-in space-y-6">
                 <div className="flex items-center gap-3 justify-between">
-                  <div className="flex items-center gap-3">
-                    <div>
-                      <h2 className="text-2xl font-black text-foreground">Schreibübung</h2>
-                      
-                    </div>
-                  </div>
                   <button
                     onClick={() => setMode("learn")}
                     className="text-xs font-black text-primary hover:underline"
@@ -1637,7 +1566,7 @@ function LessonPage() {
                               <div className="px-4 py-2 flex items-center">
                                 {correct ? (
                                   <span className="text-sm font-black text-emerald-700 flex items-center gap-1">
-                                    {it.word} ✅
+                                    {it.word} 
                                   </span>
                                 ) : (
                                   <input
@@ -1667,7 +1596,6 @@ function LessonPage() {
                 {/* Completion */}
                 {isNumbersAnwComplete && (
                   <div className="mt-8 text-center animate-bounce bg-emerald-50 border border-emerald-100 rounded-3xl p-5 shadow-inner">
-                    <div className="text-6xl">🎉😊🎉</div>
                     <p className="mt-3 text-xl font-black text-emerald-700">
                       Großartig! Du hast alle Zahlen und Anwendungen richtig geschrieben!
                     </p>
@@ -1688,7 +1616,6 @@ function LessonPage() {
               <section className="rounded-3xl bg-white p-5 sm:p-8 border-2 border-black animate-fade-in space-y-6">
                 <div className="flex items-center gap-3">
                   <div>
-                    <h2 className="text-2xl font-black text-black">Zeit</h2>
                     <p className="text-xs font-bold text-black/60">Uhrzeit und Begriffe</p>
                   </div>
                 </div>
@@ -1721,7 +1648,7 @@ function LessonPage() {
                                     {it.label}:
                                   </span>
                                 )}
-                                <span className="font-black text-base">{it.word} 🔊</span>
+                                <span className="font-black text-base">{it.word} </span>
                               </div>
                             </div>
                           ))}
@@ -1744,9 +1671,6 @@ function LessonPage() {
             {mode === "exercise" && (!previousLesson || exercisePhase === "current") && (
               <section className="rounded-3xl bg-white p-5 sm:p-8 border-2 border-black animate-fade-in space-y-6">
                 <div className="flex items-center gap-3 justify-between">
-                  <div>
-                    <h2 className="text-2xl font-black text-black">Schreibübung</h2>
-                  </div>
                   <button
                     onClick={() => setMode("learn")}
                     className="text-xs font-black text-black border-b-2 border-black"
@@ -1792,7 +1716,7 @@ function LessonPage() {
                         </div>
                         <div className="px-4 py-2 flex items-center">
                           {correct ? (
-                            <span className="text-sm font-black text-black">{it.word} ✓</span>
+                            <span className="text-sm font-black text-black">{it.word}</span>
                           ) : (
                             <input
                               type="text"
@@ -1825,13 +1749,6 @@ function LessonPage() {
             {/* LERNEN MODE */}
             {mode === "learn" && (
               <section className="rounded-3xl bg-white/80 p-5 sm:p-8 shadow-lg ring-4 ring-white animate-fade-in space-y-6">
-                <div className="flex items-center gap-3">
-                  <div>
-                    <h2 className="text-2xl font-black text-foreground">Wiederholung</h2>
-                    
-                  </div>
-                </div>
-
                 <div className="rounded-2xl bg-foreground/5 p-4 border border-foreground/10 text-foreground">
                   <p className="text-sm font-bold">
                     Wiederhole alle bisherigen Themen und Beispiele.
@@ -1844,7 +1761,6 @@ function LessonPage() {
                       key={g.category}
                       className="bg-white border border-foreground/15 rounded-2xl p-4 sm:p-5 shadow-md space-y-3"
                     >
-                      <h3 className="text-lg font-black">{g.category}</h3>
                       <div className="space-y-2">
                         {g.items.map((it, itemIdx) => (
                           <div
@@ -1857,7 +1773,7 @@ function LessonPage() {
                             }}
                             className="w-full bg-white rounded-xl px-4 py-2.5 text-sm font-black text-foreground shadow-sm border border-foreground/15 flex items-center justify-between cursor-pointer"
                           >
-                            <span className="text-base font-black">{it.full} 🔊</span>
+                            <span className="text-base font-black">{it.full} </span>
                           </div>
                         ))}
                       </div>
@@ -1892,12 +1808,6 @@ function LessonPage() {
             {mode === "exercise" && (!previousLesson || exercisePhase === "current") && (
               <section className="rounded-3xl bg-white/80 p-5 sm:p-8 shadow-lg ring-4 ring-white animate-fade-in space-y-6">
                 <div className="flex items-center gap-3 justify-between">
-                  <div className="flex items-center gap-3">
-                    <div>
-                      <h2 className="text-2xl font-black text-foreground">Schreibübung</h2>
-                      
-                    </div>
-                  </div>
                   <button
                     onClick={() => setMode("learn")}
                     className="text-xs font-black text-primary hover:underline"
@@ -1961,7 +1871,7 @@ function LessonPage() {
                               >
                                 {it.prompt}
                               </button>
-                              <span className="text-xs text-foreground/30">🔊</span>
+                              <span className="text-xs text-foreground/30"></span>
                             </div>
                             {/* Col 2: input / display */}
                             <div className="px-4 py-2 flex items-center">
@@ -1971,7 +1881,7 @@ function LessonPage() {
                                 </span>
                               ) : correct ? (
                                 <span className="text-sm font-black text-emerald-700 flex items-center gap-1">
-                                  {it.answer} ✅
+                                  {it.answer} 
                                 </span>
                               ) : (
                                 <input
@@ -2000,7 +1910,6 @@ function LessonPage() {
                 {/* Completion */}
                 {isReviewComplete && (
                   <div className="mt-8 text-center animate-bounce bg-emerald-50 border border-emerald-100 rounded-3xl p-5 shadow-inner">
-                    <div className="text-6xl">🎉😊🎉</div>
                     <p className="mt-3 text-xl font-black text-emerald-700">
                       Großartig! Du hast die ganze Wiederholung geschafft!
                     </p>
@@ -2019,13 +1928,6 @@ function LessonPage() {
             {/* LERNEN MODE */}
             {mode === "learn" && (
               <section className="rounded-3xl bg-white/80 p-5 sm:p-8 shadow-lg ring-4 ring-white animate-fade-in space-y-6">
-                <div className="flex items-center gap-3">
-                  <div>
-                    <h2 className="text-2xl font-black text-foreground">Lautkombinationen</h2>
-                    
-                  </div>
-                </div>
-
                 {/* Combo pill strip */}
                 <div className="flex gap-2 flex-wrap justify-center">
                   {lautkomGroups.map((g) => (
@@ -2100,12 +2002,6 @@ function LessonPage() {
             {mode === "exercise" && (!previousLesson || exercisePhase === "current") && (
               <section className="rounded-3xl bg-white/80 p-5 sm:p-8 shadow-lg ring-4 ring-white animate-fade-in space-y-6">
                 <div className="flex items-center gap-3 justify-between">
-                  <div className="flex items-center gap-3">
-                    <div>
-                      <h2 className="text-2xl font-black text-foreground">Schreibübung</h2>
-                      
-                    </div>
-                  </div>
                   <button
                     onClick={() => setMode("learn")}
                     className="text-xs font-black text-primary hover:underline"
@@ -2166,7 +2062,7 @@ function LessonPage() {
                               <div className="px-4 py-2 flex items-center">
                                 {correct ? (
                                   <span className="text-sm font-black text-emerald-700 flex items-center gap-1">
-                                    {w} ✅
+                                    {w} 
                                   </span>
                                 ) : (
                                   <input
@@ -2194,7 +2090,6 @@ function LessonPage() {
                 {/* Completion */}
                 {isLautComplete && (
                   <div className="mt-8 text-center animate-bounce bg-emerald-50 border border-emerald-100 rounded-3xl p-5 shadow-inner">
-                    <div className="text-6xl">🎉😊🎉</div>
                     <p className="mt-3 text-xl font-black text-emerald-700">
                       Großartig! Du hast alle Lautkombinationen geschrieben!
                     </p>
@@ -2209,15 +2104,6 @@ function LessonPage() {
             {/* LERNEN MODE (LESSON 1) */}
             {mode === "learn" && (
               <section className="rounded-3xl bg-white/80 p-5 sm:p-8 shadow-lg ring-4 ring-white animate-fade-in space-y-6">
-                <div className="flex items-center gap-3">
-                  <div>
-                    <h2 className="text-2xl font-black text-foreground">
-                      {lessonId === "2" ? "Groß- und Kleinbuchstaben" : "Das Alphabet (ABC)"}
-                    </h2>
-                    
-                  </div>
-                </div>
-
                 {/* Rows of letters */}
                 <div className="space-y-4">
                   {alphabetRows.map((row, idx) => (
@@ -2291,14 +2177,6 @@ function LessonPage() {
             {mode === "exercise" && (!previousLesson || exercisePhase === "current") && (
               <section className="rounded-3xl bg-white/80 p-5 sm:p-8 shadow-lg ring-4 ring-white animate-fade-in space-y-6">
                 <div className="flex items-center gap-3 justify-between">
-                  <div className="flex items-center gap-3">
-                    <div>
-                      <h2 className="text-2xl font-black text-foreground">
-                        {lessonId === "2" ? "Schreibübung (A a)" : "Schreibübung (ABC)"}
-                      </h2>
-                      
-                    </div>
-                  </div>
                   <button
                     onClick={() => setMode("learn")}
                     className="text-xs font-black text-primary hover:underline"
@@ -2430,7 +2308,6 @@ function LessonPage() {
                 {/* Celebration and next button */}
                 {isABCComplete && (
                   <div className="mt-8 text-center animate-bounce bg-emerald-50 border border-emerald-100 rounded-3xl p-5 shadow-inner">
-                    <div className="text-6xl">🎉😊🎉</div>
                     <p className="mt-3 text-xl font-black text-emerald-700">
                       {lessonId === "2"
                         ? "Großartig! Du hast alle Groß- und Kleinbuchstaben geschrieben!"
@@ -2450,24 +2327,11 @@ function LessonPage() {
             {/* 1. LERNEN MODE */}
             {mode === "learn" && (
               <section className="rounded-3xl bg-white/80 p-6 sm:p-8 shadow-lg ring-4 ring-white animate-fade-in">
-                <div className="flex items-center gap-3">
-                  <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-amber-100 text-2xl">
-                    🏫
-                  </span>
-                  <div>
-                    <h2 className="text-2xl font-black text-foreground">Lernzeit mit dem Lehrer</h2>
-                    
-                  </div>
-                </div>
-
                 <div className="mt-6 rounded-2xl bg-amber-50/50 p-4 border border-amber-100">
                   
                 </div>
 
                 <div className="mt-6">
-                  <h3 className="text-sm font-bold text-foreground/60 uppercase tracking-wider mb-3">
-                    Tippe auf die Karten zum Hören:
-                  </h3>
                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                     {lesson.items.map((it) => (
                       <button
@@ -2481,7 +2345,7 @@ function LessonPage() {
                             {it.split(" ")[1]}
                           </span>
                         )}
-                        <span className="text-xs opacity-75">🔊</span>
+                        <span className="text-xs opacity-75"></span>
                       </button>
                     ))}
                   </div>
@@ -2515,15 +2379,6 @@ function LessonPage() {
             {mode === "exercise" && (!previousLesson || exercisePhase === "current") && (
               <section className="rounded-3xl bg-white/80 p-6 sm:p-8 shadow-lg ring-4 ring-white animate-fade-in">
                 <div className="flex items-center gap-3 justify-between">
-                  <div className="flex items-center gap-3">
-                    <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-sky-100 text-2xl">
-                      ✏️
-                    </span>
-                    <div>
-                      <h2 className="text-2xl font-black text-foreground">Übung machen</h2>
-                      
-                    </div>
-                  </div>
                   <button
                     onClick={() => {
                       setMode("learn");
@@ -2544,7 +2399,7 @@ function LessonPage() {
                       className="flex h-24 w-24 sm:h-28 sm:w-28 items-center justify-center rounded-full bg-primary text-5xl text-primary-foreground shadow-xl hover:shadow-2xl ring-8 ring-white transition-all hover:scale-110 active:scale-90 animate-pulse cursor-pointer"
                       aria-label="Nochmal hören"
                     >
-                      🔊
+                      
                     </button>
                     <span className="text-xs font-bold text-foreground/50 animate-bounce">
                       Tippe auf den Lautsprecher!
@@ -2581,7 +2436,6 @@ function LessonPage() {
                   <div className="mt-8 text-center animate-bounce">
                     {isCorrect ? (
                       <div className="bg-emerald-50 border border-emerald-100 rounded-3xl p-5 shadow-inner">
-                        <div className="text-6xl">🎉😊🎉</div>
                         <p className="mt-3 text-xl font-black text-emerald-700">
                           Super gemacht! Perfekt!
                         </p>
@@ -2589,7 +2443,7 @@ function LessonPage() {
                       </div>
                     ) : (
                       <div className="bg-rose-50 border border-rose-100 rounded-3xl p-5 shadow-inner">
-                        <div className="text-6xl">😢</div>
+                        <div className="text-6xl">�</div>
                         <p className="mt-3 text-lg font-black text-rose-700">
                           Och, schade! Versuchs noch einmal!
                         </p>
@@ -2803,7 +2657,7 @@ function RevisionExercise({
               <div className="px-4 py-2 flex items-center">
                 {correct ? (
                   <span className="text-sm font-black text-emerald-700 flex items-center gap-1">
-                    {row.expected} ✅
+                    {row.expected} 
                   </span>
                 ) : (
                   <input
@@ -2831,9 +2685,7 @@ function RevisionExercise({
     <section className="rounded-3xl bg-amber-50/80 p-5 sm:p-8 shadow-lg ring-4 ring-amber-200 animate-fade-in space-y-6 mb-6">
       <div className="flex items-center gap-3 justify-between">
         <div className="flex items-center gap-3">
-          <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-amber-200 text-xl">🔄</span>
           <div>
-            <h2 className="text-xl font-black text-foreground">Übung (Lektion {prevLesson.id})</h2>
             <p className="text-xs font-bold text-foreground/60">{prevLesson.title}</p>
           </div>
         </div>
@@ -3000,7 +2852,7 @@ function RevisionExercise({
                     </td>
                     <td className="px-4 py-2">
                       {correct ? (
-                        <span className="inline-flex items-center gap-2 text-base font-black text-emerald-700">{row.word} ✅</span>
+                        <span className="inline-flex items-center gap-2 text-base font-black text-emerald-700">{row.word} </span>
                       ) : (
                         <input
                           type="text"
@@ -3130,7 +2982,7 @@ function RevisionExercise({
       {/* Completion message */}
       {completed && (
         <div className="mt-4 text-center animate-bounce bg-emerald-50 border border-emerald-100 rounded-3xl p-4 shadow-inner">
-          <div className="text-4xl">✅</div>
+          <div className="text-4xl"></div>
           <p className="mt-2 text-lg font-black text-emerald-700">Wiederholung geschafft!</p>
         </div>
       )}
@@ -3147,7 +2999,7 @@ function NextLessonButton({ currentId }: { currentId: string }) {
         to="/lessons"
         className="mt-4 inline-block rounded-full bg-emerald-600 hover:bg-emerald-700 px-6 py-3 text-base font-black text-white shadow-lg active:scale-95 transition-all hover:scale-105 cursor-pointer"
       >
-        🏁 Zurück zu den Lektionen
+        � Zurück zu den Lektionen
       </Link>
     );
   }
