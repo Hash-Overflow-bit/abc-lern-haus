@@ -683,6 +683,14 @@ function LessonPage() {
         {/* ======================================================== */}
         {/* LESSON 1 & 2 CUSTOM ALPHABET GRID LAYOUT                 */}
         {/* ======================================================== */}
+        {/* REVISION EXERCISE — shows previous lesson exercise first */}
+        {mode === "exercise" && previousLesson && exercisePhase === "revision" && (
+          <RevisionExercise
+            prevLesson={previousLesson}
+            onComplete={() => setExercisePhase("current")}
+          />
+        )}
+
         {lessonId === "3" ? (
           <>
             {/* ======================================================== */}
@@ -772,7 +780,7 @@ function LessonPage() {
             )}
 
             {/* ÜBUNG MODE – fill-in-the-blank table */}
-            {mode === "exercise" && (
+            {mode === "exercise" && (!previousLesson || exercisePhase === "current") && (
               <section className="rounded-3xl bg-white/80 p-5 sm:p-8 shadow-lg ring-4 ring-white animate-fade-in space-y-6">
                 <div className="flex items-center gap-3 justify-between">
                   <div className="flex items-center gap-3">
@@ -961,7 +969,7 @@ function LessonPage() {
             )}
 
             {/* ÜBUNG MODE – 2-column fill-in-the-blank */}
-            {mode === "exercise" && (
+            {mode === "exercise" && (!previousLesson || exercisePhase === "current") && (
               <section className="rounded-3xl bg-white/80 p-5 sm:p-8 shadow-lg ring-4 ring-white animate-fade-in space-y-6">
                 <div className="flex items-center gap-3 justify-between">
                   <div className="flex items-center gap-3">
@@ -1184,7 +1192,7 @@ function LessonPage() {
             )}
 
             {/* ÜBUNG MODE */}
-            {mode === "exercise" && (
+            {mode === "exercise" && (!previousLesson || exercisePhase === "current") && (
               <section className="rounded-3xl bg-white/80 p-5 sm:p-8 shadow-lg ring-4 ring-white animate-fade-in space-y-6">
                 <div className="flex items-center gap-3 justify-between">
                   <div className="flex items-center gap-3">
@@ -1364,7 +1372,7 @@ function LessonPage() {
             )}
 
             {/* ÜBUNG MODE */}
-            {mode === "exercise" && (
+            {mode === "exercise" && (!previousLesson || exercisePhase === "current") && (
               <section className="rounded-3xl bg-white/80 p-5 sm:p-8 shadow-lg ring-4 ring-white animate-fade-in space-y-6">
                 <div className="flex items-center gap-3 justify-between">
                   <div className="flex items-center gap-3">
@@ -1556,7 +1564,7 @@ function LessonPage() {
             )}
 
             {/* ÜBUNG MODE */}
-            {mode === "exercise" && (
+            {mode === "exercise" && (!previousLesson || exercisePhase === "current") && (
               <section className="rounded-3xl bg-white/80 p-5 sm:p-8 shadow-lg ring-4 ring-white animate-fade-in space-y-6">
                 <div className="flex items-center gap-3 justify-between">
                   <div className="flex items-center gap-3">
@@ -1733,7 +1741,7 @@ function LessonPage() {
             )}
 
             {/* ÜBUNG MODE */}
-            {mode === "exercise" && (
+            {mode === "exercise" && (!previousLesson || exercisePhase === "current") && (
               <section className="rounded-3xl bg-white p-5 sm:p-8 border-2 border-black animate-fade-in space-y-6">
                 <div className="flex items-center gap-3 justify-between">
                   <div>
@@ -1881,7 +1889,7 @@ function LessonPage() {
             )}
 
             {/* ÜBUNG MODE */}
-            {mode === "exercise" && (
+            {mode === "exercise" && (!previousLesson || exercisePhase === "current") && (
               <section className="rounded-3xl bg-white/80 p-5 sm:p-8 shadow-lg ring-4 ring-white animate-fade-in space-y-6">
                 <div className="flex items-center gap-3 justify-between">
                   <div className="flex items-center gap-3">
@@ -2089,7 +2097,7 @@ function LessonPage() {
             )}
 
             {/* ÜBUNG MODE – 2-column fill-in-the-blank */}
-            {mode === "exercise" && (
+            {mode === "exercise" && (!previousLesson || exercisePhase === "current") && (
               <section className="rounded-3xl bg-white/80 p-5 sm:p-8 shadow-lg ring-4 ring-white animate-fade-in space-y-6">
                 <div className="flex items-center gap-3 justify-between">
                   <div className="flex items-center gap-3">
@@ -2280,7 +2288,7 @@ function LessonPage() {
             )}
 
             {/* ÜBUNG MODE (LESSON 1) */}
-            {mode === "exercise" && (
+            {mode === "exercise" && (!previousLesson || exercisePhase === "current") && (
               <section className="rounded-3xl bg-white/80 p-5 sm:p-8 shadow-lg ring-4 ring-white animate-fade-in space-y-6">
                 <div className="flex items-center gap-3 justify-between">
                   <div className="flex items-center gap-3">
@@ -2504,7 +2512,7 @@ function LessonPage() {
             )}
 
             {/* 2. ÜBUNG MODE */}
-            {mode === "exercise" && (
+            {mode === "exercise" && (!previousLesson || exercisePhase === "current") && (
               <section className="rounded-3xl bg-white/80 p-6 sm:p-8 shadow-lg ring-4 ring-white animate-fade-in">
                 <div className="flex items-center gap-3 justify-between">
                   <div className="flex items-center gap-3">
@@ -2601,6 +2609,416 @@ function LessonPage() {
         )}
       </div>
     </>
+  );
+}
+
+
+// ============================================================================
+// REVISION EXERCISE — Shows previous lesson's exercise as practice
+// ============================================================================
+function RevisionExercise({
+  prevLesson,
+  onComplete,
+}: {
+  prevLesson: (typeof lessons)[0];
+  onComplete: () => void;
+}) {
+  const [revAnswers, setRevAnswers] = React.useState<Record<string, string>>({});
+  const [revPicked, setRevPicked] = React.useState<string | null>(null);
+
+  // Generic answer check
+  function checkRevAnswer(expected: string, val: string) {
+    if (!val || !expected) return false;
+    return val.trim().toLowerCase() === expected.toLowerCase();
+  }
+
+  function handleRevInput(key: string, expected: string, val: string) {
+    const wasCorrect = checkRevAnswer(expected, revAnswers[key] || "");
+    const isNow = checkRevAnswer(expected, val);
+    setRevAnswers((prev) => ({ ...prev, [key]: val }));
+    if (isNow && !wasCorrect) speakDE("Super!");
+  }
+
+  const prevEx = prevLesson.exercise;
+  const prevId = prevLesson.id;
+  const isRevCorrect = revPicked === prevEx.answer;
+
+  function chooseRev(opt: string) {
+    setRevPicked(opt);
+    if (opt === prevEx.answer) {
+      speakDE("Super!");
+      setTimeout(() => onComplete(), 1500);
+    } else {
+      speakDE("Nochmal!");
+    }
+  }
+
+  // Completion checks for each exercise type
+  const prevVokale = (prevLesson as any).vokale as { vowel: string; words: string[] }[] | undefined;
+  const prevLautkom = (prevLesson as any).lautkom as { combo: string; label: string; words: string[] }[] | undefined;
+  const prevLautpaare = (prevLesson as any).lautpaare as { pair: string; label: string; words1: string[]; words2: string[] }[] | undefined;
+  const prevNumbers = (prevLesson as any).numbers as { n: number; word: string }[] | undefined;
+  const prevNumbersAnw = (prevLesson as any).numbers_anw as { label: string; word: string; category: string }[] | undefined;
+  const prevZeit = (prevLesson as any).exercises as { label: string; word: string }[] | undefined;
+  const prevReview = (prevLesson as any).wiederholung as { category: string; items: { prompt: string; answer: string; full: string }[] }[] | undefined;
+
+  // Check completion for fill-blank types
+  function isComplete(): boolean {
+    if (prevId === "1" || prevId === "2") return isRevCorrect;
+    if (prevId === "3") {
+      return abcMitWieRows.every((r) => checkRevAnswer(r.word, revAnswers[`rev_wie_${r.letter}`] || ""));
+    }
+    if (prevId === "4" && prevVokale) {
+      return prevVokale.every((g) => g.words.every((w) => checkRevAnswer(w, revAnswers[`rev_v_${w}`] || "")));
+    }
+    if (prevId === "5" && prevLautkom) {
+      return prevLautkom.every((g) => g.words.every((w) => checkRevAnswer(w, revAnswers[`rev_l_${w}`] || "")));
+    }
+    if (prevId === "6" && prevLautpaare) {
+      return prevLautpaare.every((g) => {
+        const all = [...g.words1, ...g.words2];
+        return all.every((w, i) => checkRevAnswer(w, revAnswers[`rev_p_${g.pair}_${w}_${i}`] || ""));
+      });
+    }
+    if (prevId === "7" && prevNumbers) {
+      return prevNumbers.every((num) => checkRevAnswer(num.word, revAnswers[`rev_num_${num.word}`] || ""));
+    }
+    if (prevId === "8" && prevNumbersAnw) {
+      return prevNumbersAnw.every((it, idx) => checkRevAnswer(it.word, revAnswers[`rev_numanw_${it.word}_${idx}`] || ""));
+    }
+    if (prevId === "9" && prevZeit) {
+      return prevZeit.every((it, idx) => checkRevAnswer(it.word, revAnswers[`rev_zeit_${it.word}_${idx}`] || ""));
+    }
+    if (prevId === "10" && prevReview) {
+      return prevReview.every((g, ci) =>
+        g.items.every((it, ii) => it.answer.length === 0 || checkRevAnswer(it.answer, revAnswers[`rev_review_${ci}_${ii}`] || ""))
+      );
+    }
+    return false;
+  }
+
+  const completed = isComplete();
+
+  // Auto-advance on completion for fill-blank types
+  React.useEffect(() => {
+    if (completed && prevId !== "1" && prevId !== "2") {
+      const timer = setTimeout(() => onComplete(), 1500);
+      return () => clearTimeout(timer);
+    }
+  }, [completed]);
+
+  // Highlight combo letters inside a word
+  function hlCombo(word: string, combo: string): React.ReactNode {
+    const lower = word.toLowerCase();
+    const comboLower = combo.toLowerCase();
+    const idx = lower.indexOf(comboLower);
+    if (idx === -1) return <span>{word}</span>;
+    return (
+      <span>
+        {word.slice(0, idx)}
+        <span className="underline decoration-2 font-black" style={{ color: "inherit" }}>
+          {word.slice(idx, idx + combo.length)}
+        </span>
+        {word.slice(idx + combo.length)}
+      </span>
+    );
+  }
+
+  // Render a 2-column fill-in table
+  function renderFillTable(
+    header: string,
+    col1Label: string,
+    col2Label: string,
+    rows: { display: React.ReactNode; key: string; expected: string }[],
+  ) {
+    return (
+      <div className="overflow-hidden rounded-2xl border border-foreground/10 shadow-sm">
+        <div className="bg-foreground/5 px-4 py-2.5 flex items-center gap-3">
+          <span className="text-foreground text-sm font-bold">{header}</span>
+        </div>
+        <div className="grid grid-cols-2 bg-foreground/5">
+          <div className="px-4 py-2 text-xs font-black text-foreground/60 uppercase tracking-wider border-r border-foreground/10">
+            {col1Label}
+          </div>
+          <div className="px-4 py-2 text-xs font-black text-foreground/60 uppercase tracking-wider">
+            {col2Label}
+          </div>
+        </div>
+        {rows.map((row, idx) => {
+          const val = revAnswers[row.key] || "";
+          const correct = checkRevAnswer(row.expected, val);
+          const hasVal = val.length > 0;
+          return (
+            <div
+              key={row.key}
+              className={`grid grid-cols-2 border-t border-foreground/5 transition-colors ${
+                correct ? "bg-emerald-50" : idx % 2 === 0 ? "bg-white" : "bg-white/50"
+              }`}
+            >
+              <div className="px-4 py-2.5 border-r border-foreground/10 flex items-center">
+                <span className="text-sm font-black text-foreground select-none">{row.display}</span>
+              </div>
+              <div className="px-4 py-2 flex items-center">
+                {correct ? (
+                  <span className="text-sm font-black text-emerald-700 flex items-center gap-1">
+                    {row.expected} ✅
+                  </span>
+                ) : (
+                  <input
+                    type="text"
+                    value={val}
+                    onChange={(e) => handleRevInput(row.key, row.expected, e.target.value)}
+                    placeholder="?"
+                    maxLength={30}
+                    className={`w-full px-3 py-1.5 rounded-xl border-2 text-sm font-black transition-all outline-none ${
+                      hasVal
+                        ? "bg-rose-100 border-rose-400 text-rose-800 animate-shake"
+                        : "bg-white border-dashed border-sky-300 focus:border-sky-50/50"
+                    }`}
+                  />
+                )}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    );
+  }
+
+  return (
+    <section className="rounded-3xl bg-amber-50/80 p-5 sm:p-8 shadow-lg ring-4 ring-amber-200 animate-fade-in space-y-6 mb-6">
+      <div className="flex items-center gap-3 justify-between">
+        <div className="flex items-center gap-3">
+          <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-amber-200 text-xl">🔄</span>
+          <div>
+            <h2 className="text-xl font-black text-foreground">Übung (Vorherige Lektion)</h2>
+            <p className="text-xs font-bold text-foreground/60">{prevLesson.title}</p>
+          </div>
+        </div>
+        <button
+          onClick={onComplete}
+          className="text-xs font-black text-amber-700 hover:underline"
+        >
+          Überspringen →
+        </button>
+      </div>
+
+      {/* Lesson 1 or 2: MCQ exercise */}
+      {(prevId === "1" || prevId === "2") && prevEx.options.length > 0 && (
+        <div className="text-center">
+          <p className="text-lg font-black text-foreground/80">{prevEx.prompt}</p>
+          <div className="mt-4 flex flex-col items-center gap-3">
+            <button
+              onClick={() => speakDE(prevEx.speak)}
+              className="flex h-20 w-20 items-center justify-center rounded-full bg-amber-400 text-4xl shadow-xl ring-4 ring-white transition-all hover:scale-110 active:scale-90 cursor-pointer"
+            >
+              🔊
+            </button>
+          </div>
+          <div className="mt-6 grid grid-cols-2 gap-3 max-w-md mx-auto">
+            {prevEx.options.map((opt) => {
+              const chosen = revPicked === opt;
+              const correct = opt === prevEx.answer;
+              const showState = revPicked !== null && (chosen || correct);
+              const cls = showState
+                ? correct
+                  ? "bg-emerald-300 border-emerald-500 text-emerald-950 scale-105"
+                  : chosen
+                    ? "bg-rose-300 border-rose-500 text-rose-950"
+                    : "bg-amber-100 border-white text-foreground"
+                : "bg-amber-200 border-white text-foreground hover:bg-amber-100";
+              return (
+                <button
+                  key={opt}
+                  onClick={() => chooseRev(opt)}
+                  disabled={revPicked !== null && isRevCorrect}
+                  className={`${cls} aspect-square rounded-3xl text-3xl sm:text-4xl font-black border-4 shadow-md transition-all duration-200 active:scale-95 cursor-pointer flex items-center justify-center`}
+                >
+                  {opt}
+                </button>
+              );
+            })}
+          </div>
+          {revPicked !== null && !isRevCorrect && (
+            <div className="mt-4">
+              <button
+                onClick={() => setRevPicked(null)}
+                className="rounded-full bg-amber-500 px-5 py-2 text-sm font-black text-white shadow active:scale-95 cursor-pointer"
+              >
+                Nochmal versuchen
+              </button>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Lesson 3: Fill-in-the-blank ABC mit WIE */}
+      {prevId === "3" && (
+        <div className="overflow-x-auto">
+          <table className="w-full border-collapse">
+            <thead>
+              <tr className="bg-foreground/5">
+                <th className="text-left px-4 py-3 text-sm font-black text-foreground/70 rounded-tl-2xl w-16">Abc</th>
+                <th className="text-left px-4 py-3 text-sm font-black text-foreground/70 w-16">wie</th>
+                <th className="text-left px-4 py-3 text-sm font-black text-foreground/70 rounded-tr-2xl">Deutsch</th>
+              </tr>
+            </thead>
+            <tbody>
+              {abcMitWieRows.map((row, idx) => {
+                const key = `rev_wie_${row.letter}`;
+                const val = revAnswers[key] || "";
+                const correct = checkRevAnswer(row.word, val);
+                const hasVal = val.length > 0;
+                return (
+                  <tr
+                    key={row.letter}
+                    className={`border-b border-foreground/5 transition-colors ${
+                      correct ? "bg-emerald-50" : idx % 2 === 0 ? "bg-white/60" : "bg-white/30"
+                    }`}
+                  >
+                    <td className="px-4 py-2">
+                      <span className="text-2xl font-black text-foreground select-none">{row.letter}</span>
+                    </td>
+                    <td className="px-4 py-2">
+                      <span className="text-sm font-bold text-foreground/40">wie</span>
+                    </td>
+                    <td className="px-4 py-2">
+                      {correct ? (
+                        <span className="inline-flex items-center gap-2 text-base font-black text-emerald-700">{row.word} ✅</span>
+                      ) : (
+                        <input
+                          type="text"
+                          value={val}
+                          onChange={(e) => handleRevInput(key, row.word, e.target.value)}
+                          placeholder="?"
+                          maxLength={20}
+                          className={`w-full max-w-[200px] px-3 py-1.5 rounded-xl border-2 text-sm font-black transition-all outline-none ${
+                            hasVal ? "bg-rose-100 border-rose-400 text-rose-800 animate-shake" : "bg-white border-dashed border-sky-300 focus:border-sky-50/50"
+                          }`}
+                        />
+                      )}
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      )}
+
+      {/* Lesson 4: Vokale fill-in */}
+      {prevId === "4" && prevVokale && (
+        <div className="space-y-6">
+          {prevVokale.map((g) =>
+            renderFillTable(
+              `Vokale – ${g.vowel}`,
+              "Deutsch",
+              "Schreibe hier",
+              g.words.map((w) => ({ display: w, key: `rev_v_${w}`, expected: w })),
+            ),
+          )}
+        </div>
+      )}
+
+      {/* Lesson 5: Lautkombinationen fill-in */}
+      {prevId === "5" && prevLautkom && (
+        <div className="space-y-6">
+          {prevLautkom.map((g) =>
+            renderFillTable(
+              `Lautkombination – ${g.label}`,
+              "Deutsch",
+              "Schreibe hier",
+              g.words.map((w) => ({ display: hlCombo(w, g.label), key: `rev_l_${w}`, expected: w })),
+            ),
+          )}
+        </div>
+      )}
+
+      {/* Lesson 6: Lautpaare fill-in */}
+      {prevId === "6" && prevLautpaare && (
+        <div className="space-y-6">
+          {prevLautpaare.map((g) => {
+            const allWords: string[] = [];
+            const maxLen = Math.max(g.words1.length, g.words2.length);
+            for (let i = 0; i < maxLen; i++) {
+              if (i < g.words1.length) allWords.push(g.words1[i]);
+              if (i < g.words2.length) allWords.push(g.words2[i]);
+            }
+            return renderFillTable(
+              `Ähnliche Lautpaare – ${g.label}`,
+              "Deutsch",
+              "Schreibe hier",
+              allWords.map((w, i) => ({ display: w, key: `rev_p_${g.pair}_${w}_${i}`, expected: w })),
+            );
+          })}
+        </div>
+      )}
+
+      {/* Lesson 7: Zahlen 0-10 fill-in */}
+      {prevId === "7" && prevNumbers && (
+        renderFillTable(
+          "Zahlen 0–10",
+          "Zahl",
+          "Schreibe hier",
+          prevNumbers.map((num) => ({ display: String(num.n), key: `rev_num_${num.word}`, expected: num.word })),
+        )
+      )}
+
+      {/* Lesson 8: Zahlen 11-20 & Anwendungen fill-in */}
+      {prevId === "8" && prevNumbersAnw && (
+        <div className="space-y-6">
+          {Array.from(new Set(prevNumbersAnw.map((g) => g.category))).map((cat) => {
+            const items = prevNumbersAnw.filter((g) => g.category === cat);
+            return renderFillTable(
+              cat,
+              "Deutsch",
+              "Schreibe hier",
+              items.map((it, idx) => ({
+                display: it.label,
+                key: `rev_numanw_${it.word}_${prevNumbersAnw.indexOf(it)}`,
+                expected: it.word,
+              })),
+            );
+          })}
+        </div>
+      )}
+
+      {/* Lesson 9: Zeit fill-in */}
+      {prevId === "9" && prevZeit && (
+        renderFillTable(
+          "Zeit",
+          "Deutsch",
+          "Antwort",
+          prevZeit.map((it, idx) => ({ display: it.label, key: `rev_zeit_${it.word}_${idx}`, expected: it.word })),
+        )
+      )}
+
+      {/* Lesson 10: Wiederholung fill-in */}
+      {prevId === "10" && prevReview && (
+        <div className="space-y-6">
+          {prevReview.map((g, catIdx) =>
+            renderFillTable(
+              g.category,
+              "Frage",
+              "Antwort",
+              g.items.filter((it) => it.answer.length > 0).map((it, itemIdx) => ({
+                display: it.prompt,
+                key: `rev_review_${catIdx}_${g.items.indexOf(it)}`,
+                expected: it.answer,
+              })),
+            ),
+          )}
+        </div>
+      )}
+
+      {/* Completion message */}
+      {completed && (
+        <div className="mt-4 text-center animate-bounce bg-emerald-50 border border-emerald-100 rounded-3xl p-4 shadow-inner">
+          <div className="text-4xl">✅</div>
+          <p className="mt-2 text-lg font-black text-emerald-700">Wiederholung geschafft!</p>
+        </div>
+      )}
+    </section>
   );
 }
 
