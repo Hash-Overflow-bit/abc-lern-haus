@@ -60,7 +60,7 @@ const GERMAN_LETTER_SOUNDS: Record<string, string> = {
   "Ö": "ö",
   "Ü": "ü",
   "ß": "Eszett",
-  "ss": "Doppel-S",
+  "ss": "Ess-Ess",
 
   // Numbers
   "0": "Null",
