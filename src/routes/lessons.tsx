@@ -127,7 +127,7 @@ function LessonsLayout() {
                   <span
                     className={`text-sm leading-tight ${isActive ? "font-black" : "font-semibold"}`}
                   >
-                    {`Lektion${lesson.id}`}
+                    {`Lektion ${lesson.id}`}
                   </span>
                 </Link>
               );
