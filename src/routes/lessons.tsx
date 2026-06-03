@@ -136,15 +136,36 @@ function LessonsLayout() {
 
           {/* Footer spacer */}
           <div className="h-6" />
+          
+          <div className="px-3 py-2 text-center border-t border-gray-100 mt-auto">
+            <a
+              href="https://www.upwork.com/freelancers/~018cb6b2be97dd2433?mp_source=share"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[11px] text-gray-400 hover:text-gray-600 transition"
+            >
+              Developed by Hashir mehbob
+            </a>
+          </div>
         </div>
       </aside>
 
       {/* ────────────── Main content area ────────────── */}
       {/* pt-14 = below fixed header; lg:ml-72 = beside fixed sidebar on desktop */}
-      <main className="pt-14 lg:ml-72 min-h-screen">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 py-6">
+      <main className="pt-14 lg:ml-72 min-h-screen flex flex-col">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 py-6 flex-grow w-full">
           <Outlet />
         </div>
+        <footer className="py-4 text-center border-t border-gray-100/50 bg-white">
+          <a
+            href="https://www.upwork.com/freelancers/~018cb6b2be97dd2433?mp_source=share"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-xs text-gray-400 hover:text-gray-600 transition font-semibold"
+          >
+            Developed by Hashir mehbob
+          </a>
+        </footer>
       </main>
     </div>
   );
