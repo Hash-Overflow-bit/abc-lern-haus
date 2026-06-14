@@ -78,15 +78,15 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Deutsch ABC für Kinder" },
+      { title: "ABC" },
       { name: "description", content: "Spielerisch Deutsch lernen: Alphabet und Zahlen." },
       { name: "theme-color", content: "#22c55e" },
-      { property: "og:title", content: "Deutsch ABC für Kinder" },
+      { property: "og:title", content: "ABC" },
       { property: "og:description", content: "Spielerisch Deutsch lernen: Alphabet und Zahlen." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
-      { name: "twitter:title", content: "Deutsch ABC für Kinder" },
+      { name: "twitter:title", content: "ABC" },
       { name: "twitter:description", content: "Spielerisch Deutsch lernen: Alphabet und Zahlen." },
       {
         property: "og:image",

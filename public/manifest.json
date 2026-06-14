@@ -1,6 +1,6 @@
 {
-  "name": "Deutsch ABC für Kinder",
-  "short_name": "Deutsch ABC",
+  "name": "ABC",
+  "short_name": "ABC",
   "description": "Spielerisch Deutsch lernen: Alphabet und Zahlen.",
   "start_url": "/",
   "scope": "/",
