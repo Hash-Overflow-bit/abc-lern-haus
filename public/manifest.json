@@ -1,6 +1,6 @@
 {
-  "name": "ABC",
-  "short_name": "ABC",
+  "name": "abc",
+  "short_name": "abc",
   "description": "Spielerisch Deutsch lernen: Alphabet und Zahlen.",
   "start_url": "/",
   "scope": "/",
