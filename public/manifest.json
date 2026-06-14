@@ -1,6 +1,6 @@
 {
-  "name": "abc",
-  "short_name": "abc",
+  "name": "ABC",
+  "short_name": "ABC",
   "description": "Spielerisch Deutsch lernen: Alphabet und Zahlen.",
   "start_url": "/",
   "scope": "/",
@@ -10,22 +10,10 @@
   "theme_color": "#22c55e",
   "icons": [
     {
-      "src": "/icon.svg?v=3",
+      "src": "/icon.svg?v=2",
       "sizes": "any",
       "type": "image/svg+xml",
       "purpose": "any maskable"
-    },
-    {
-      "src": "/icon-192x192.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "/icon-512x512.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any maskable"
     }
   ]
-}
+}
