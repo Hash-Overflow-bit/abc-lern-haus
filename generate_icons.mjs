@@ -4,12 +4,12 @@ async function generate() {
   await sharp('public/icon.svg')
     .resize(192, 192)
     .png()
-    .toFile('public/icon-192x192.png');
+    .toFile('public/icon-192x192-v2.png');
     
   await sharp('public/icon.svg')
     .resize(512, 512)
     .png()
-    .toFile('public/icon-512x512.png');
+    .toFile('public/icon-512x512-v2.png');
     
   console.log('PNG icons generated successfully.');
 }
