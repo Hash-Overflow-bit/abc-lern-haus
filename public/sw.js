@@ -1,7 +1,7 @@
-// Service Worker for Deutsch ABC für Kinder
+// Service Worker for abc
 // Provides offline UI support by caching the app shell and static assets.
 
-const CACHE_NAME = "deutsch-abc-v1";
+const CACHE_NAME = "abc-lern-haus-v3";
 
 // Core app shell files to pre-cache on install
 const APP_SHELL = ["/", "/icon.svg", "/manifest.json"];

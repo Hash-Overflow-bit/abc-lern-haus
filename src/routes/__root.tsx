@@ -81,6 +81,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { title: "abc" },
       { name: "description", content: "Spielerisch Deutsch lernen: Alphabet und Zahlen." },
       { name: "theme-color", content: "#22c55e" },
+      { name: "apple-mobile-web-app-capable", content: "yes" },
+      { name: "apple-mobile-web-app-title", content: "abc" },
       { property: "og:title", content: "abc" },
       { property: "og:description", content: "Spielerisch Deutsch lernen: Alphabet und Zahlen." },
       { property: "og:type", content: "website" },

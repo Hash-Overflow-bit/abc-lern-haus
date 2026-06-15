@@ -5,7 +5,7 @@ import { speakDE, warmupSpeech } from "@/lib/speak";
 
 export const Route = createFileRoute("/lessons/$lessonId")({
   head: ({ params }) => ({
-    meta: [{ title: `Lektion ${params.lessonId} – Deutsch ABC` }],
+    meta: [{ title: `Lektion ${params.lessonId} – abc` }],
   }),
   component: LessonPage,
 });
